@@ -62,13 +62,13 @@ export const features: FeatureTab[] = [
     alt: 'Alcove Peek previewing a file inside the workspace',
   },
   {
-    id: 'palette',
-    title: 'Command Palette',
+    id: 'shelf',
+    title: 'Shelf',
     heading: 'When typing is faster than browsing',
     description:
-      'The Command Palette sits alongside the workspace. Local search finds anything in your grid. Google and Wikipedia scopes open in your browser or preview inline. It\'s there for when typing is faster than browsing.',
-    screenshot: 'palette.png',
-    alt: 'The Alcove Command Palette with local search results',
+      'The Shelf sits alongside the workspace. Local search finds anything in your grid. Google and Wikipedia scopes open in your browser or preview inline. It\'s there for when typing is faster than browsing.',
+    screenshot: 'shelf.png',
+    alt: 'The Alcove Shelf with local search results',
   },
 ];
 
@@ -88,7 +88,7 @@ export const narrative: NarrativeSection[] = [
     heading: 'Not a launcher',
     motifSide: 'left',
     paragraphs: [
-      'A launcher is a list you type at. Alcove is a space you arrange. The Command Palette is in there too - local search, Google, Wikipedia - but the grid comes first.',
+      'A launcher is a list you type at. Alcove is a space you arrange. The Shelf is in there too - local search, Google, Wikipedia - but the grid comes first.',
       'The grid is the thing: the stuff you use, laid out the way you think about it, visible all at once instead of buried in a menu.',
       'Around the edges: Peek for quick file previews, volume and audio device switching with a per-app mixer, power actions that ask before they act, and full keyboard navigation if you\'d rather not touch the mouse.',
     ],

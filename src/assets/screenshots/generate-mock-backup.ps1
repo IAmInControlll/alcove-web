@@ -155,7 +155,7 @@ Write-Txt 'tips.txt' @(
     ''
     'DRAG     Drop .lnk, .url, or .exe files onto the window.'
     'PEEK     Hold Ctrl+P on any tile to preview without opening.'
-    'SEARCH   Ctrl+Shift+Space opens the command palette.'
+    'SEARCH   Ctrl+Shift+Space opens the Shelf.'
     'FOLDERS  Drag a folder in - it becomes a junction, not a copy.'
     'COLOURS  Right-click a folder to colour it.'
     'THEMES   Pick a theme in Settings. There are 20+.'
@@ -417,12 +417,12 @@ Write-Json 'settings.json' @"
   "audio_collapsed": true,
   "power_collapsed": true,
   "show_hint_rotation": true,
-  "show_palette_hints": true,
+  "show_shelf_hints": true,
   "full_shutdown": false,
   "peek_key": "ctrl+p",
-  "palette_key": "ctrl+shift+space",
-  "palette_positions": {},
-  "palette_preview": true,
+  "shelf_key": "ctrl+shift+space",
+  "shelf_positions": {},
+  "shelf_preview": true,
   "autostart": false,
   "last_launched_version": "",
   "last_seen_changelog_version": ""

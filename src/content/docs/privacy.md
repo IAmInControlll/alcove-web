@@ -39,8 +39,8 @@ Alcove stores the following in `%APPDATA%\Alcove\`. All of it stays on your mach
 - **Linked folders** - an external folder you drag in becomes a Windows junction instead of a copy. Only the link is stored. The folder's contents are never copied and never moved.
 - **Grid layout** - `positions.json` maps each item's path to its column and row on the grid.
 - **Folder colours** - `folder_colors.json` maps in-app folders to the colour you picked for them.
-- **Launch statistics** - `launch_stats.json` holds a launch count and a last-launch timestamp per item, used to rank recent and frequent entries in the Command Palette. No file contents are recorded.
-- **Search history** - when you use the Command Palette in Google or Wikipedia mode, your queries are saved to `search_history.json` so you can re-run them. Each mode keeps a separate list of up to 20 queries, most recent first, deduplicated by normalised text. Wikipedia queries are recorded when you scroll an article preview, when a preview stays on screen for three seconds, or when you open the article in your browser. Google queries are recorded when you launch the search.
+- **Launch statistics** - `launch_stats.json` holds a launch count and a last-launch timestamp per item, used to rank recent and frequent entries in the Shelf. No file contents are recorded.
+- **Search history** - when you use the Shelf in Google or Wikipedia mode, your queries are saved to `search_history.json` so you can re-run them. Each mode keeps a separate list of up to 20 queries, most recent first, deduplicated by normalised text. Wikipedia queries are recorded when you scroll an article preview, when a preview stays on screen for three seconds, or when you open the article in your browser. Google queries are recorded when you launch the search.
 - **Settings** - `settings.json` holds your theme, window position and size, opacity, tile size, hotkey assignments, and the other preferences from the Settings modal.
 - **Cached exchange rates** - `exchange_rates.json` holds the most recent European Central Bank reference rate feed, so currency answers keep working offline.
 - **Icon cache** - `icons\` holds icons extracted from your shortcuts, as PNG and ICO files, so the grid loads quickly.
@@ -70,7 +70,7 @@ Restoring a backup replaces your current workspace. Only import backup files you
 
 Alcove reaches the network in these cases only. As with any network request, the service on the other end sees your IP address and standard request headers. That's how HTTP works, not something Alcove adds.
 
-- **Wikipedia search** - when you select the Wikipedia scope in the Command Palette, Alcove sends what you type to the Wikimedia Foundation API at `en.wikipedia.org`. This happens automatically as you type: once your query reaches two characters, it is sent about 300 milliseconds after you stop typing. **You do not have to press Enter for this to happen.** Selecting a result can trigger a second request for that article's text, shown in the preview pane under the CC BY-SA 4.0 licence. Nothing is sent to Wikipedia while you are in Local or Google mode. Wikimedia's handling of these requests is governed by the [Wikimedia Foundation Privacy Policy](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy).
+- **Wikipedia search** - when you select the Wikipedia scope in the Shelf, Alcove sends what you type to the Wikimedia Foundation API at `en.wikipedia.org`. This happens automatically as you type: once your query reaches two characters, it is sent about 300 milliseconds after you stop typing. **You do not have to press Enter for this to happen.** Selecting a result can trigger a second request for that article's text, shown in the preview pane under the CC BY-SA 4.0 licence. Nothing is sent to Wikipedia while you are in Local or Google mode. Wikimedia's handling of these requests is governed by the [Wikimedia Foundation Privacy Policy](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy).
 - **Google search** - when you select the Google scope and launch a search, Alcove opens your default browser at a Google search URL. It does not contact Google itself, and typing alone sends nothing. From that point on you are in your browser, and Google's own [privacy policy](https://policies.google.com/privacy) applies.
 - **Currency exchange rates** - when you type a conversion such as `100 USD to EUR`, Alcove downloads the daily reference rate feed from the European Central Bank at `www.ecb.europa.eu`. Your query text is never sent; the same public feed is downloaded regardless of what you typed. Rates are cached locally for up to 24 hours, so repeated conversions usually make no request at all. Alcove also refreshes this feed automatically at startup when the cache is stale or missing, so currency answers are ready before you first need them.
 - **Microsoft Store** - if you installed Alcove from the Microsoft Store, the Store handles acquisition and listing under Microsoft's own privacy policy. Alcove does not currently include an auto-updater, so updates depend on the distribution channel and the Store's own update behavior for unpackaged apps.
@@ -91,8 +91,8 @@ Because none of this leaves your device, there is no server-side copy with its o
 
 You can remove any of it at any time:
 
-- **Search history** - in the Command Palette, switch to Google or Wikipedia mode with an empty query, then use the "Clear" button in the history header for that mode. Individual entries have an x button.
-- **Launch statistics** - in the Command Palette, use "Clear recents" on an empty Local query.
+- **Search history** - in the Shelf, switch to Google or Wikipedia mode with an empty query, then use the "Clear" button in the history header for that mode. Individual entries have an x button.
+- **Launch statistics** - in the Shelf, use "Clear recents" on an empty Local query.
 - **Icon cache** - Settings > About > "Clear cache".
 - **Settings** - Settings > About > "Reset settings". This deletes `settings.json` and restores the defaults. It does **not** delete your shortcuts, grid layout, folder colours, launch statistics, or search history.
 - **Individual shortcuts** - delete them from the grid. For a linked folder, only the junction is removed; the original folder and everything in it is left alone.
@@ -108,7 +108,7 @@ Alcove requests the following Windows capabilities:
 - **Audio control** - to read and set system volume, switch output devices, and drive the per-app mixer.
 - **Power actions** - to shut down, restart, sleep, or lock the machine when you confirm one of those actions.
 - **Network access** - for Wikipedia lookups, the ECB rate feed, and the launch update check.
-- **Global hotkeys** - to show or hide the window, Peek, and the Command Palette from anywhere.
+- **Global hotkeys** - to show or hide the window, Peek, and the Shelf from anywhere.
 
 Alcove does not access your camera, microphone, location, contacts, messages, or browsing history.
 

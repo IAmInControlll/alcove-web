@@ -3,7 +3,7 @@ import gridView from '../assets/screenshots/grid-view.png?url';
 import folders from '../assets/screenshots/folders.png?url';
 import themes from '../assets/screenshots/themes.png?url';
 import peek from '../assets/screenshots/peek.png?url';
-import palette from '../assets/screenshots/palette.png?url';
+import shelf from '../assets/screenshots/shelf.png?url';
 import heroWorkspace from '../assets/screenshots/hero-workspace.png?url';
 
 interface Props {
@@ -17,7 +17,7 @@ const map: Record<string, string> = {
   'folders.png': folders,
   'themes.png': themes,
   'peek.png': peek,
-  'palette.png': palette,
+  'shelf.png': shelf,
   'hero-workspace.png': heroWorkspace,
 };
 

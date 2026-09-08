@@ -62,7 +62,7 @@ Linked external folders work the same way in spirit: dragging a folder in create
 
 Global hotkeys are exclusive: whichever application registers a combination first owns it, and everything else silently misses out. `Ctrl+Space` in particular is claimed by some IMEs and by a few IDEs.
 
-Open Settings, record a different combination for the workspace, Peek, or Command Palette hotkey, and check that it is not already in use by something running at startup.
+Open Settings, record a different combination for the workspace, Peek, or Shelf hotkey, and check that it is not already in use by something running at startup.
 
 ### An icon is missing or looks wrong
 

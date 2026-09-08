@@ -3,9 +3,13 @@ title: Changelog
 heading: Changelog
 summary: Every version of Alcove, what changed in it, newest first.
 description: The full Alcove changelog. Every version, what changed, newest first.
-updated: 2026-08-21
+updated: 2026-08-22
 toc: false
 ---
+
+## August 22, 2026
+
+- Command Palette is now called Shelf - same feature, new name.
 
 ## August 21, 2026 (v0.1.2)
 

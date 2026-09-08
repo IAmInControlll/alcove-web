@@ -2,7 +2,7 @@
 
 This file lists every image the site expects from the user. Drop real files in at the paths below; the build picks them up by exact filename and no code changes are needed.
 
-Screenshot order follows the brand rule: workspace -> folders -> themes -> peek -> palette. Never lead with settings or the command palette. The site positions Alcove as a visual workspace, not a launcher, so every shot should reinforce "a space you arrange" before it shows any feature.
+Screenshot order follows the brand rule: workspace -> folders -> themes -> peek -> shelf. Never lead with settings or the Shelf. The site positions Alcove as a visual workspace, not a launcher, so every shot should reinforce "a space you arrange" before it shows any feature.
 
 General guidance for all screenshots:
 - Capture on Windows 11 at a realistic window size. The workspace should look like it does in normal use, not staged with one item in the middle.
@@ -24,7 +24,7 @@ Place these in `src/assets/screenshots/`. Do not put them in `public/` - they go
 - Goal: Make a visitor understand what Alcove is in under two seconds. This is the single most important image on the site.
 - What to show: The Alcove workspace open over a real Windows desktop, so the grid is clearly the focal point and the desktop behind it is visibly decluttered. The preferred composition is "Alcove floating cleanly over a tidy desktop" - the workspace is the subject, the desktop is context.
 - Alternative composition: A before/after split (cluttered desktop on one side, same desktop with Alcove open on the other). Only use this if the split reads clearly at small sizes; otherwise prefer the single floating-workspace shot.
-- What to avoid: A bare workspace with one or two tiles. A shot that leads with the Command Palette or settings. A shot so zoomed out the tiles become unreadable.
+- What to avoid: A bare workspace with one or two tiles. A shot that leads with the Shelf or settings. A shot so zoomed out the tiles become unreadable.
 - Feeling: Calm, organised, "this is where my stuff lives". Not flashy.
 
 ### `grid-view.png`
@@ -63,13 +63,13 @@ Place these in `src/assets/screenshots/`. Do not put them in `public/` - they go
 - What to avoid: A Peek preview of something unreadable at small sizes (a giant spreadsheet, a video frame). A shot where the preview blends into the workspace background.
 - Feeling: "Quick look, no commitment."
 
-### `palette.png`
+### `shelf.png`
 
-- Used by: FeatureShowcase tab 5 ("Command Palette - When typing is faster than browsing")
+- Used by: FeatureShowcase tab 5 ("Shelf - When typing is faster than browsing")
 - Aspect: 16:10
-- Goal: Show the Command Palette as a supporting capability, presented last.
-- What to show: The Command Palette open with a local search query typed in and a few results visible - enough to show it searches the workspace. If the Google and Wikipedia scopes are visible in the same frame, include them, but do not force all three scopes into the shot if it makes it cluttered. Local search results are the priority.
-- What to avoid: Making this the most polished or largest shot - it is the last tab and should feel supporting, not heroic. An empty palette with no query. A shot that makes Alcove look like a launcher first.
+- Goal: Show the Shelf as a supporting capability, presented last.
+- What to show: The Shelf open with a local search query typed in and a few results visible - enough to show it searches the workspace. If the Google and Wikipedia scopes are visible in the same frame, include them, but do not force all three scopes into the shot if it makes it cluttered. Local search results are the priority.
+- What to avoid: Making this the most polished or largest shot - it is the last tab and should feel supporting, not heroic. An empty Shelf with no query. A shot that makes Alcove look like a launcher first.
 - Feeling: "It's there when typing is faster than browsing."
 
 ## Social share image

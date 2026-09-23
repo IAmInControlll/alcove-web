@@ -777,6 +777,10 @@ h3:hover .anchor,
 :root[data-theme="light"] .hero-lockup-light { display: block; }
 :root[data-theme="light"] .hero-lockup-dark { display: none; }
 
+.prose .hero-title {
+  margin: 0;
+}
+
 .hero-headline {
   margin: 0 0 32px;
   font-size: 1.35rem;

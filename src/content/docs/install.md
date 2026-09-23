@@ -20,7 +20,7 @@ The installer for the latest release should start downloading on its own. If it 
 <div class="install-step">
 <p><strong>1.</strong> Open the <strong>Downloads</strong> folder and find <code>Alcove-setup.exe</code>.</p>
 <figure class="install-figure">
-<img src="../install-shots/just-downlaoded.png" alt="Alcove-setup.exe shown in the browser download bar after downloading" loading="lazy" />
+<img src="../install-shots/just-downloaded.png" alt="Alcove-setup.exe shown in the browser download bar after downloading" loading="lazy" />
 <figcaption>The installer in the browser download bar.</figcaption>
 </figure>
 </div>
@@ -33,42 +33,42 @@ The installer for the latest release should start downloading on its own. If it 
 Current builds (v0.1.2) are not code-signed, so SmartScreen flags the installer. This is a signing gap, not a sign the file is malicious.
 </blockquote>
 <figure class="install-figure">
-<img src="../install-shots/windows before more info.png" alt="Windows SmartScreen showing 'Windows protected your PC' with no Run button visible yet" loading="lazy" />
+<img src="../install-shots/smartscreen-before-more-info.png" alt="Windows SmartScreen showing 'Windows protected your PC' with no Run button visible yet" loading="lazy" />
 <figcaption>The SmartScreen prompt as it first appears.</figcaption>
 </figure>
 </div>
 <div class="install-step">
 <p><strong>4.</strong> Click <strong>Run anyway</strong>.</p>
 <figure class="install-figure">
-<img src="../install-shots/windows after more info.png" alt="SmartScreen prompt after clicking More info, now showing the Run anyway button" loading="lazy" />
+<img src="../install-shots/smartscreen-after-more-info.png" alt="SmartScreen prompt after clicking More info, now showing the Run anyway button" loading="lazy" />
 <figcaption>The <strong>Run anyway</strong> button appears after clicking <strong>More info</strong>.</figcaption>
 </figure>
 </div>
 <div class="install-step">
 <p><strong>5.</strong> The installer opens. Click <strong>Next</strong>.</p>
 <figure class="install-figure">
-<img src="../install-shots/installer 1.png" alt="Alcove NSIS installer welcome screen" loading="lazy" />
+<img src="../install-shots/installer-1.png" alt="Alcove NSIS installer welcome screen" loading="lazy" />
 <figcaption>The installer welcome screen.</figcaption>
 </figure>
 </div>
 <div class="install-step">
 <p><strong>6.</strong> Pick the install location. The default is fine. Click <strong>Next</strong>.</p>
 <figure class="install-figure">
-<img src="../install-shots/installer 2.png" alt="Alcove installer install location selection" loading="lazy" />
+<img src="../install-shots/installer-2.png" alt="Alcove installer install location selection" loading="lazy" />
 <figcaption>Choose where Alcove installs. The default works for most users.</figcaption>
 </figure>
 </div>
 <div class="install-step">
 <p><strong>7.</strong> Click <strong>Install</strong> and wait for it to finish.</p>
 <figure class="install-figure">
-<img src="../install-shots/installer 3.png" alt="Alcove installer progress bar while installing" loading="lazy" />
+<img src="../install-shots/installer-3.png" alt="Alcove installer progress bar while installing" loading="lazy" />
 <figcaption>The installer copies files and sets up Alcove.</figcaption>
 </figure>
 </div>
 <div class="install-step">
 <p><strong>8.</strong> The finish screen has two options, both checked by default. <strong>Run Alcove</strong> launches the app as soon as you click Finish. <strong>Create desktop shortcut</strong> adds a shortcut on the desktop for launching it later. Leave them checked, or uncheck either if you'd rather not. Then click <strong>Finish</strong>.</p>
 <figure class="install-figure">
-<img src="../install-shots/installer 4.png" alt="Alcove installer completing screen with Finish button, Run Alcove and desktop shortcut options" loading="lazy" />
+<img src="../install-shots/installer-4.png" alt="Alcove installer completing screen with Finish button, Run Alcove and desktop shortcut options" loading="lazy" />
 <figcaption>Both options are checked by default. Click <strong>Finish</strong> when you're ready.</figcaption>
 </figure>
 </div>

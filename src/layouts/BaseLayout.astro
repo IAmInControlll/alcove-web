@@ -41,7 +41,11 @@ const isActive = (url: string) => {
 };
 
 const fullTitle =
-  title === site.title ? `${site.title} - ${site.tagline}` : `${title} - ${site.title}`;
+  title === site.title
+    ? `${site.title} - ${site.tagline}`
+    : title.includes(site.title)
+      ? title
+      : `${title} - ${site.title}`;
 const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') || '/';
 ---
 
@@ -70,6 +74,7 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
 
     <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
     <link rel="apple-touch-icon" href={withBase('/icon.png')} />
+    <slot name="head" />
 
     <script is:inline>
       (function () {

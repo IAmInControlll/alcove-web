@@ -14,9 +14,9 @@ export default function Hero({ slides, downloadHref, helpHref, changelogHref }: 
   return (
     <div className="hero">
       <div className="hero-flourish" aria-hidden="true" />
-      <div className="hero-reveal hero-reveal-lockup">
+      <h1 className="hero-title hero-reveal hero-reveal-lockup">
         <AlcoveTaglineLockup variant="horizontal" className="hero-lockup" />
-      </div>
+      </h1>
       <p className="hero-headline hero-reveal hero-reveal-2">
         Clear the clutter. Keep what matters close.
       </p>

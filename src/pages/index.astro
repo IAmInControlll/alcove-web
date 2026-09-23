@@ -11,9 +11,33 @@ import { heroSlides, features, narrative, faqGroups } from '../config/home';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => base + (path.startsWith('/') ? path : '/' + path);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: site.title,
+      url: site.url + '/',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: site.title,
+      description: site.description,
+      url: site.url + '/',
+      image: site.url + '/og.png',
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Windows',
+      downloadUrl: site.downloadUrl,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      author: { '@type': 'Person', name: 'IAmInControlll', url: 'https://github.com/IAmInControlll' },
+    },
+  ],
+};
 ---
 
 <BaseLayout title={site.title} description={site.description} wide>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <Hero client:load slides={heroSlides} downloadHref={withBase('/install/')} helpHref={withBase('/support/')} changelogHref={withBase('/changelog/')} />
 
   <div class="lede-block">

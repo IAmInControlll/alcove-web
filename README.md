@@ -68,7 +68,7 @@ src/
     [slug].astro      # dynamic route for content collection pages
   styles/
     global.css        # design system, theme variables, Tailwind import
-public/             # favicon.png, icon.png, og.png (served as-is)
+public/             # favicon.png, icon.png, og.png, robots.txt (served as-is)
 brand/              # local-only brand archive (gitignored, not deployed)
 .github/workflows/
   deploy.yml        # GitHub Actions deploy workflow

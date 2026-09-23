@@ -55,11 +55,11 @@ The site is served at the custom domain `alcove-app.com` (apex, no base path), c
 src/
   assets/
     brand/         # SVG lockups, glyphs, wordmarks (tracked)
-    screenshots/   # Real screenshots, dropped in later (tracked)
+    screenshots/   # Feature tab shots, hero slides, capture scripts (see its README.md)
   components/      # React islands + Astro components (atomic design)
-  config/          # site.ts, nav.ts, home.ts (typed data)
+  config/          # site.ts, nav.ts, home.ts (typed data), screenshots.ts (image lookup)
   content/
-    docs/          # privacy.md, terms.md, support.md (content collection)
+    docs/          # privacy, terms, support, install, changelog (content collection)
   content.config.ts  # content collection schema
   layouts/
     BaseLayout.astro  # header, nav, footer, theme init, TOC, SEO

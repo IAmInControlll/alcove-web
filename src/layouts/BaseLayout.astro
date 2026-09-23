@@ -106,6 +106,8 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
           }
         </nav>
 
+        <a class="btn btn-primary header-download" href={withBase('/install/')}>Download</a>
+
         <ThemeToggle client:load />
       </div>
     </header>

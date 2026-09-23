@@ -7,14 +7,14 @@ import FAQAccordion from '../components/FAQAccordion.tsx';
 import DocCards from '../components/DocCards.astro';
 import Email from '../components/Email.astro';
 import { site } from '../config/site';
-import { features, narrative, faqGroups } from '../config/home';
+import { heroSlides, features, narrative, faqGroups } from '../config/home';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => base + (path.startsWith('/') ? path : '/' + path);
 ---
 
 <BaseLayout title={site.title} description={site.description} wide>
-  <Hero client:load downloadHref={withBase('/install/')} changelogHref={withBase('/changelog/')} />
+  <Hero client:load slides={heroSlides} downloadHref={withBase('/install/')} helpHref={withBase('/support/')} changelogHref={withBase('/changelog/')} />
 
   <div class="lede-block">
     <p class="lede">
@@ -26,6 +26,7 @@ const withBase = (path: string) => base + (path.startsWith('/') ? path : '/' + p
 
   {narrative.map((section) => <NarrativeSection client:visible section={section} />)}
 
+  <h2>Questions</h2>
   <FAQAccordion client:visible groups={faqGroups} supportHref={withBase('/support/')} />
 
   <h2>The docs</h2>

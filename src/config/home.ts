@@ -7,10 +7,16 @@ export interface FeatureTab {
   alt: string;
 }
 
+export interface HeroSlide {
+  screenshot: string;
+  alt: string;
+}
+
 export interface NarrativeSection {
   id: string;
   heading: string;
-  motifSide: 'left' | 'right';
+  visualSide: 'left' | 'right';
+  visual: 'hotkey' | 'grid' | 'data-folder';
   paragraphs: string[];
 }
 
@@ -23,6 +29,45 @@ export interface FAQGroup {
   title: string;
   items: FAQItem[];
 }
+
+export const heroSlides: HeroSlide[] = [
+  {
+    screenshot: 'hero-1.webp',
+    alt: 'Alcove in its default dark theme, open over a night-sky desktop',
+  },
+  {
+    screenshot: 'hero-2.webp',
+    alt: 'Alcove in a translucent theme over a purple Windows 11 wallpaper',
+  },
+  {
+    screenshot: 'hero-3.webp',
+    alt: 'Alcove in a light theme over the Windows 11 Bloom wallpaper',
+  },
+  {
+    screenshot: 'hero-4.webp',
+    alt: 'Alcove in a retro theme over the Windows 10 wallpaper',
+  },
+  {
+    screenshot: 'hero-5.webp',
+    alt: 'Alcove in a translucent theme over an illustrated swamp with two frogs on a raft',
+  },
+  {
+    screenshot: 'hero-6.webp',
+    alt: 'Alcove in a dark teal theme over a koi pond wallpaper',
+  },
+  {
+    screenshot: 'hero-7.webp',
+    alt: 'Alcove in a soft pink theme over a photo of blossom on a branch',
+  },
+  {
+    screenshot: 'hero-8.webp',
+    alt: 'Alcove in a grey theme over a night photo of a street light in fog',
+  },
+  {
+    screenshot: 'hero-9.webp',
+    alt: 'Alcove in a deep red theme over an illustrated red tree at sunset',
+  },
+];
 
 export const features: FeatureTab[] = [
   {
@@ -76,17 +121,19 @@ export const narrative: NarrativeSection[] = [
   {
     id: 'one-hotkey-away',
     heading: 'One hotkey away',
-    motifSide: 'right',
+    visual: 'hotkey',
+    visualSide: 'right',
     paragraphs: [
       'Hit your hotkey from anywhere in Windows and your space appears. Hit it again and it is gone. No alt-tabbing through twenty windows, no minimising everything to get to the desktop.',
       'Everything you put in Alcove stays where you left it. Drag it around, rearrange it until it fits.',
-      'Drop a `.lnk`, `.url`, or `.exe` onto the window and Alcove copies it in, pulls out its icon, and drops it on the grid. Drag a folder in and it becomes a Windows junction, not a copy, so the original stays put. Click to launch. That is the whole idea.',
+      'Drop a <code>.lnk</code>, <code>.url</code>, or <code>.exe</code> onto the window and Alcove copies it in, pulls out its icon, and drops it on the grid. Drag a folder in and it becomes a Windows junction, not a copy, so the original stays put. Click to launch. That is the whole idea.',
     ],
   },
   {
     id: 'not-a-launcher',
     heading: 'Not a launcher',
-    motifSide: 'left',
+    visual: 'grid',
+    visualSide: 'left',
     paragraphs: [
       'A launcher is a list you type at. Alcove is a space you arrange. The Shelf is in there too - local search, Google, Wikipedia - but the grid comes first.',
       'The grid is the thing: the stuff you use, laid out the way you think about it, visible all at once instead of buried in a menu.',
@@ -96,10 +143,11 @@ export const narrative: NarrativeSection[] = [
   {
     id: 'yours-privately',
     heading: 'Yours, privately',
-    motifSide: 'right',
+    visual: 'data-folder',
+    visualSide: 'right',
     paragraphs: [
-      'Nothing leaves your machine unless you ask it to. No account, no telemetry, no analytics, no crash reporting. Your workspace lives in `%APPDATA%\\Alcove\\` as plain JSON and copied files.',
-      'Back it up to a single `.alcove-backup` file and restore it whenever. The only network calls are the ones you trigger yourself - a Wikipedia lookup, a Google search opened in your browser, a currency conversion pulling the ECB rate feed.',
+      'Your workspace stays on your machine. No account, no telemetry, no analytics, no crash reporting. It lives in <code>%APPDATA%\\Alcove\\</code> as plain JSON and copied files.',
+      'Back it up to a single <code>.alcove-backup</code> file and restore it whenever. Searches you run, currency rates, and a quick update check at launch are the only things that touch the network. The details are in the <a href="privacy/">Privacy Policy</a>.',
     ],
   },
 ];
@@ -121,7 +169,7 @@ export const faqGroups: FAQGroup[] = [
       {
         question: 'What happens to my data?',
         answer:
-          'Nothing leaves your machine unless you ask it to. There is no account, no telemetry, and no analytics. Your workspace lives in %APPDATA%\\Alcove\\ as plain JSON and copied files.',
+          'Your workspace stays on your machine. There is no account, no telemetry, and no analytics. It lives in %APPDATA%\\Alcove\\ as plain JSON and copied files. The few times Alcove goes online are listed in the <a href="privacy/">Privacy Policy</a>.',
       },
       {
         question: 'Why only Windows?',
@@ -160,7 +208,8 @@ export const faqGroups: FAQGroup[] = [
       },
       {
         question: 'Where is the changelog?',
-        answer: 'Settings > About > "What\'s new", inside the app.',
+        answer:
+          'On the <a href="changelog/">Changelog</a> page, or inside the app under Settings > About > "What\'s new".',
       },
     ],
   },

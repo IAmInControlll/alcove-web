@@ -2,13 +2,13 @@ import Button from './Button';
 
 interface Props {
   downloadHref?: string;
-  docsHref?: string;
+  helpHref?: string;
   changelogHref?: string;
 }
 
 export default function HeroCTAs({
   downloadHref = '/install/',
-  docsHref = '#docs',
+  helpHref = '/support/',
   changelogHref = '/changelog/',
 }: Props) {
   return (
@@ -16,8 +16,8 @@ export default function HeroCTAs({
       <Button variant="primary" href={downloadHref}>
         Download for Windows
       </Button>
-      <Button variant="secondary" href={docsHref}>
-        Read the docs
+      <Button variant="secondary" href={helpHref}>
+        Get help
       </Button>
       <a className="hero-changelog-link" href={changelogHref}>
         See what's new

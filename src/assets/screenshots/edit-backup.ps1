@@ -199,12 +199,16 @@ $manifest = @{
 
 # ---------- write JSON back ----------
 
-$positions | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'positions.json') -Encoding UTF8 -NoNewline
-$folderColors | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'folder_colors.json') -Encoding UTF8 -NoNewline
-$launchStats | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'launch_stats.json') -Encoding UTF8 -NoNewline
-$searchHistory | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'search_history.json') -Encoding UTF8 -NoNewline
-$settings | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'settings.json') -Encoding UTF8 -NoNewline
-$manifest | ConvertTo-Json -Depth 5 | Out-File -FilePath (Join-Path $staging 'manifest.json') -Encoding UTF8 -NoNewline
+function Write-Json($fileName, $value) {
+    [System.IO.File]::WriteAllText((Join-Path $staging $fileName), ($value | ConvertTo-Json -Depth 5))
+}
+
+Write-Json 'positions.json' $positions
+Write-Json 'folder_colors.json' $folderColors
+Write-Json 'launch_stats.json' $launchStats
+Write-Json 'search_history.json' $searchHistory
+Write-Json 'settings.json' $settings
+Write-Json 'manifest.json' $manifest
 
 # ---------- re-zip ----------
 

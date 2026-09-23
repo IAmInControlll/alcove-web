@@ -11,16 +11,30 @@ General guidance for all screenshots:
 - No annotations, arrows, or callouts on the screenshots themselves. The site adds its own captions and copy.
 - Keep the workspace partially filled - enough tiles to look lived-in, not so many it looks cluttered. Roughly 60-75% of the grid in use works well.
 - PNG is fine. WebP or AVIF is smaller if you can export it.
-- Feature tabs render at `aspect-ratio: 16 / 10`; the hero is 16:9. Crop to roughly those ratios. Leave a little headroom so the site can crop slightly without losing content.
+- Feature tabs show each screenshot fitted inside a 16:9 frame, so nothing is cropped and the tab height stays put as they rotate. Shots close to 16:9 fill it best; take all five from the same window size. Hero slides are 16:9.
 
 ## App screenshots
 
-Place these in `src/assets/screenshots/`. Do not put them in `public/` - they go through the Astro build so they get hashed and optimized. The `Screenshot` component (`src/components/Screenshot.tsx`) renders each one by filename; if a file is missing it falls back to a styled placeholder.
+Place these in `src/assets/screenshots/`. Do not put them in `public/` - they go through the Astro build so they get hashed and optimized. The `Screenshot` component (`src/components/Screenshot.tsx`) finds each one by name, so `grid-view.png`, `grid-view.webp`, and `grid-view.avif` all work; if no file matches it falls back to a styled placeholder.
 
-### `hero-workspace.png`
+### Capturing
 
-- Used by: Hero (the first image visitors see)
-- Aspect: 16:9
+1. Back up your own workspace first (Settings > Backup & restore > Export). Importing replaces it.
+2. Import `C:\Users\Mohammad\Documents\mock-workspace.alcove-backup` (built by `edit-backup.ps1`, or build a fresh one with `generate-mock-backup.ps1`).
+3. Close or minimise everything behind Alcove. The window shots include a margin of whatever is behind it.
+4. For each shot, run the capture script, then set up the view during the countdown and keep focus on Alcove:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
+```
+
+`-Shot` is one of `grid-view`, `folders`, `themes`, `peek`, `shelf`. The file is saved next to the script under the right name. `-Delay` changes the countdown (default 6 seconds), `-Margin` the desktop border around the window (default 40px), `-NoResize` captures the window exactly as it is with no margin, and `-KeepSize` leaves the window at the capture size instead of restoring it. `-Widen` resizes the window to 16:10 at its current height and exits, so you can arrange tiles before capturing with `-NoResize`.
+
+### Hero slides (`hero-1.webp`, `hero-2.webp`, ...)
+
+- Used by: the Hero slideshow (the first images visitors see). The list, order, and alt text live in `heroSlides` in `src/config/home.ts`.
+- Aspect: 16:9. Each slide is a full-screen screenshot cropped to 1900x1069 centred on the Alcove window and saved as WebP, so the window sits in the same place on every slide and the crossfade only changes the theme and wallpaper around it. Keep the window at the same size and position for every slide.
+- Each slide shows a different theme over a different wallpaper, with desktop icons hidden.
 - Goal: Make a visitor understand what Alcove is in under two seconds. This is the single most important image on the site.
 - What to show: The Alcove workspace open over a real Windows desktop, so the grid is clearly the focal point and the desktop behind it is visibly decluttered. The preferred composition is "Alcove floating cleanly over a tidy desktop" - the workspace is the subject, the desktop is context.
 - Alternative composition: A before/after split (cluttered desktop on one side, same desktop with Alcove open on the other). Only use this if the split reads clearly at small sizes; otherwise prefer the single floating-workspace shot.
@@ -90,5 +104,6 @@ These are real assets and do not need replacing:
 
 - Brand SVGs in `src/assets/brand/`: `glyph.svg`, `wordmark-dark.svg`, `wordmark-light.svg`, `lockup-horizontal-tagline-dark.svg`, `lockup-horizontal-tagline-light.svg`, `lockup-stacked-dark.svg`, `lockup-stacked-light.svg`, `marketing-lockup-dark.svg`, `marketing-lockup-light.svg`.
 - `public/favicon.png` and `public/icon.png` (apple-touch icon).
+- `public/og.png` - the marketing lockup with "A visual workspace for Windows" underneath, on the charcoal background with a mint glow.
 - `src/assets/brand/kofi-badge-dark.png` and `kofi-badge-light.png`.
 - `public/install-shots/*` - the eight installer and SmartScreen walkthrough images used on the Install page.

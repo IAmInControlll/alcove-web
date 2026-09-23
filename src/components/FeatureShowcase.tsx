@@ -75,7 +75,7 @@ export default function FeatureShowcase({ features }: Props) {
           exit={reduce ? undefined : { opacity: 0, y: -8 }}
           transition={transitionProps}
         >
-          <Screenshot filename={tab.screenshot} alt={tab.alt} />
+          <Screenshot filename={tab.screenshot} alt={tab.alt} aspectRatio="16 / 9" />
           <FeatureTab feature={tab} />
         </motion.div>
       </AnimatePresence>

@@ -3,11 +3,12 @@ import type { FeatureTab as FeatureTabData } from '../config/home';
 
 interface Props {
   feature: FeatureTabData;
+  inactive?: boolean;
 }
 
-export default function FeatureTab({ feature }: Props) {
+export default function FeatureTab({ feature, inactive = false }: Props) {
   return (
-    <div className="showcase-copy">
+    <div className={inactive ? 'showcase-copy is-inactive' : 'showcase-copy'} aria-hidden={inactive || undefined}>
       <h3>{feature.heading}</h3>
       <p>{feature.description}</p>
     </div>

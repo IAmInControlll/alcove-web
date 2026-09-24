@@ -1217,6 +1217,18 @@ main.wide .prose > h2 {
   color: color-mix(in srgb, var(--accent-bright) 40%, transparent);
 }
 
+.showcase-copy-stack {
+  display: grid;
+}
+
+.showcase-copy-stack > .showcase-copy {
+  grid-area: 1 / 1;
+}
+
+.showcase-copy.is-inactive {
+  visibility: hidden;
+}
+
 .showcase-copy h3 {
   margin: 0 0 12px;
   font-size: 1.3rem;
@@ -1232,6 +1244,28 @@ main.wide .prose > h2 {
 @media (max-width: 860px) {
   .showcase-panel {
     grid-template-columns: 1fr;
+  }
+}
+
+.showcase-stack {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .showcase-tabbed {
+    display: none;
+  }
+
+  .showcase-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .showcase-stack-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 

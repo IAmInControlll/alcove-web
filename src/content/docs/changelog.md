@@ -3,22 +3,20 @@ title: Changelog
 heading: Changelog
 summary: Every version of Alcove, what changed in it, newest first.
 description: The full Alcove changelog. Every version, what changed, newest first.
-updated: 2026-08-22
+updated: 2026-09-24
 toc: false
 ---
 
-## August 22, 2026
-
-- Command Palette is now called Shelf - same feature, new name.
-
-## August 21, 2026 (v0.1.2)
+## September 24, 2026 (v0.1.3)
 
 - Alcove now shows a friendly what's new panel when you update or open it for the first time, so you always know what changed
 - Added two new themes - Loki and Zudu
-- Added a Donate button at the bottom of Settings, in case you'd like to support development
 - Alcove now checks for new versions on launch and lets you know when an update is available
+- Added a Donate button at the bottom of Settings, in case you'd like to support development
+- Command Palette is now called Shelf - same feature, new name
+- Settings has a cleaner, better organised layout
 
-## August 16, 2026
+## August 16, 2026 (v0.1.2)
 
 - CleanLaunch is now Alcove - fresh app icon, brand lockups, and updated naming throughout
 - Added the Alcove theme in brand colours - mint accent on the logo's dark field, now the default look

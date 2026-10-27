@@ -109,7 +109,7 @@ export const tour: TourShot[] = [
     id: 'shelf',
     title: 'Shelf',
     caption:
-      'Its own hotkey opens it from anywhere. Find what is in your grid, or search Google and Wikipedia, when typing is faster than browsing.',
+      'Its own hotkey opens it from anywhere. It finds apps, files, and folders on your PC as you type, and searches Google or Wikipedia when you want the web.',
     screenshot: 'shelf.png',
     alt: 'The Alcove Shelf with local search results',
   },
@@ -137,7 +137,7 @@ export const comparison: Comparison = {
     },
     {
       task: 'Find something by typing',
-      cells: ['Not really', 'Start search, mixed in with web results', 'The Shelf, on its own hotkey'],
+      cells: ['Not really', 'Start search, mixed in with web results', 'The Shelf: apps, files, and folders as you type'],
     },
     {
       task: 'Look inside a file',

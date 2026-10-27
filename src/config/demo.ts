@@ -123,7 +123,7 @@ export const demoHome: DemoItem[] = [
     path: 'C:\\Users\\You\\Desktop\\Things to try.txt',
     cell: [8, 0],
     recent: 'Home - just now',
-    body: 'Drag any tile to an empty spot. It stays there.\n\nDouble-click Tools to open it.\n\nPress Ctrl+Space to hide this window, and again to bring it back.\n\nPress Ctrl+Shift+Space for the Shelf. Type "theme" in it.\n\nThe gear in the title bar switches themes too. The whole site changes with it.',
+    body: 'Drag any tile to an empty spot. It stays there.\n\nClick Tools to open it.\n\nPress Ctrl+Space to hide this window, and again to bring it back.\n\nPress Ctrl+Shift+Space for the Shelf. Type "theme" in it.\n\nThe gear in the title bar switches themes too. The whole site changes with it.',
   },
   { id: 'explorer', kind: 'app', label: 'File Explorer', icon: 'file-explorer', type: 'Shortcut', target: 'explorer.exe', cell: [8, 1], recent: 'Home - Aug 6, 2026' },
   {

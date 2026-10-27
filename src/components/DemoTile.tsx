@@ -75,8 +75,8 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
           return;
         }
         onFocus();
+        onOpen();
       }}
-      onDoubleClick={onOpen}
       onFocus={onFocus}
     >
       <span className="alc-tile-icon" style={{ width: iconSize, height: iconSize }}>

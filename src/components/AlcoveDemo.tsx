@@ -244,11 +244,11 @@ export default function AlcoveDemo() {
   );
 
   const shelfOpen = (e: ShelfEntry) => {
-    dispatch({ type: 'shelf', open: false });
     if (e.kind === 'theme') {
       pickTheme(e.id);
       return;
     }
+    dispatch({ type: 'shelf', open: false });
     dispatch({ type: 'show' });
     const parent = demoHome.find((h) => h.kind === 'folder' && h.items.some((c) => c.id === e.item.id));
     dispatch({ type: 'enter', folder: parent ? parent.id : null });

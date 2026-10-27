@@ -25,7 +25,7 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
   return (
     <button
       type="button"
-      className="ad-tile"
+      className="alc-tile"
       data-id={item.id}
       data-focused={focused || undefined}
       style={{
@@ -79,10 +79,10 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
       onDoubleClick={onOpen}
       onFocus={onFocus}
     >
-      <span className="ad-tile-icon" style={{ width: iconSize, height: iconSize }}>
+      <span className="alc-tile-icon" style={{ width: iconSize, height: iconSize }}>
         {item.kind === 'folder' ? (
           <span
-            className="ad-folder"
+            className="alc-folder"
             style={{ background: `${item.color}33`, border: `1px solid ${item.color}66` }}
           >
             <span aria-hidden="true">📁</span>
@@ -91,7 +91,7 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
           <img src={demoIcon(item.icon)} alt="" width={iconSize} height={iconSize} draggable={false} />
         )}
       </span>
-      <span className="ad-tile-label">{label}</span>
+      <span className="alc-tile-label">{label}</span>
     </button>
   );
 }

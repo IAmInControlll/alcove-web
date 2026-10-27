@@ -56,20 +56,20 @@ export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props)
   const highlight = themeQuery ?? q;
 
   return (
-    <div className={`ad-app ${themeClass} ad-shelf`} role="dialog" aria-label="Shelf">
-      <span className="ad-shelf-pill" aria-hidden="true" />
-      <div className="ad-shelf-head">
-        <GripVertical size={14} className="ad-shelf-grip" aria-hidden="true" />
-        <span className="ad-shelf-lockup">
+    <div className={`alc-app ${themeClass} alc-shelf`} role="dialog" aria-label="Shelf">
+      <span className="alc-shelf-pill" aria-hidden="true" />
+      <div className="alc-shelf-head">
+        <GripVertical size={14} className="alc-shelf-grip" aria-hidden="true" />
+        <span className="alc-shelf-lockup">
           <ShelvingUnit size={18} strokeWidth={2.5} aria-hidden="true" />
           Shelf
         </span>
-        <label className="ad-shelf-field" data-active={q ? true : undefined}>
-          <span className="ad-shelf-mode">
+        <label className="alc-shelf-field" data-active={q ? true : undefined}>
+          <span className="alc-shelf-mode">
             Local <ChevronDown size={12} aria-hidden="true" />
           </span>
-          <span className="ad-shelf-divider" />
-          <Search size={18} className="ad-shelf-search-icon" aria-hidden="true" />
+          <span className="alc-shelf-divider" />
+          <Search size={18} className="alc-shelf-search-icon" aria-hidden="true" />
           <input
             ref={input}
             value={query}
@@ -89,38 +89,38 @@ export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props)
             }}
             placeholder="Search shortcuts, apps, files and commands..."
             aria-label="Search the Shelf"
-            aria-controls="ad-shelf-results"
-            aria-activedescendant={current ? `ad-shelf-${current.key}` : undefined}
+            aria-controls="alc-shelf-results"
+            aria-activedescendant={current ? `alc-shelf-${current.key}` : undefined}
           />
-          {q && <span className="ad-shelf-count">{results.length} {results.length === 1 ? 'result' : 'results'}</span>}
+          {q && <span className="alc-shelf-count">{results.length} {results.length === 1 ? 'result' : 'results'}</span>}
         </label>
-        <button type="button" className="ad-shelf-toggle" onClick={onClose}>
+        <button type="button" className="alc-shelf-toggle" onClick={onClose}>
           Toggle window
           <kbd>[Ctrl+Shift+Space]</kbd>
         </button>
       </div>
-      <div className="ad-shelf-main">
-        <div className="ad-shelf-list">
-          <div className="ad-shelf-section">
+      <div className="alc-shelf-main">
+        <div className="alc-shelf-list">
+          <div className="alc-shelf-section">
             <span>{q ? 'Results' : 'Recents'}</span>
             {!q && (
-              <span className="ad-shelf-clear">
+              <span className="alc-shelf-clear">
                 <Trash2 size={11} aria-hidden="true" /> Clear recents
               </span>
             )}
           </div>
-          <ul id="ad-shelf-results" role="listbox" aria-label="Results">
+          <ul id="alc-shelf-results" role="listbox" aria-label="Results">
             {results.map((e, i) => (
               <li
                 key={e.key}
-                id={`ad-shelf-${e.key}`}
+                id={`alc-shelf-${e.key}`}
                 role="option"
                 aria-selected={i === active}
-                className="ad-shelf-row"
+                className="alc-shelf-row"
                 onMouseMove={() => setActive(i)}
                 onClick={() => onOpen(e)}
               >
-                <span className="ad-shelf-row-icon">
+                <span className="alc-shelf-row-icon">
                   {e.kind === 'theme' ? (
                     <Palette size={16} />
                   ) : e.item.kind === 'folder' ? (
@@ -129,39 +129,39 @@ export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props)
                     <img src={demoIcon(e.item.icon)} alt="" width={20} height={20} />
                   )}
                 </span>
-                <span className="ad-shelf-row-text">
-                  <span className="ad-shelf-row-name">
+                <span className="alc-shelf-row-text">
+                  <span className="alc-shelf-row-name">
                     <Highlight text={e.kind === 'theme' ? e.label : e.item.label} query={highlight} />
                   </span>
-                  <span className="ad-shelf-row-detail">{e.kind === 'theme' ? 'Command' : e.item.recent}</span>
+                  <span className="alc-shelf-row-detail">{e.kind === 'theme' ? 'Command' : e.item.recent}</span>
                 </span>
-                {i === active && <ChevronRight size={14} className="ad-shelf-row-chev" aria-hidden="true" />}
+                {i === active && <ChevronRight size={14} className="alc-shelf-row-chev" aria-hidden="true" />}
               </li>
             ))}
           </ul>
-          {results.length === 0 && <p className="ad-shelf-empty">Nothing called that. Try "calc" or "theme".</p>}
+          {results.length === 0 && <p className="alc-shelf-empty">Nothing called that. Try "calc" or "theme".</p>}
         </div>
-        <aside className="ad-shelf-preview" aria-live="polite">
-          <div className="ad-shelf-preview-head">
+        <aside className="alc-shelf-preview" aria-live="polite">
+          <div className="alc-shelf-preview-head">
             <span>Preview</span>
             {current?.kind === 'item' && current.item.kind === 'file' && <span>{current.item.size}</span>}
           </div>
-          <div className="ad-shelf-preview-body">
+          <div className="alc-shelf-preview-body">
             {current?.kind === 'item' && <DemoPeekContent item={current.item} />}
             {current?.kind === 'theme' && (
-              <p className="ad-shelf-preview-note">Press Enter to switch. The site switches with it.</p>
+              <p className="alc-shelf-preview-note">Press Enter to switch. The site switches with it.</p>
             )}
           </div>
         </aside>
       </div>
-      <footer className="ad-shelf-foot">
+      <footer className="alc-shelf-foot">
         <span>
           <kbd>[Enter]</kbd> Open <kbd>[Tab]</kbd> or <kbd>[Right]</kbd> Menu
         </span>
-        <span className="ad-shelf-foot-hint">
+        <span className="alc-shelf-foot-hint">
           Search for <kbd>Theme:</kbd> in the Shelf to switch themes
         </span>
-        <span className="ad-shelf-foot-end">
+        <span className="alc-shelf-foot-end">
           <kbd>[Esc]</kbd> Close
         </span>
       </footer>

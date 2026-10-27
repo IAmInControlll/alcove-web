@@ -7,7 +7,7 @@ interface Props {
 
 export default function DemoPeekContent({ item }: Props) {
   if (item.kind === 'file') {
-    return <pre className="ad-peek-text">{item.body}</pre>;
+    return <pre className="alc-peek-text">{item.body}</pre>;
   }
   const rows =
     item.kind === 'folder'
@@ -20,17 +20,17 @@ export default function DemoPeekContent({ item }: Props) {
           ['Target', item.target],
         ];
   return (
-    <div className="ad-peek-info">
+    <div className="alc-peek-info">
       {item.kind === 'folder' ? (
-        <span className="ad-folder ad-folder-lg" style={{ background: `${item.color}33`, border: `1px solid ${item.color}66` }}>
+        <span className="alc-folder alc-folder-lg" style={{ background: `${item.color}33`, border: `1px solid ${item.color}66` }}>
           <span aria-hidden="true">📁</span>
         </span>
       ) : (
-        <span className="ad-peek-app-icon">
+        <span className="alc-peek-app-icon">
           <img src={demoIcon(item.icon)} alt="" width={32} height={32} />
         </span>
       )}
-      <p className="ad-peek-name">{item.label}</p>
+      <p className="alc-peek-name">{item.label}</p>
       <dl>
         {rows.map(([k, v]) => (
           <div key={k}>

@@ -258,7 +258,7 @@ export default function AlcoveDemo() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const mod = e.ctrlKey || e.metaKey;
-      const inDemo = !!grid.current?.closest('.ad-stage')?.matches(':hover, :focus-within');
+      const inDemo = !!grid.current?.closest('.alc-stage')?.matches(':hover, :focus-within');
       if (mod && e.code === 'Space') {
         e.preventDefault();
         if (e.shiftKey) dispatch({ type: 'shelf', open: !s.shelf });
@@ -292,10 +292,10 @@ export default function AlcoveDemo() {
   const radius = theme?.corners === 'square' ? 0 : theme?.corners === 'small' ? 4 : 8;
 
   return (
-    <div className="ad-stage" data-intro-target style={{ '--ad-corner': `${radius}px` } as React.CSSProperties}>
+    <div className="alc-stage" data-intro-target style={{ '--alc-corner': `${radius}px` } as React.CSSProperties}>
       {s.open ? (
         <div
-          className={`ad-app ${themeClass} ad-window`}
+          className={`alc-app ${themeClass} alc-window`}
           data-translucent={theme?.translucent || undefined}
           role="application"
           aria-label="Alcove demo"
@@ -332,7 +332,7 @@ export default function AlcoveDemo() {
           />
           <div
             ref={grid}
-            className="ad-grid grid-surface"
+            className="alc-grid grid-surface"
             onPointerDown={(e) => {
               if (e.target === e.currentTarget) dispatch({ type: 'focus', id: null });
             }}
@@ -346,7 +346,7 @@ export default function AlcoveDemo() {
             }}
           >
             {s.loading ? (
-              <span className="ad-spinner" role="status" aria-label="Loading" />
+              <span className="alc-spinner" role="status" aria-label="Loading" />
             ) : (
               visible.map((item) => (
                 <DemoTile
@@ -373,7 +373,7 @@ export default function AlcoveDemo() {
           </div>
           {peekFile && (
             <div
-              className="ad-peek-layer"
+              className="alc-peek-layer"
               onPointerDown={(e) => {
                 if (e.target === e.currentTarget) dispatch({ type: 'peek', id: null });
               }}
@@ -383,15 +383,15 @@ export default function AlcoveDemo() {
           )}
         </div>
       ) : (
-        <div className="ad-desktop">
+        <div className="alc-desktop">
           <p>Hidden. It is one keypress away.</p>
-          <button type="button" className="ad-summon" onClick={() => dispatch({ type: 'show' })}>
+          <button type="button" className="alc-summon" onClick={() => dispatch({ type: 'show' })}>
             <Keycap keys={demoHotkeys.window} /> brings it back
           </button>
         </div>
       )}
       {s.shelf && (
-        <div className="ad-shelf-wrap">
+        <div className="alc-shelf-wrap">
           <DemoShelf
             items={shelfItems}
             themeClass={themeClass}

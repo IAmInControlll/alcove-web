@@ -8,17 +8,17 @@ interface Props {
 export default function DemoThemeMenu({ activeId, onPick }: Props) {
   const active = THEMES.find((t) => t.id === activeId) ?? THEMES[0];
   return (
-    <div className="ad-menu" role="dialog" aria-label="Themes">
-      <p className="ad-menu-title">
+    <div className="alc-menu" role="dialog" aria-label="Themes">
+      <p className="alc-menu-title">
         <span>Theme</span>
         <span>{active.name}</span>
       </p>
-      <ul className="ad-swatches">
+      <ul className="alc-swatches">
         {THEMES.map((t) => (
           <li key={t.id}>
             <button
               type="button"
-              className="ad-swatch"
+              className="alc-swatch"
               title={t.name}
               aria-label={t.name}
               aria-pressed={t.id === active.id}

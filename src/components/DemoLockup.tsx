@@ -3,7 +3,7 @@ const WORDMARK = 'M0.000,72.750 L13.651,72.750 L19.515,55.359 L47.326,55.359 L53
 
 export default function DemoLockup() {
   return (
-    <span className="ad-lockup">
+    <span className="alc-lockup">
       <svg viewBox="0 0 256 256" width="20" height="20" aria-hidden="true">
         <path d={GLYPH} fill="currentColor" fillRule="evenodd" clipRule="evenodd" />
         <rect x="104" y="162" width="48" height="6" rx="3" fill="currentColor" />

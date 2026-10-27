@@ -35,30 +35,30 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
   searchRef,
 ) {
   return (
-    <div className="ad-toolbar">
-      <nav className="ad-crumbs" aria-label="Location">
-        <button type="button" className="ad-crumb" data-current={!folderLabel || undefined} onClick={onHome}>
+    <div className="alc-toolbar">
+      <nav className="alc-crumbs" aria-label="Location">
+        <button type="button" className="alc-crumb" data-current={!folderLabel || undefined} onClick={onHome}>
           Home
         </button>
         {folderLabel && (
           <>
-            <span className="ad-crumb-sep">/</span>
-            <span className="ad-crumb" data-current>
+            <span className="alc-crumb-sep">/</span>
+            <span className="alc-crumb" data-current>
               {folderLabel}
             </span>
           </>
         )}
       </nav>
-      <span className="ad-spacer" />
-      <div className="ad-group ad-group-audio">
-        <button type="button" className="ad-sm-btn" data-danger={muted || undefined} aria-label={muted ? 'Unmute' : 'Mute'} onClick={onMute}>
+      <span className="alc-spacer" />
+      <div className="alc-group alc-group-audio">
+        <button type="button" className="alc-sm-btn" data-danger={muted || undefined} aria-label={muted ? 'Unmute' : 'Mute'} onClick={onMute}>
           {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
         </button>
         {audioOpen && (
           <>
             <input
               type="range"
-              className="ad-slider"
+              className="alc-slider"
               min={0}
               max={100}
               value={muted ? 0 : volume}
@@ -66,47 +66,47 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
               aria-label="Volume"
               style={{ '--fill': `${muted ? 0 : volume}%` } as React.CSSProperties}
             />
-            <span className="ad-vol">{muted ? 0 : volume}%</span>
-            <button type="button" className="ad-sm-btn" aria-label="Output device">
+            <span className="alc-vol">{muted ? 0 : volume}%</span>
+            <button type="button" className="alc-sm-btn" aria-label="Output device">
               <Headphones size={13} />
             </button>
-            <button type="button" className="ad-sm-btn" aria-label="Mixer">
+            <button type="button" className="alc-sm-btn" aria-label="Mixer">
               <SlidersHorizontal size={13} />
             </button>
           </>
         )}
-        <span className="ad-divider" />
-        <button type="button" className="ad-sm-btn ad-group-toggle" aria-label={audioOpen ? 'Collapse' : 'Expand'} onClick={onToggleAudio}>
+        <span className="alc-divider" />
+        <button type="button" className="alc-sm-btn alc-group-toggle" aria-label={audioOpen ? 'Collapse' : 'Expand'} onClick={onToggleAudio}>
           {audioOpen ? <ChevronLeft size={13} /> : <ChevronRight size={13} />}
         </button>
       </div>
-      <div className="ad-group ad-group-power">
-        <button type="button" className="ad-sm-btn" aria-label="Shut down" onClick={onPower}>
+      <div className="alc-group alc-group-power">
+        <button type="button" className="alc-sm-btn" aria-label="Shut down" onClick={onPower}>
           <Power size={13} />
         </button>
         {powerOpen && (
           <>
-            <button type="button" className="ad-sm-btn" aria-label="Restart" onClick={onPower}>
+            <button type="button" className="alc-sm-btn" aria-label="Restart" onClick={onPower}>
               <RotateCw size={13} />
             </button>
-            <button type="button" className="ad-sm-btn" aria-label="Sleep" onClick={onPower}>
+            <button type="button" className="alc-sm-btn" aria-label="Sleep" onClick={onPower}>
               <Moon size={13} />
             </button>
-            <button type="button" className="ad-sm-btn" aria-label="Lock" onClick={onPower}>
+            <button type="button" className="alc-sm-btn" aria-label="Lock" onClick={onPower}>
               <Lock size={13} />
             </button>
           </>
         )}
-        <span className="ad-divider" />
-        <button type="button" className="ad-sm-btn ad-group-toggle" aria-label={powerOpen ? 'Collapse' : 'Expand'} onClick={onTogglePower}>
+        <span className="alc-divider" />
+        <button type="button" className="alc-sm-btn alc-group-toggle" aria-label={powerOpen ? 'Collapse' : 'Expand'} onClick={onTogglePower}>
           {powerOpen ? <ChevronLeft size={13} /> : <ChevronRight size={13} />}
         </button>
       </div>
-      <label className="ad-search">
+      <label className="alc-search">
         <Search size={12} aria-hidden="true" />
         <input ref={searchRef} value={query} onChange={(e) => onQuery(e.target.value)} placeholder="Search..." aria-label="Search the grid" />
         {query ? (
-          <button type="button" className="ad-search-clear" aria-label="Clear search" onClick={() => onQuery('')}>
+          <button type="button" className="alc-search-clear" aria-label="Clear search" onClick={() => onQuery('')}>
             <X size={12} />
           </button>
         ) : (

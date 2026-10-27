@@ -1,13 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.tsx';
-import FeatureShowcase from '../components/FeatureShowcase.tsx';
-import NarrativeSection from '../components/NarrativeSection.tsx';
+import ArchIntroInit from '../components/ArchIntroInit.astro';
+import ArchIntro from '../components/ArchIntro.astro';
+import HomeHero from '../components/HomeHero.astro';
+import DemoVideo from '../components/DemoVideo.tsx';
+import HomeWorkspace from '../components/HomeWorkspace.astro';
+import HomeShelf from '../components/HomeShelf.astro';
+import HomeThemes from '../components/HomeThemes.astro';
+import ComparisonTable from '../components/ComparisonTable.tsx';
+import HomePrivacy from '../components/HomePrivacy.astro';
+import SectionHeader from '../components/SectionHeader.tsx';
 import FAQAccordion from '../components/FAQAccordion.tsx';
-import DocCards from '../components/DocCards.astro';
+import HomeClosing from '../components/HomeClosing.astro';
 import Email from '../components/Email.astro';
 import { site } from '../config/site';
-import { heroSlides, features, narrative, faqGroups } from '../config/home';
+import { demo, comparison, faqGroups } from '../config/home';
+import { demoVideoUrl, demoPosterUrl } from '../config/video';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => base + (path.startsWith('/') ? path : '/' + path);
@@ -36,28 +44,29 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title={site.title} description={site.description} wide>
+<BaseLayout title={site.title} description={site.description} bare>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-  <Hero client:load slides={heroSlides} downloadHref={withBase('/install/')} helpHref={withBase('/support/')} changelogHref={withBase('/changelog/')} />
+  <ArchIntroInit slot="head" />
+  <ArchIntro slot="overlay" />
 
-  <div class="lede-block">
-    <p class="lede">
-      Windows gives you a desktop, a Start menu, a taskbar, and a search bar. The things <em>you</em> actually use every day are still scattered across all of them. Alcove gives them one place to live - a visual workspace you open with a hotkey, arrange the way you work, and close again.
-    </p>
+  <HomeHero downloadHref={withBase('/install/')} helpHref={withBase('/support/')} />
+  <div class="prose hm-prose">
+    <DemoVideo copy={demo} src={demoVideoUrl} poster={demoPosterUrl} />
   </div>
-
-  <FeatureShowcase client:visible features={features} />
-
-  {narrative.map((section) => <NarrativeSection client:visible section={section} />)}
-
-  <h2>Questions</h2>
-  <FAQAccordion client:visible groups={faqGroups} supportHref={withBase('/support/')} />
-
-  <h2>The docs</h2>
-  <DocCards />
-
-  <h2>Getting help</h2>
-  <p>
-    Questions, bugs, feature requests - all welcome. See <a href={withBase('/support/')}>Support</a> for the fastest route, or email <Email email={site.contactEmail} />.
-  </p>
+  <HomeWorkspace />
+  <HomeShelf />
+  <HomeThemes />
+  <div class="prose hm-prose">
+    <ComparisonTable comparison={comparison} />
+  </div>
+  <HomePrivacy />
+  <div class="prose hm-prose">
+    <section class="home-section band" aria-labelledby="questions">
+      <SectionHeader id="questions" title="Questions">
+        Alcove is built by one person. Questions, bugs, and feature requests all land in the same inbox: <Email email={site.contactEmail} />
+      </SectionHeader>
+      <FAQAccordion client:visible groups={faqGroups} supportHref={withBase('/support/')} />
+    </section>
+  </div>
+  <HomeClosing downloadHref={withBase('/install/')} helpHref={withBase('/support/')} changelogHref={withBase('/changelog/')} />
 </BaseLayout>

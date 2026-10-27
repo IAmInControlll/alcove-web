@@ -1,0 +1,26 @@
+---
+import { tour } from '../config/home';
+import { screenshotUrl } from '../config/screenshots';
+
+const shelf = tour.find((shot) => shot.id === 'shelf');
+const src = shelf ? screenshotUrl(shelf.screenshot) : undefined;
+---
+
+<section class="hm-section hm-shelf band" aria-labelledby="shelf">
+  <div class="hm-wrap hm-shelf-grid">
+    <div class="hm-shelf-copy">
+      <h2 id="shelf" class="hm-h2">When you already know what you want</h2>
+      <p class="hm-lede">
+        There's the Shelf: a launcher, kept separate on purpose so the grid stays a place you arrange.
+      </p>
+      <p class="hm-lede">Its own hotkey opens it from anywhere. It finds what's in your grid, or searches Google and Wikipedia.</p>
+    </div>
+    {
+      shelf && src && (
+        <figure class="hm-shelf-shot">
+          <img src={src} alt={shelf.alt} loading="lazy" width="1200" height="600" />
+        </figure>
+      )
+    }
+  </div>
+</section>

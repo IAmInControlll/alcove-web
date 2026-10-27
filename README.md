@@ -14,7 +14,7 @@ The documentation and marketing site for **Alcove**, a visual workspace for Wind
 ## Tech stack
 
 - [Astro](https://astro.build) - static site generator, ships zero JS by default
-- [React](https://react.dev) - interactive islands only (hero, feature showcase, FAQ, theme toggle)
+- [React](https://react.dev) - interactive islands only (the live Alcove demo, FAQ, theme picker, theme toggle)
 - [Tailwind CSS](https://tailwindcss.com) v4 - utility-first styling, mapped to CSS variables for theme awareness
 - [motion](https://motion.dev) (Framer Motion) - React component animations
 - [Lenis](https://lenis.darkroom.engineering) - smooth scroll
@@ -55,9 +55,10 @@ The site is served at the custom domain `alcove-app.com` (apex, no base path), c
 src/
   assets/
     brand/         # SVG lockups, glyphs, wordmarks (tracked)
-    screenshots/   # Feature tab shots, hero slides, capture scripts (see its README.md)
+    screenshots/   # Feature shots, theme desktops, capture scripts (see its README.md)
+    demo-icons/    # Real Windows icons used by the live demo
   components/      # React islands + Astro components (atomic design)
-  config/          # site.ts, nav.ts, home.ts (typed data), screenshots.ts (image lookup)
+  config/          # site.ts, nav.ts, home.ts and demo.ts (typed data), themes.ts, screenshots.ts (image lookup)
   content/
     docs/          # privacy, terms, support, install, changelog (content collection)
   content.config.ts  # content collection schema
@@ -68,6 +69,9 @@ src/
     [slug].astro      # dynamic route for content collection pages
   styles/
     global.css        # design system, theme variables, Tailwind import
+    app-themes.css    # the app's theme variables for the demo (generated, see scripts/)
+scripts/
+  sync-app-themes.mjs # regenerates app-themes.css from the app repo's app.css
 public/             # favicon.png, icon.png, og.png, robots.txt (served as-is)
 brand/              # local-only brand archive (gitignored, not deployed)
 .github/workflows/

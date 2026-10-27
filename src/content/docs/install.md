@@ -30,7 +30,7 @@ The installer for the latest release should start downloading on its own. If it 
 <div class="install-step">
 <p><strong>3.</strong> Windows SmartScreen may show a <strong>"Windows protected your PC"</strong> prompt. Click <strong>More info</strong>.</p>
 <blockquote class="install-callout">
-Current builds (v0.1.2) are not code-signed, so SmartScreen flags the installer. This is a signing gap, not a sign the file is malicious.
+Current builds are not code-signed, so SmartScreen flags the installer. This is a signing gap, not a sign the file is malicious.
 </blockquote>
 <figure class="install-figure">
 <img src="../install-shots/smartscreen-before-more-info.png" alt="Windows SmartScreen showing 'Windows protected your PC' with no Run button visible yet" loading="lazy" />

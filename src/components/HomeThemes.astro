@@ -1,0 +1,91 @@
+---
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ThemePicker from './ThemePicker.tsx';
+import { heroSlides } from '../config/home';
+import { screenshotUrl } from '../config/screenshots';
+
+const picks = ['hero-1.webp', 'hero-3.webp', 'hero-4.webp', 'hero-5.webp', 'hero-6.webp', 'hero-7.webp', 'hero-9.webp'];
+const slides = heroSlides
+  .filter((slide) => picks.includes(slide.screenshot))
+  .map((slide) => ({ ...slide, src: screenshotUrl(slide.screenshot) }))
+  .filter((slide) => slide.src);
+---
+
+<section class="hm-themes" aria-labelledby="themes">
+  <div class="hm-pan">
+    <div class="hm-wrap">
+      <h2 id="themes" class="hm-h2">Dark, light, or Windows XP</h2>
+      <p class="hm-lede">Same window, same spot, different theme. All 40 are in the picker below, and this page switches with you.</p>
+    </div>
+    <div class="hm-pan-track">
+      {
+        slides.map((slide, i) => (
+          <figure class:list={['hm-pan-item', { 'is-current': i === 0 }]}>
+            <img src={slide.src} alt={slide.alt} loading="lazy" width="1900" height="1069" />
+          </figure>
+        ))
+      }
+    </div>
+    <div class="hm-swap-controls">
+      <button type="button" class="hm-swap-btn" data-step="-1" aria-label="Previous theme">
+        <ChevronLeft size={20} />
+      </button>
+      <button type="button" class="hm-swap-btn" data-step="1" aria-label="Next theme">
+        <ChevronRight size={20} />
+      </button>
+    </div>
+  </div>
+  <div class="prose hm-prose hm-themes-picker">
+    <ThemePicker client:visible headless />
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const items = [...document.querySelectorAll<HTMLElement>('.hm-pan-item')];
+  const track = document.querySelector<HTMLElement>('.hm-pan-track');
+  let current = 0;
+  const go = (step: number) => {
+    current = (current + step + items.length) % items.length;
+    items.forEach((item, i) => item.classList.toggle('is-current', i === current));
+  };
+  document.querySelectorAll<HTMLButtonElement>('.hm-swap-btn').forEach((btn) => {
+    btn.addEventListener('click', () => go(Number(btn.dataset.step)));
+  });
+  let startX: number | null = null;
+  track?.addEventListener('pointerdown', (e) => (startX = e.clientX));
+  track?.addEventListener('pointerup', (e) => {
+    if (startX !== null && Math.abs(e.clientX - startX) > 40) go(e.clientX < startX ? 1 : -1);
+    startX = null;
+  });
+
+  // The window sits in the same place in every shot, so wiping one over the next reads as the theme changing in place.
+  gsap.matchMedia().add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
+    const wrap = document.querySelector<HTMLElement>('.hm-pan')!;
+    const shots = gsap.utils.toArray<HTMLElement>('.hm-pan-item');
+    wrap.classList.add('is-pinned');
+    gsap.set(shots.slice(1), { clipPath: 'inset(0 100% 0 0)' });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrap,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * 0.6 * (shots.length - 1)}`,
+        pin: true,
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      },
+    });
+    shots.slice(1).forEach((shot, i) => {
+      tl.to(shot, { clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'power2.inOut' }, i * 1.25);
+    });
+    tl.to({}, { duration: 0.4 });
+    return () => {
+      wrap.classList.remove('is-pinned');
+      gsap.set(shots, { clearProps: 'clipPath' });
+    };
+  });
+</script>

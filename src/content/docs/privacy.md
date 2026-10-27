@@ -3,7 +3,7 @@ title: Privacy Policy
 heading: Alcove Privacy Policy
 summary: What Alcove keeps on your device, the cases where anything leaves it, and how to remove all of it.
 description: The Alcove privacy policy. Alcove is a visual workspace for Windows with no accounts, no telemetry, and no analytics.
-updated: 2026-08-21
+updated: 2026-10-27
 toc: true
 ---
 
@@ -39,7 +39,8 @@ Alcove stores the following in `%APPDATA%\Alcove\`. All of it stays on your mach
 - **Linked folders** - an external folder you drag in becomes a Windows junction instead of a copy. Only the link is stored. The folder's contents are never copied and never moved.
 - **Grid layout** - `positions.json` maps each item's path to its column and row on the grid.
 - **Folder colours** - `folder_colors.json` maps in-app folders to the colour you picked for them.
-- **Launch statistics** - `launch_stats.json` holds a launch count and a last-launch timestamp per item, used to rank recent and frequent entries in the Shelf. No file contents are recorded.
+- **Launch statistics** - `launch_stats.json` holds a launch count and a last-launch timestamp per item, used to rank recent and frequent entries in the Shelf. When you open something from a Shelf search, the text you typed is saved with that item (up to 20 searches per item) so the same search finds it first next time. No file contents are recorded.
+- **File search index** - while file search uses Alcove's own index (the default), `file_index.bin` holds the names of the files and folders in the places the Shelf searches: your user folder, the programs in Program Files, and any drives or folders you add in Settings. It records names and folder structure only, never file contents, so results can appear as you type. It is never included in a backup, and it is deleted when you switch file search to Windows Search or turn it off. With Windows Search selected, Alcove asks Windows' own search index on your PC instead and keeps nothing.
 - **Search history** - when you use the Shelf in Google or Wikipedia mode, your queries are saved to `search_history.json` so you can re-run them. Each mode keeps a separate list of up to 20 queries, most recent first, deduplicated by normalised text. Wikipedia queries are recorded when you scroll an article preview, when a preview stays on screen for three seconds, or when you open the article in your browser. Google queries are recorded when you launch the search.
 - **Settings** - `settings.json` holds your theme, window position and size, opacity, tile size, hotkey assignments, and the other preferences from the Settings modal.
 - **Cached exchange rates** - `exchange_rates.json` holds the most recent European Central Bank reference rate feed, so currency answers keep working offline.
@@ -93,6 +94,7 @@ You can remove any of it at any time:
 
 - **Search history** - in the Shelf, switch to Google or Wikipedia mode with an empty query, then use the "Clear" button in the history header for that mode. Individual entries have an x button.
 - **Launch statistics** - in the Shelf, use "Clear recents" on an empty Local query.
+- **File search index** - Settings > Behavior > File search, choose Windows Search or Off. This deletes `file_index.bin`.
 - **Icon cache** - Settings > About > "Clear cache".
 - **Settings** - Settings > About > "Reset settings". This deletes `settings.json` and restores the defaults. It does **not** delete your shortcuts, grid layout, folder colours, launch statistics, or search history.
 - **Individual shortcuts** - delete them from the grid. For a linked folder, only the junction is removed; the original folder and everything in it is left alone.

@@ -3,9 +3,30 @@ title: Changelog
 heading: Changelog
 summary: Every version of Alcove, what changed in it, newest first.
 description: The full Alcove changelog. Every version, what changed, newest first.
-updated: 2026-09-24
+updated: 2026-10-27
 toc: false
 ---
+
+## October 27, 2026 (v0.1.4)
+
+- Alcove now works with an Xbox controller, everywhere from the grid to the Shelf and Settings
+- Right-clicking an app now shows the same options it has on the taskbar
+- Peek now opens centered and sized to fit your file
+- The Shelf can now find files and folders on your PC as you type, from your personal folders, your installed programs, and any drives or folders you choose in Settings. Tick Files only under the search box to narrow results to files by type, folder, or date
+- Shelf results are smarter: an exact name match always comes first, and the Shelf remembers what you open for each search so it comes up first next time
+
+## October 10, 2026 (v0.1.4)
+
+- Start with Windows now opens Alcove within seconds of signing in, instead of waiting behind your other startup apps
+- Fixed the show/hide hotkey sometimes needing two presses to hide Alcove right after it opened
+
+## October 9, 2026 (v0.1.4)
+
+- Fixed the Alcove window sometimes opening much smaller or larger than you left it after restarting your PC
+- Programs and scripts you drag in now link to the original instead of being copied, so apps like Android Studio start correctly. Alcove warns about any that were copied before
+- New things on your Desktop now show up in your Home folder automatically, even ones that arrive while Alcove is closed. Turn it off in Settings if you prefer
+- Import from Desktop now finds your Desktop when OneDrive is backing it up
+- Removing a linked folder now works even after its original folder was deleted
 
 ## September 24, 2026 (v0.1.3)
 

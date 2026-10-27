@@ -1,0 +1,170 @@
+<div class="arch-intro">
+  <div class="arch-intro-light"></div>
+  <svg class="arch-intro-scene" aria-hidden="true">
+    <defs>
+      <linearGradient id="arch-intro-mint" x1="82" y1="59" x2="176" y2="189" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" class="arch-intro-stop-highlight" />
+        <stop offset="38%" class="arch-intro-stop-primary" />
+        <stop offset="100%" class="arch-intro-stop-shadow" />
+      </linearGradient>
+      <mask id="arch-intro-hole" maskUnits="userSpaceOnUse">
+        <rect class="arch-intro-mask-area arch-intro-mask-fill" />
+        <g class="arch-intro-glyph">
+          <path class="arch-intro-cut" d="M101 162 V109 C101 79 112 61 128 61 C144 61 155 79 155 109 V162 Z" />
+        </g>
+      </mask>
+      <clipPath id="arch-intro-doorway">
+        <path d="M101 162 V109 C101 79 112 61 128 61 C144 61 155 79 155 109 V162 Z" />
+      </clipPath>
+    </defs>
+    <rect class="arch-intro-mask-area arch-intro-surround" mask="url(#arch-intro-hole)" />
+    <g class="arch-intro-glyph">
+      <path
+        class="arch-intro-letter"
+        fill-rule="evenodd"
+        d="M51 210 L82 101 C90 65 107 43 128 43 C149 43 166 65 174 101 L205 210 H163 L152 168 H104 L93 210 Z M101 162 V109 C101 79 112 61 128 61 C144 61 155 79 155 109 V162 Z"
+      />
+      <path class="arch-intro-door" d="M101 162 V109 C101 79 112 61 128 61 C144 61 155 79 155 109 V162 Z" />
+      <rect class="arch-intro-flat" x="104" y="162" width="48" height="6" rx="3" />
+      <g class="arch-intro-tiles" clip-path="url(#arch-intro-doorway)">
+        <rect class="arch-intro-flat" x="111" y="88" width="15" height="15" rx="5.5" />
+        <rect class="arch-intro-flat" x="130" y="88" width="15" height="15" rx="5.5" />
+        <rect class="arch-intro-flat" x="111" y="107" width="15" height="15" rx="5.5" />
+        <rect class="arch-intro-flat" x="130" y="107" width="15" height="15" rx="5.5" />
+      </g>
+    </g>
+  </svg>
+  <p class="arch-intro-title">Welcome to Alcove</p>
+  <div class="arch-intro-cue" aria-hidden="true">
+    <span class="arch-intro-cue-scroll">Scroll</span>
+    <span class="arch-intro-cue-swipe">Swipe up</span>
+    <span class="arch-intro-cue-line"></span>
+  </div>
+  <button type="button" class="arch-intro-skip">Skip intro</button>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  const root = document.documentElement;
+  const intro = document.querySelector<HTMLElement>('.arch-intro');
+  const frame = document.querySelector<HTMLElement>('.site-frame');
+
+  if (root.dataset.intro === 'play' && intro && frame) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const svg = intro.querySelector<SVGSVGElement>('.arch-intro-scene')!;
+    const areas = intro.querySelectorAll<SVGRectElement>('.arch-intro-mask-area');
+    const mask = intro.querySelector<SVGMaskElement>('#arch-intro-hole')!;
+    const glyphs = intro.querySelectorAll<SVGGElement>('.arch-intro-glyph');
+    const tiles = intro.querySelectorAll<SVGRectElement>('.arch-intro-tiles rect');
+    // Each tile slides out towards its own side of the doorway, like a pair of doors.
+    const tileDirs = [-1, 1, -1, 1];
+    const skip = intro.querySelector<HTMLButtonElement>('.arch-intro-skip')!;
+
+    // Zoom origin inside the glyph's doorway, in the glyph's 256-unit space.
+    const HOLE_X = 128;
+    const HOLE_Y = 125;
+
+    let span = 0;
+    let base = 1;
+    let zoomEnd = 1;
+    let ox = 0;
+    let oy = 0;
+    let pan = 0;
+    let done = false;
+    let trigger: ScrollTrigger | null = null;
+
+    const smooth = (t: number) => t * t * (3 - 2 * t);
+
+    const render = (p: number) => {
+      const e = smooth(p);
+      const k = base * Math.pow(zoomEnd, Math.pow(Math.min(1, p / 0.85), 1.6));
+      const m = `matrix(${k} 0 0 ${k} ${ox - k * HOLE_X} ${oy - k * HOLE_Y})`;
+      glyphs.forEach((g) => g.setAttribute('transform', m));
+      const open = smooth(Math.min(1, p / 0.3));
+      tiles.forEach((tile, i) => tile.setAttribute('transform', `translate(${tileDirs[i] * 34 * open} 0)`));
+      intro.style.setProperty('--intro-p', String(p));
+      intro.style.setProperty('--light-r', `${Math.round(k * 150)}px`);
+      intro.style.setProperty('--light-fade', String(Math.max(0, Math.min(1, (p - 0.8) / 0.2))));
+      frame.style.transform = `translateY(${window.scrollY - span + pan * (1 - e)}px) scale(${1.08 - 0.08 * e})`;
+    };
+
+    const measure = () => {
+      const vw = document.documentElement.clientWidth;
+      const vh = window.innerHeight;
+      span = Math.round(vh * 1.2);
+      document.body.style.paddingTop = `${span}px`;
+
+      svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+      for (const el of [...areas, mask]) {
+        el.setAttribute('x', '0');
+        el.setAttribute('y', '0');
+        el.setAttribute('width', String(vw));
+        el.setAttribute('height', String(vh));
+      }
+
+      // The letter spans x 51-205 and y 43-210 of the 256 box.
+      base = Math.min((vh * 0.54) / 167, (vw * 0.78) / 154);
+      ox = vw / 2;
+      oy = vh * 0.58 + (HOLE_Y - 126.5) * base;
+
+      // Grow until the straight part of the doorway covers the whole viewport.
+      const kEnd =
+        Math.max(ox / (HOLE_X - 101), (vw - ox) / (155 - HOLE_X), oy / (HOLE_Y - 109), (vh - oy) / (162 - HOLE_Y)) * 1.06;
+      zoomEnd = kEnd / base;
+
+      intro.style.setProperty('--light-x', `${ox}px`);
+      intro.style.setProperty('--light-y', `${oy}px`);
+      frame.style.transformOrigin = `${ox}px ${oy}px`;
+      frame.style.transform = 'none';
+      const shot = frame.querySelector<HTMLElement>('[data-intro-target]');
+      pan = 0;
+      if (shot) {
+        const r = shot.getBoundingClientRect();
+        const f = frame.getBoundingClientRect();
+        pan = oy - (r.top - f.top + r.height / 2);
+      }
+
+      trigger?.kill();
+      trigger = ScrollTrigger.create({
+        start: 0,
+        end: span,
+        onUpdate: (self) => {
+          if (self.progress >= 1) finish();
+          else render(self.progress);
+        },
+      });
+      render(Math.min(1, window.scrollY / span));
+    };
+
+    const finish = () => {
+      if (done) return;
+      done = true;
+      const y = window.scrollY;
+      trigger?.kill();
+      window.removeEventListener('resize', measure);
+      root.removeAttribute('data-intro');
+      document.body.style.paddingTop = '';
+      frame.style.transform = '';
+      frame.style.transformOrigin = '';
+      frame.removeAttribute('inert');
+      window.scrollTo({ top: Math.max(0, y - span), behavior: 'instant' });
+      ScrollTrigger.refresh();
+      if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+      try {
+        sessionStorage.setItem('alcove-intro-seen', '1');
+      } catch (e) {}
+    };
+
+    frame.setAttribute('inert', '');
+    measure();
+    if (window.scrollY >= span) finish();
+    window.addEventListener('resize', measure);
+    skip.addEventListener('click', () => {
+      window.scrollTo({ top: span, behavior: 'instant' });
+      finish();
+    });
+  }
+</script>

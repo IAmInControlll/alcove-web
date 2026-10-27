@@ -1,20 +1,28 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
+import { getSiteThemeId, setSiteTheme, themeById } from "../config/themes";
 
-type Theme = 'light' | 'dark';
+type Theme = "light" | "dark";
 
 function currentTheme(): Theme {
-  const attr = document.documentElement.getAttribute('data-theme');
-  if (attr === 'light' || attr === 'dark') return attr;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const attr = document.documentElement.getAttribute("data-theme");
+  if (attr === "light" || attr === "dark") return attr;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 export default function ThemeToggle() {
   const toggle = useCallback(() => {
-    const next: Theme = currentTheme() === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
+    const active = themeById(getSiteThemeId() ?? "");
+    const special = Boolean(
+      active?.translucent || active?.retro || active?.scene,
+    );
+    const dark = active ? active.variant === "dark" : currentTheme() === "dark";
+    const next = dark && !special ? "paper" : "alcove";
+    setSiteTheme(next);
     try {
-      localStorage.setItem('alcove-theme', next);
-    } catch (e) {
+      localStorage.setItem("alcove-theme", next === "paper" ? "light" : "dark");
+    } catch {
       /* ignore */
     }
   }, []);

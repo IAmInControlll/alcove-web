@@ -1,23 +1,29 @@
-export interface FeatureTab {
+export interface TourShot {
   id: string;
   title: string;
-  heading: string;
-  description: string;
+  caption: string;
   screenshot: string;
   alt: string;
+}
+
+export interface DemoCopy {
+  heading: string;
+  lede: string;
+}
+
+export interface ComparisonRow {
+  task: string;
+  cells: string[];
+}
+
+export interface Comparison {
+  columns: string[];
+  rows: ComparisonRow[];
 }
 
 export interface HeroSlide {
   screenshot: string;
   alt: string;
-}
-
-export interface NarrativeSection {
-  id: string;
-  heading: string;
-  visualSide: 'left' | 'right';
-  visual: 'hotkey' | 'grid' | 'data-folder';
-  paragraphs: string[];
 }
 
 export interface FAQItem {
@@ -69,88 +75,80 @@ export const heroSlides: HeroSlide[] = [
   },
 ];
 
-export const features: FeatureTab[] = [
+export const tour: TourShot[] = [
   {
     id: 'workspace',
     title: 'Your space',
-    heading: 'A grid you arrange the way you think',
-    description:
-      'Drop shortcuts, apps, folders, and shell objects onto a grid. Drag them around, snap them into place, and the layout stays the way you left it. It\'s a workspace you arrange, not a list somebody else designed.',
+    caption:
+      'Shortcuts, apps, folders, and shell objects on a grid you drag into shape. It stays the way you left it.',
     screenshot: 'grid-view.png',
     alt: 'The Alcove workspace grid with shortcuts and folders arranged on it',
   },
   {
     id: 'folders',
     title: 'Folders & junctions',
-    heading: 'Organise without copying anything',
-    description:
-      'Drag a folder in and it becomes a Windows junction, not a copy. The original stays put. You can group related items into in-app folders and colour them to find things at a glance.',
+    caption: 'Group things into coloured folders. Real folders come in as junctions, so nothing gets copied.',
     screenshot: 'folders.png',
     alt: 'Alcove folders and junctions shown in the workspace',
   },
   {
     id: 'themes',
     title: 'Themes',
-    heading: 'Make it look like yours',
-    description:
-      'Forty themes across light, dark, and retro. Adjustable tile size and window opacity. It\'s not the main thing, but it\'s there.',
+    caption: 'Forty of them across light, dark, and retro, with adjustable tile size and window opacity.',
     screenshot: 'themes.png',
     alt: 'Alcove theme picker showing a selection of light, dark, and retro themes',
   },
   {
     id: 'peek',
     title: 'Peek',
-    heading: 'Preview without opening',
-    description:
-      'Peek a file to see what\'s inside without launching anything. Works on images, documents, text - anything where a quick look beats opening the whole app.',
+    caption: 'Look inside an image, document, or text file right from the grid, without opening its app.',
     screenshot: 'peek.png',
     alt: 'Alcove Peek previewing a file inside the workspace',
   },
   {
     id: 'shelf',
     title: 'Shelf',
-    heading: 'When typing is faster than browsing',
-    description:
-      'The Shelf sits alongside the workspace. Local search finds anything in your grid. Google and Wikipedia scopes open in your browser or preview inline. It\'s there for when typing is faster than browsing.',
+    caption:
+      'Its own hotkey opens it from anywhere. Find what is in your grid, or search Google and Wikipedia, when typing is faster than browsing.',
     screenshot: 'shelf.png',
     alt: 'The Alcove Shelf with local search results',
   },
 ];
 
-export const narrative: NarrativeSection[] = [
-  {
-    id: 'one-hotkey-away',
-    heading: 'One hotkey away',
-    visual: 'hotkey',
-    visualSide: 'right',
-    paragraphs: [
-      'Hit your hotkey from anywhere in Windows and your space appears. Hit it again and it is gone. No alt-tabbing through twenty windows, no minimising everything to get to the desktop.',
-      'Everything you put in Alcove stays where you left it. Drag it around, rearrange it until it fits.',
-      'Drop a <code>.lnk</code>, <code>.url</code>, or <code>.exe</code> onto the window and Alcove copies it in, pulls out its icon, and drops it on the grid. Drag a folder in and it becomes a Windows junction, not a copy, so the original stays put. Click to launch. That is the whole idea.',
-    ],
-  },
-  {
-    id: 'not-a-launcher',
-    heading: 'Not a launcher',
-    visual: 'grid',
-    visualSide: 'left',
-    paragraphs: [
-      'A launcher is a list you type at. Alcove is a space you arrange. The Shelf is in there too - local search, Google, Wikipedia - but the grid comes first.',
-      'The grid is the thing: the stuff you use, laid out the way you think about it, visible all at once instead of buried in a menu.',
-      'Around the edges: Peek for quick file previews, volume and audio device switching with a per-app mixer, power actions that ask before they act, and full keyboard navigation if you\'d rather not touch the mouse.',
-    ],
-  },
-  {
-    id: 'yours-privately',
-    heading: 'Yours, privately',
-    visual: 'data-folder',
-    visualSide: 'right',
-    paragraphs: [
-      'Your workspace stays on your machine. No account, no telemetry, no analytics, no crash reporting. It lives in <code>%APPDATA%\\Alcove\\</code> as plain JSON and copied files.',
-      'Back it up to a single <code>.alcove-backup</code> file and restore it whenever. Searches you run, currency rates, and a quick update check at launch are the only things that touch the network. The details are in the <a href="privacy/">Privacy Policy</a>.',
-    ],
-  },
-];
+export const demo: DemoCopy = {
+  heading: 'One hotkey away',
+  lede: 'Hit your hotkey from anywhere in Windows and your space appears. Hit it again and it is gone.',
+};
+
+export const comparison: Comparison = {
+  columns: ['Windows desktop', 'Start menu pins', 'Alcove'],
+  rows: [
+    {
+      task: 'Reach it over open windows',
+      cells: ['Win + D minimises everything first', 'Win key, over anything', 'Your hotkey, and again to hide it'],
+    },
+    {
+      task: 'Arrange things your way',
+      cells: ['Anywhere, until something covers it', 'A fixed grid you can reorder', 'A grid you drag into shape'],
+    },
+    {
+      task: 'Group related things',
+      cells: ['Folders, which move the files', 'Folders, one level deep', 'Coloured folders, and junctions instead of copies'],
+    },
+    {
+      task: 'Find something by typing',
+      cells: ['Not really', 'Start search, mixed in with web results', 'The Shelf, on its own hotkey'],
+    },
+    {
+      task: 'Look inside a file',
+      cells: ['Open it', 'Open it', 'Peek, without opening the app'],
+    },
+    {
+      task: 'Back up the layout',
+      cells: ['Copy the files by hand', 'Windows Backup, with a Microsoft account', 'One .alcove-backup file, no account'],
+    },
+  ],
+};
 
 export const faqGroups: FAQGroup[] = [
   {
@@ -170,6 +168,11 @@ export const faqGroups: FAQGroup[] = [
         question: 'What happens to my data?',
         answer:
           'Your workspace stays on your machine. There is no account, no telemetry, and no analytics. It lives in %APPDATA%\\Alcove\\ as plain JSON and copied files. The few times Alcove goes online are listed in the <a href="privacy/">Privacy Policy</a>.',
+      },
+      {
+        question: 'Does it work with a controller?',
+        answer:
+          'Yes. An Xbox controller, or anything Windows sees as one, gets you around the grid, the Shelf, Peek, and Settings. A layout guide shows the buttons when you connect it, and you can remap them in Settings > Behavior > Controller. PlayStation controllers work through Steam Input or DS4Windows.',
       },
       {
         question: 'Why only Windows?',

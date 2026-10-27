@@ -1,8 +1,11 @@
 ---
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '@fontsource-variable/martian-mono/standard.css';
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle.tsx';
+import { Menu, X } from 'lucide-react';
 import { site } from '../config/site';
-import { nav } from '../config/nav';
+import { nav, footerNav } from '../config/nav';
 import glyphUrl from '../assets/brand/glyph.svg?url';
 import wordmarkDarkUrl from '../assets/brand/wordmark-dark.svg?url';
 import wordmarkLightUrl from '../assets/brand/wordmark-light.svg?url';
@@ -16,8 +19,9 @@ interface Props {
   summary?: string;
   updated?: string;
   toc?: boolean;
-  wide?: boolean;
   slug?: string;
+  noindex?: boolean;
+  bare?: boolean;
 }
 
 const {
@@ -27,8 +31,9 @@ const {
   summary,
   updated,
   toc = false,
-  wide = false,
   slug,
+  noindex = false,
+  bare = false,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -59,6 +64,7 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={site.url + canonicalPath} />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.title} />
@@ -86,8 +92,28 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
         } catch (e) {}
       })();
     </script>
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('alcove-site-theme');
+          if (!saved) return;
+          var data = JSON.parse(saved);
+          if (!data || !data.vars) return;
+          var root = document.documentElement;
+          Object.keys(data.vars).forEach(function (k) {
+            root.style.setProperty(k, data.vars[k]);
+          });
+          if (data.variant === 'dark' || data.variant === 'light') {
+            root.setAttribute('data-theme', data.variant);
+          }
+          if (data.id) root.setAttribute('data-site-theme', data.id);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
+    <slot name="overlay" />
+    <div class="site-frame">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -111,13 +137,55 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
           }
         </nav>
 
-        <a class="btn btn-primary header-download" href={withBase('/install/')}>Download</a>
+        <a class="btn btn-primary header-download" href={withBase('/install/')}><span>Download<span class="header-download-long"> for Windows</span></span></a>
 
         <ThemeToggle client:load />
+
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+          <Menu size={18} className="nav-toggle-open" aria-hidden="true" />
+          <X size={18} className="nav-toggle-close" aria-hidden="true" />
+        </button>
       </div>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Site" hidden>
+        <a href={withBase('/')} aria-current={isActive('/') ? 'page' : undefined}>Home</a>
+        <a href={withBase('/install/')} aria-current={isActive('/install/') ? 'page' : undefined}>Install</a>
+        {
+          [...nav, ...footerNav.filter((f) => !nav.some((n) => n.url === f.url))].map((item) => (
+            <a href={withBase(item.url)} aria-current={isActive(item.url) ? 'page' : undefined}>
+              {item.title}
+            </a>
+          ))
+        }
+      </nav>
     </header>
 
-    <main id="main" class:list={[{ 'has-toc': toc, wide }]}>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+      const menu = document.querySelector<HTMLElement>('#mobile-nav');
+      if (toggle && menu) {
+        const set = (open: boolean) => {
+          toggle.setAttribute('aria-expanded', String(open));
+          menu.hidden = !open;
+        };
+        toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+        menu.addEventListener('click', (e) => {
+          if ((e.target as HTMLElement).closest('a')) set(false);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !menu.hidden) {
+            set(false);
+            toggle.focus();
+          }
+        });
+        document.addEventListener('pointerdown', (e) => {
+          if (!menu.hidden && !(e.target as HTMLElement).closest('.site-header')) set(false);
+        });
+        matchMedia('(min-width: 641px)').addEventListener('change', (e) => e.matches && set(false));
+      }
+    </script>
+
+    {bare && <main id="main" class="bare"><slot /></main>}
+    {!bare && <main id="main" class:list={[{ 'has-toc': toc }]}>
       {
         toc && (
           <aside class="toc" hidden>
@@ -135,37 +203,40 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
             <div class="page-head">
               <h1>{heading}</h1>
               {summary && <p class="lede">{summary}</p>}
-              {updated && (
-                <p class="badges">
-                  <span class="badge">Last updated {updated}</span>
-                </p>
-              )}
+              {updated && <p class="page-updated">Last updated {updated}</p>}
             </div>
           )
         }
 
         <slot />
       </article>
-    </main>
+    </main>}
 
     <footer class="site-footer">
       <div class="bar">
-        <p class="footer-tagline">{site.title} - {site.tagline}</p>
-        <a class="donate-btn" href={site.donateUrl} target="_blank" rel="noopener noreferrer" aria-label="Support Alcove on Ko-fi">
-          <img class="kofi-badge kofi-badge-dark" src={kofiBadgeDarkUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
-          <img class="kofi-badge kofi-badge-light" src={kofiBadgeLightUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
-        </a>
-        <nav aria-label="Footer">
-          {
-            nav.map((item) => (
-              <a href={withBase(item.url)}>{item.title}</a>
-            ))
-          }
-          <a href={site.issuesUrl}>GitHub</a>
+        <div class="footer-brand">
+          <a class="brand" href={withBase('/')} aria-label="Alcove home">
+            <img src={glyphUrl} alt="" width="24" height="24" />
+            <img class="wordmark wordmark-dark" src={wordmarkDarkUrl} alt="Alcove" />
+            <img class="wordmark wordmark-light" src={wordmarkLightUrl} alt="Alcove" />
+          </a>
+          <p class="footer-tagline">{site.tagline}</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          {footerNav.map((item) => <a href={withBase(item.url)}>{item.title}</a>)}
+          <a href={`mailto:${site.contactEmail}`}>Email</a>
+          <a href={site.issuesUrl}>Report an issue</a>
         </nav>
-        <p class="fine">This site loads no fonts, scripts, or trackers from third parties.</p>
+        <div class="footer-base">
+          <p class="fine">This site loads no fonts, scripts, or trackers from third parties.</p>
+          <a class="donate-btn" href={site.donateUrl} target="_blank" rel="noopener noreferrer" aria-label="Support Alcove on Ko-fi">
+            <img class="kofi-badge kofi-badge-dark" src={kofiBadgeDarkUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
+            <img class="kofi-badge kofi-badge-light" src={kofiBadgeLightUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
+          </a>
+        </div>
       </div>
     </footer>
+    </div>
 
     <script is:inline>
       (function () {
@@ -180,9 +251,15 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
           wrap.appendChild(t);
         });
 
-        var headings = prose.querySelectorAll('h2[id], h3[id]');
+        var headings = Array.prototype.filter.call(
+          prose.querySelectorAll('h2[id], h3[id]'),
+          function (h) {
+            return !h.closest('astro-island');
+          }
+        );
 
         headings.forEach(function (h) {
+          if (h.querySelector('.anchor')) return;
           var a = document.createElement('a');
           a.className = 'anchor';
           a.href = '#' + h.id;

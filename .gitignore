@@ -13,6 +13,12 @@ CLAUDE.md
 CONTEXT.md
 ai-docs/
 .devin/
+.agents/
+.claude/
+skills-lock.json
+scrollcraft/
+PRODUCT.md
+.impeccable/
 
 # OS / editor
 .DS_Store

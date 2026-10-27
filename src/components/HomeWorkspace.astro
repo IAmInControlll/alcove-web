@@ -1,0 +1,78 @@
+---
+import { tour } from '../config/home';
+import { screenshotUrl } from '../config/screenshots';
+
+const steps = ['workspace', 'folders', 'peek']
+  .map((id) => tour.find((step) => step.id === id))
+  .filter((step) => step !== undefined)
+  .map((step) => ({ ...step, src: screenshotUrl(step.screenshot) }));
+---
+
+<section class="hm-section hm-workspace" aria-labelledby="workspace">
+  <div class="hm-wrap hm-workspace-grid">
+    <div class="hm-workspace-copy">
+      <h2 id="workspace" class="hm-h2">A grid you arrange the way you think</h2>
+      {
+        steps.map((step, i) => (
+          <div class="hm-step" data-step={i}>
+            <h3>{step.title}</h3>
+            <p>{step.caption}</p>
+            {step.src && <img class="hm-step-shot" src={step.src} alt={step.alt} loading="lazy" />}
+          </div>
+        ))
+      }
+      <p class="hm-step-foot">
+        Around the edges: a per-app volume mixer, power actions that ask before they act, and full keyboard and Xbox
+        controller navigation if you'd rather not touch the mouse.
+      </p>
+    </div>
+    <div class="hm-workspace-stage">
+      <div class="hm-stage-frame">
+        {
+          steps.map(
+            (step, i) =>
+              step.src && (
+                <img
+                  class:list={['hm-stage-shot', { 'is-active': i === 0 }]}
+                  src={step.src}
+                  alt={step.alt}
+                  data-shot={i}
+                  loading="lazy"
+                />
+              ),
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const shots = document.querySelectorAll<HTMLElement>('.hm-stage-shot');
+  const steps = document.querySelectorAll<HTMLElement>('.hm-step');
+
+  const show = (index: number) => {
+    shots.forEach((shot) => shot.classList.toggle('is-active', shot.dataset.shot === String(index)));
+    steps.forEach((step) => step.classList.toggle('is-active', step.dataset.step === String(index)));
+  };
+
+  // The screenshot beside the copy follows whichever step is being read.
+  gsap.matchMedia().add('(min-width: 900px)', () => {
+    steps.forEach((step) => {
+      ScrollTrigger.create({
+        trigger: step,
+        start: 'top 60%',
+        end: 'bottom 60%',
+        onToggle: (self) => {
+          if (self.isActive) show(Number(step.dataset.step));
+        },
+      });
+    });
+    show(0);
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+import DataFolderVisual from './DataFolderVisual.tsx';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="hm-section hm-privacy" aria-labelledby="privacy">
+  <div class="hm-wrap hm-privacy-grid">
+    <div>
+      <h2 id="privacy" class="hm-h2">Yours, privately</h2>
+      <p class="hm-lede">
+        Your workspace stays on your machine. No account, no telemetry, no analytics, no crash reporting. It lives in
+        <code>%APPDATA%\Alcove\</code> as plain JSON and copied files.
+      </p>
+      <p class="hm-lede">
+        Back it up to a single <code>.alcove-backup</code> file and restore it whenever. Searches you run, currency rates,
+        and a quick update check at launch are the only things that touch the network. The details are in the{' '}
+        <a href={`${base}/privacy/`}>Privacy Policy</a>.
+      </p>
+    </div>
+    <figure class="hm-privacy-visual">
+      <DataFolderVisual />
+    </figure>
+  </div>
+</section>

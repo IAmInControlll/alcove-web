@@ -1,0 +1,46 @@
+---
+import lockupOnLightUrl from '../assets/brand/lockup-stacked-light.svg?url';
+import lockupOnDarkUrl from '../assets/brand/lockup-stacked-dark.svg?url';
+
+interface Props {
+  downloadHref: string;
+  helpHref: string;
+  changelogHref: string;
+}
+
+const { downloadHref, helpHref, changelogHref } = Astro.props;
+---
+
+<section class="hm-section hm-close" aria-labelledby="close">
+  <div class="hm-wrap">
+    <div class="hm-close-zone">
+      <h2 id="close" class="hm-close-lockup">
+        <img class="lockup-on-light" src={lockupOnLightUrl} alt="Alcove. Your space inside Windows." width="299" height="280" />
+        <img class="lockup-on-dark" src={lockupOnDarkUrl} alt="Alcove. Your space inside Windows." width="299" height="280" />
+      </h2>
+      <p class="hm-close-line">This is what yours looks like on day one. Drag your shortcuts in.</p>
+      <div class="hm-hero-ctas">
+        <a class="btn btn-primary" href={downloadHref}>Download for Windows</a>
+        <a class="hm-link" href={helpHref}>Get help</a>
+      </div>
+      <p class="hm-spec">
+        Free for personal use. No account. <a href={changelogHref}>See what's new</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ downloadHref }}>
+  window.addEventListener(
+    'keydown',
+    (e) => {
+      if (!(e.ctrlKey || e.metaKey) || e.shiftKey || e.code !== 'Space') return;
+      const r = document.querySelector('.hm-close')?.getBoundingClientRect();
+      if (!r || r.top > innerHeight * 0.6 || r.bottom < innerHeight * 0.4) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      location.href = downloadHref;
+    },
+    { capture: true },
+  );
+</script>

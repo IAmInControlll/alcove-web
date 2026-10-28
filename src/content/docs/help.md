@@ -1,12 +1,12 @@
 ---
-title: Support
-heading: Support
+title: Help
+heading: Help
 summary: Where your files live, answers to the questions that come up most, and how to report something that is broken.
-description: Support and troubleshooting for Alcove, a visual workspace for Windows.
+description: Help and troubleshooting for Alcove, a visual workspace for Windows.
 toc: true
 ---
 
-The fastest way to get help is to email <a href="mailto:iamincontrol.dev@gmail.com">iamincontrol.dev@gmail.com</a><button type="button" class="email-copy" data-email="iamincontrol.dev@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-check"><polyline points="20 6 9 17 4 12"></polyline></svg></button>, or to open an issue at [https://github.com/IAmInControlll/alcove-web/issues](https://github.com/IAmInControlll/alcove-web/issues). Issues are public, so use email for anything private.
+The fastest way to get help is to email <a href="mailto:iamincontrol.dev@gmail.com">iamincontrol.dev@gmail.com</a><button type="button" class="email-copy" data-email="iamincontrol.dev@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-check"><polyline points="20 6 9 17 4 12"></polyline></svg></button>, or to [open an issue on GitHub](https://github.com/IAmInControlll/alcove-web/issues). Issues are public, so use email for anything private.
 
 Alcove is a personal project, so replies are best-effort rather than same-day.
 
@@ -42,23 +42,23 @@ If a specific shortcut misbehaves, say what kind it is: a `.lnk`, a `.url`, an `
 
 ## Common questions
 
-### Windows warned me about the installer
+### Windows flagged the installer
 
 Current builds are not code-signed, so Windows SmartScreen may show a "Windows protected your PC" prompt, and some antivirus engines occasionally flag an unsigned installer on heuristics alone. Choose "More info" and then "Run anyway" if you are confident the download came from a source you trust. This is a signing gap, not a sign that anything is wrong with the file, and it is on the list to fix.
 
-### There are two installers. Which one do I want?
+### Which installer do I want?
 
 The `.exe` (NSIS) installer is the one to use for a normal install. It installs to `%LOCALAPPDATA%\Alcove` for your user account and needs no administrator rights.
 
 The `.msi` (WiX) installer is the enterprise option. It always installs for all users, to `C:\Program Files\Alcove`, and needs administrator rights.
 
-### I deleted a shortcut from the grid. Did I delete the real file?
+### Does deleting remove the file?
 
 No. Alcove works on its own copy inside `shortcuts\`, so deleting from the grid removes that copy and leaves the original where it was.
 
 Linked external folders work the same way in spirit: dragging a folder in creates a Windows junction, and deleting it removes only the junction. The real folder and everything inside it is untouched.
 
-### My global hotkey does nothing
+### The hotkey does nothing
 
 Global hotkeys are exclusive: whichever application registers a combination first owns it, and everything else silently misses out. `Ctrl+Space` in particular is claimed by some IMEs and by a few IDEs.
 
@@ -68,7 +68,7 @@ Open Settings, record a different combination for the workspace, Peek, or Shelf 
 
 Icons are extracted once and then cached. If a program updates and changes its icon, or extraction failed the first time, the stale one sticks around. Settings > About > "Clear cache" empties the cache, and icons are re-extracted the next time the folder is opened.
 
-### A restored shortcut does not open anything
+### A restored shortcut will not open
 
 A backup stores your shortcuts, not the programs they point at. If a program has been uninstalled since the backup was made, or you restored onto a different machine where it was never installed, the shortcut comes back with nothing to launch. Linked folders that cannot be found are listed for you after a restore.
 

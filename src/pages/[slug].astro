@@ -23,6 +23,11 @@ const { title, heading, summary, description, updated, toc, autoDownload } = doc
 {autoDownload && (
   <script is:inline define:vars={{ downloadUrl: site.downloadUrl }}>
     (function () {
+      var params = new URLSearchParams(location.search);
+      if (!params.has('download')) return;
+      params.delete('download');
+      var query = params.toString();
+      history.replaceState(null, '', location.pathname + (query ? '?' + query : '') + location.hash);
       function startDownload() {
         try {
           var a = document.createElement('a');
@@ -31,6 +36,8 @@ const { title, heading, summary, description, updated, toc, autoDownload } = doc
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
+          var note = document.querySelector('.install-started');
+          if (note) note.hidden = false;
         } catch (e) {}
       }
       if (document.readyState === 'complete' || document.readyState === 'interactive') {

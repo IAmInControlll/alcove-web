@@ -16,9 +16,14 @@ import Email from '../components/Email.astro';
 import { site } from '../config/site';
 import { demo, comparison, faqGroups } from '../config/home';
 import { demoVideoUrl, demoPosterUrl } from '../config/video';
+import { screenshotUrl } from '../config/screenshots';
+import changelogSource from '../content/docs/changelog.md?raw';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => base + (path.startsWith('/') ? path : '/' + path);
+
+const latestVersion = changelogSource.match(/\(v(\d+\.\d+\.\d+)\)/)?.[1];
+const absolute = (path: string | undefined) => (path ? new URL(path, site.url).href : undefined);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -35,7 +40,9 @@ const structuredData = {
       url: site.url + '/',
       image: site.url + '/og.png',
       applicationCategory: 'UtilitiesApplication',
-      operatingSystem: 'Windows',
+      operatingSystem: 'Windows 10, Windows 11',
+      softwareVersion: latestVersion,
+      screenshot: [absolute(screenshotUrl('hero-1.webp')), absolute(screenshotUrl('shelf.png'))].filter(Boolean),
       downloadUrl: site.downloadUrl,
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       author: { '@type': 'Person', name: 'IAmInControlll', url: 'https://github.com/IAmInControlll' },
@@ -49,7 +56,7 @@ const structuredData = {
   <ArchIntroInit slot="head" />
   <ArchIntro slot="overlay" />
 
-  <HomeHero downloadHref={withBase('/install/')} helpHref={withBase('/support/')} />
+  <HomeHero downloadHref={withBase('/install/?download')} helpHref={withBase('/help/')} />
   <div class="prose hm-prose">
     <DemoVideo copy={demo} src={demoVideoUrl} poster={demoPosterUrl} />
   </div>
@@ -65,8 +72,8 @@ const structuredData = {
       <SectionHeader id="questions" title="Questions">
         Alcove is built by one person. Questions, bugs, and feature requests all land in the same inbox: <Email email={site.contactEmail} />
       </SectionHeader>
-      <FAQAccordion client:visible groups={faqGroups} supportHref={withBase('/support/')} />
+      <FAQAccordion client:visible groups={faqGroups} helpHref={withBase('/help/')} />
     </section>
   </div>
-  <HomeClosing downloadHref={withBase('/install/')} helpHref={withBase('/support/')} changelogHref={withBase('/changelog/')} />
+  <HomeClosing downloadHref={withBase('/install/?download')} helpHref={withBase('/help/')} changelogHref={withBase('/changelog/')} />
 </BaseLayout>

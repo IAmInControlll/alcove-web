@@ -1,17 +1,19 @@
-import { ChevronDown, Minus, Settings, ShelvingUnit, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, Minus, Settings, ShelvingUnit, X } from 'lucide-react';
 import DemoLockup from './DemoLockup';
 
 interface Props {
   hint: string;
   hintVisible: boolean;
   menuOpen: boolean;
+  toolbarVisible: boolean;
   onShelf: () => void;
   onSettings: () => void;
   onHide: () => void;
+  onToggleToolbar: () => void;
   children?: React.ReactNode;
 }
 
-export default function DemoTitleBar({ hint, hintVisible, menuOpen, onShelf, onSettings, onHide, children }: Props) {
+export default function DemoTitleBar({ hint, hintVisible, menuOpen, toolbarVisible, onShelf, onSettings, onHide, onToggleToolbar, children }: Props) {
   return (
     <header className="alc-titlebar">
       <DemoLockup />
@@ -22,7 +24,7 @@ export default function DemoTitleBar({ hint, hintVisible, menuOpen, onShelf, onS
         <span className="alc-anchor">
           <button
             type="button"
-            className="alc-tb-btn"
+            className="alc-tb-btn alc-menu-toggle"
             aria-label="Themes"
             aria-expanded={menuOpen}
             onClick={onSettings}
@@ -31,8 +33,14 @@ export default function DemoTitleBar({ hint, hintVisible, menuOpen, onShelf, onS
           </button>
           {children}
         </span>
-        <button type="button" className="alc-tb-btn" aria-label="Toolbar" tabIndex={-1}>
-          <ChevronDown size={14} />
+        <button
+          type="button"
+          className="alc-tb-btn"
+          aria-label={toolbarVisible ? 'Hide toolbar' : 'Show toolbar'}
+          title={toolbarVisible ? 'Hide toolbar' : 'Show toolbar'}
+          onClick={onToggleToolbar}
+        >
+          {toolbarVisible ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
         </button>
       </div>
       <div className="alc-titlebar-centre">

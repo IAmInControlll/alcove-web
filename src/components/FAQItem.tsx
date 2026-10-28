@@ -1,5 +1,3 @@
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-
 interface Props {
   question: string;
   answer: string;
@@ -8,8 +6,6 @@ interface Props {
 }
 
 export default function FAQItem({ question, answer, isOpen, onToggle }: Props) {
-  const reduce = useReducedMotion();
-
   return (
     <div className="faq-item">
       <button
@@ -31,20 +27,11 @@ export default function FAQItem({ question, answer, isOpen, onToggle }: Props) {
           <path d="M12 5v14M5 12h14" />
         </svg>
       </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            className="faq-answer"
-            initial={reduce ? undefined : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={reduce ? undefined : { height: 0, opacity: 0 }}
-            transition={reduce ? { duration: 0 } : { duration: 0.25, ease: 'easeOut' }}
-            style={{ overflow: 'hidden' }}
-          >
-            <p dangerouslySetInnerHTML={{ __html: answer }} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="faq-answer" data-open={isOpen || undefined} inert={!isOpen}>
+        <div className="faq-answer-inner">
+          <p dangerouslySetInnerHTML={{ __html: answer }} />
+        </div>
+      </div>
     </div>
   );
 }

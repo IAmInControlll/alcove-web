@@ -13,42 +13,33 @@ import {
   VolumeX,
   X,
 } from 'lucide-react';
+import DemoCrumbs from './DemoCrumbs';
 
 interface Props {
-  folderLabel: string | null;
+  crumbs: string[];
   query: string;
   muted: boolean;
   volume: number;
   audioOpen: boolean;
   powerOpen: boolean;
-  onHome: () => void;
+  onCrumb: (index: number) => void;
   onQuery: (q: string) => void;
   onMute: () => void;
   onVolume: (v: number) => void;
   onToggleAudio: () => void;
   onTogglePower: () => void;
   onPower: () => void;
+  onOutput: () => void;
+  onMixer: () => void;
 }
 
 const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
-  { folderLabel, query, muted, volume, audioOpen, powerOpen, onHome, onQuery, onMute, onVolume, onToggleAudio, onTogglePower, onPower },
+  { crumbs, query, muted, volume, audioOpen, powerOpen, onCrumb, onQuery, onMute, onVolume, onToggleAudio, onTogglePower, onPower, onOutput, onMixer },
   searchRef,
 ) {
   return (
     <div className="alc-toolbar">
-      <nav className="alc-crumbs" aria-label="Location">
-        <button type="button" className="alc-crumb" data-current={!folderLabel || undefined} onClick={onHome}>
-          Home
-        </button>
-        {folderLabel && (
-          <>
-            <span className="alc-crumb-sep">/</span>
-            <span className="alc-crumb" data-current>
-              {folderLabel}
-            </span>
-          </>
-        )}
-      </nav>
+      <DemoCrumbs crumbs={crumbs} onCrumb={onCrumb} />
       <span className="alc-spacer" />
       <div className="alc-group alc-group-audio">
         <button type="button" className="alc-sm-btn" data-danger={muted || undefined} aria-label={muted ? 'Unmute' : 'Mute'} onClick={onMute}>
@@ -67,10 +58,10 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
               style={{ '--fill': `${muted ? 0 : volume}%` } as React.CSSProperties}
             />
             <span className="alc-vol">{muted ? 0 : volume}%</span>
-            <button type="button" className="alc-sm-btn" aria-label="Output device">
+            <button type="button" className="alc-sm-btn" aria-label="Output device" onClick={onOutput}>
               <Headphones size={13} />
             </button>
-            <button type="button" className="alc-sm-btn" aria-label="Mixer">
+            <button type="button" className="alc-sm-btn" aria-label="Mixer" onClick={onMixer}>
               <SlidersHorizontal size={13} />
             </button>
           </>

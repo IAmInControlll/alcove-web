@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://alcove-app.com',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap({ filter: (page) => !page.endsWith('/support/') })],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,4 +1,4 @@
-import { demoIcon } from '../config/demo';
+import { demoIcon, folderSwatch } from '../config/demo';
 import type { DemoItem } from '../config/demo';
 
 interface Props {
@@ -12,8 +12,9 @@ export default function DemoPeekContent({ item }: Props) {
   const rows =
     item.kind === 'folder'
       ? [
-          ['Type', 'Folder'],
-          ['Items', String(item.items.length)],
+          ['Type', item.link ? 'Linked folder' : 'Folder'],
+          ['Items', String(item.link ? item.link.entries.length : item.items.length)],
+          ...(item.link ? [['Target', item.link.path]] : []),
         ]
       : [
           ['Type', item.type],
@@ -22,7 +23,7 @@ export default function DemoPeekContent({ item }: Props) {
   return (
     <div className="alc-peek-info">
       {item.kind === 'folder' ? (
-        <span className="alc-folder alc-folder-lg" style={{ background: `${item.color}33`, border: `1px solid ${item.color}66` }}>
+        <span className="alc-folder alc-folder-lg" style={folderSwatch(item.color)}>
           <span aria-hidden="true">📁</span>
         </span>
       ) : (

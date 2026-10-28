@@ -1,26 +1,25 @@
+import type { ReactNode } from 'react';
 import { X } from 'lucide-react';
-import DemoPeekContent from './DemoPeekContent';
-import type { DemoFile } from '../config/demo';
 
 interface Props {
-  file: DemoFile;
+  title: string;
+  path: string;
   themeClass: string;
   onClose: () => void;
+  children: ReactNode;
 }
 
-export default function DemoPeek({ file, themeClass, onClose }: Props) {
+export default function DemoPeek({ title, path, themeClass, onClose, children }: Props) {
   return (
-    <aside className={`alc-app ${themeClass} alc-peek`} aria-label={`Peek: ${file.label}`}>
+    <aside className={`alc-app ${themeClass} alc-peek`} aria-label={`Peek: ${title}`}>
       <header className="alc-peek-head">
-        <span>{file.label}</span>
+        <span>{title}</span>
         <button type="button" className="alc-xs-btn" onClick={onClose} aria-label="Close Peek">
           <X size={12} />
         </button>
       </header>
-      <div className="alc-peek-body">
-        <DemoPeekContent item={file} />
-      </div>
-      <footer className="alc-peek-foot">{file.path}</footer>
+      <div className="alc-peek-body">{children}</div>
+      <footer className="alc-peek-foot">{path}</footer>
     </aside>
   );
 }

@@ -86,10 +86,10 @@ export const tour: TourShot[] = [
   },
   {
     id: 'folders',
-    title: 'Folders & junctions',
-    caption: 'Group things into coloured folders. Real folders come in as junctions, so nothing gets copied.',
+    title: 'Folders',
+    caption: 'Group things into coloured folders. Drag in a real folder and it is linked, not copied.',
     screenshot: 'folders.png',
-    alt: 'Alcove folders and junctions shown in the workspace',
+    alt: 'Alcove folders shown in the workspace',
   },
   {
     id: 'themes',
@@ -133,7 +133,7 @@ export const comparison: Comparison = {
     },
     {
       task: 'Group related things',
-      cells: ['Folders, which move the files', 'Folders, one level deep', 'Coloured folders, and junctions instead of copies'],
+      cells: ['Folders, which move the files', 'Folders, one level deep', 'Coloured folders, and real folders linked, not copied'],
     },
     {
       task: 'Find something by typing',
@@ -177,7 +177,7 @@ export const faqGroups: FAQGroup[] = [
       {
         question: 'Why only Windows?',
         answer:
-          'Alcove is built on Windows Shell APIs. The workspace, the junctions, the icon extraction, the hotkeys - all of it is Windows-specific. That is where it lives.',
+          'Alcove is built on Windows Shell APIs. The workspace, the linked folders, the icon extraction, the hotkeys - all of it is Windows-specific. That is where it lives.',
       },
       {
         question: 'How do I get it?',

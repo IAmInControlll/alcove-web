@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { demoIcon } from '../config/demo';
+import { demoIcon, folderSwatch } from '../config/demo';
 import type { Cell, DemoItem } from '../config/demo';
 
 interface Props {
@@ -81,10 +81,7 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
     >
       <span className="alc-tile-icon" style={{ width: iconSize, height: iconSize }}>
         {item.kind === 'folder' ? (
-          <span
-            className="alc-folder"
-            style={{ background: `${item.color}33`, border: `1px solid ${item.color}66` }}
-          >
+          <span className="alc-folder" style={folderSwatch(item.color)}>
             <span aria-hidden="true">📁</span>
           </span>
         ) : (

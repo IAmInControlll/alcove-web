@@ -42,17 +42,57 @@ const slides = heroSlides
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  const items = [...document.querySelectorAll<HTMLElement>('.hm-pan-item')];
+  const wrap = document.querySelector<HTMLElement>('.hm-pan');
   const track = document.querySelector<HTMLElement>('.hm-pan-track');
+  const items = [...document.querySelectorAll<HTMLElement>('.hm-pan-item')];
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const INTERVAL = 1000;
+  const SLANT = 30;
   let current = 0;
+  let timer = 0;
+  let visible = false;
+  let wipe = { x: 0 };
+
+  // The window sits in the same place in every shot, so wiping one over the next reads as the theme changing in place.
   const go = (step: number) => {
+    const prev = items[current];
     current = (current + step + items.length) % items.length;
-    items.forEach((item, i) => item.classList.toggle('is-current', i === current));
+    const next = items[current];
+    gsap.killTweensOf(wipe);
+    prev.style.clipPath = '';
+    items.forEach((item, i) => {
+      item.classList.toggle('is-current', i === current);
+      item.classList.toggle('is-prev', item === prev && prev !== next);
+    });
+    window.clearTimeout(timer);
+    if (reduced) return;
+    // A slanted edge sweeps across: x is where it meets the top, SLANT how far behind it trails at the bottom.
+    wipe = { x: 0 };
+    const clip = () => {
+      const top = step > 0 ? wipe.x : 100 - wipe.x;
+      const bottom = step > 0 ? wipe.x - SLANT : 100 - wipe.x + SLANT;
+      const side = step > 0 ? 0 : 100;
+      next.style.clipPath = `polygon(${side}% 0%, ${top}% 0%, ${bottom}% 100%, ${side}% 100%)`;
+    };
+    clip();
+    gsap.to(wipe, {
+      x: 100 + SLANT,
+      duration: 0.9,
+      ease: 'sine.inOut',
+      onUpdate: clip,
+      onComplete: () => {
+        next.style.clipPath = '';
+        schedule();
+      },
+    });
   };
+
+  const schedule = () => {
+    window.clearTimeout(timer);
+    if (!reduced && visible && !document.hidden) timer = window.setTimeout(() => go(1), INTERVAL);
+  };
+
   document.querySelectorAll<HTMLButtonElement>('.hm-swap-btn').forEach((btn) => {
     btn.addEventListener('click', () => go(Number(btn.dataset.step)));
   });
@@ -63,29 +103,14 @@ const slides = heroSlides
     startX = null;
   });
 
-  // The window sits in the same place in every shot, so wiping one over the next reads as the theme changing in place.
-  gsap.matchMedia().add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
-    const wrap = document.querySelector<HTMLElement>('.hm-pan')!;
-    const shots = gsap.utils.toArray<HTMLElement>('.hm-pan-item');
-    wrap.classList.add('is-pinned');
-    gsap.set(shots.slice(1), { clipPath: 'inset(0 100% 0 0)' });
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrap,
-        start: 'top top',
-        end: () => `+=${window.innerHeight * 0.6 * (shots.length - 1)}`,
-        pin: true,
-        scrub: 0.6,
-        invalidateOnRefresh: true,
+  if (wrap) {
+    new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        schedule();
       },
-    });
-    shots.slice(1).forEach((shot, i) => {
-      tl.to(shot, { clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'power2.inOut' }, i * 1.25);
-    });
-    tl.to({}, { duration: 0.4 });
-    return () => {
-      wrap.classList.remove('is-pinned');
-      gsap.set(shots, { clearProps: 'clipPath' });
-    };
-  });
+      { threshold: 0.4 },
+    ).observe(wrap);
+  }
+  document.addEventListener('visibilitychange', schedule);
 </script>

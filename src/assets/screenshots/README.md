@@ -32,7 +32,7 @@ powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
 
 ### Hero slides (`hero-1.webp`, `hero-2.webp`, ...)
 
-- Used by: the themes chapter (`hero-1`, `hero-3`, `hero-4`, `hero-5`, `hero-6`, `hero-7`, `hero-9`, picked in `HomeThemes.astro`), which stacks the shots and wipes one over the next on scroll (one at a time with arrows on phones). Every shot must keep the Alcove window at the same size and position, or the wipe stops reading as the theme changing in place. `hero-2` and `hero-8` are not currently shown. Alt text lives in `heroSlides` in `src/config/home.ts`.
+- Used by: the themes chapter (`hero-1`, `hero-3`, `hero-4`, `hero-5`, `hero-6`, `hero-7`, `hero-9`, picked in `HomeThemes.astro`), which stacks the shots and wipes one diagonally over the next on a timer (arrows instead of the timer with reduced motion). Every shot must keep the Alcove window at the same size and position, or the wipe stops reading as the theme changing in place. `hero-2` and `hero-8` are not currently shown. Alt text lives in `heroSlides` in `src/config/home.ts`.
 - Aspect: 16:9. Each slide is a full-screen screenshot cropped to 1900x1069 centred on the Alcove window and saved as WebP, so the window sits in the same place on every slide and the crossfade only changes the theme and wallpaper around it. Keep the window at the same size and position for every slide.
 - Each slide shows a different theme over a different wallpaper, with desktop icons hidden.
 - Goal: Make a visitor understand what Alcove is in under two seconds. This is the single most important image on the site.
@@ -52,7 +52,7 @@ powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
 
 ### `folders.png`
 
-- Used by: the workspace chapter, step 2 ("Folders & junctions")
+- Used by: the workspace chapter, step 2 ("Folders")
 - Aspect: 16:10
 - Goal: Show that folders in Alcove are real Windows junctions and that you can group things in-app.
 - What to show: At least one in-app folder open or expanded, with items inside it visible. Show a coloured folder or two so the "colour them to find things at a glance" claim is visible. If the UI distinguishes a junction from a copied folder (an icon, a badge, a path tooltip), include that cue - it is the proof for "not a copy".
@@ -121,3 +121,11 @@ These are real assets and do not need replacing:
 ## Demo icons (`src/assets/demo-icons/`)
 
 The live Alcove demo on the home page uses real icons copied from the app's icon cache (`%APPDATA%\Alcove\icons\`), renamed to short ids that `src/config/demo.ts` references (`chrome.png`, `this-pc.png`, ...). They are 32 or 40 px, the same bitmaps the app renders. Replace one by copying the matching file from the cache over it under the same name.
+
+## Demo wallpaper (`src/assets/demo-wallpaper-*.svg` / `.webp`)
+
+The hero demo sits on a desktop: a rounded frame filled with an original abstract wallpaper (mint and teal ribbons over soft glows), dark or light following the site theme (`--demo-wallpaper` in `global.css`). Not the Windows 11 wallpaper, which is Microsoft's artwork. The SVGs are the editable sources; the page loads the WebPs (2400x1500, about 25KB each) so the browser never rasterizes the SVG blur filters. After editing an SVG, run `node scripts/render-demo-wallpaper.mjs`.
+
+## Demo file pictures (`src/assets/demo-files/`)
+
+Small original SVG illustrations that stand in for the photos and images inside the demo's linked "Projects" folder (Lisbon trip photos, a park, a lake). The Website folder inside Projects shows this site's real `og.png` and glyph instead. Peek shows them when a `.jpg` or `.svg` entry is opened. `src/config/demo.ts` refers to them by file name (`picture: 'rooftops'`).

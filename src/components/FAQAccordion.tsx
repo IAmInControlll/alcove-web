@@ -4,10 +4,10 @@ import type { FAQGroup } from '../config/home';
 
 interface Props {
   groups: FAQGroup[];
-  supportHref?: string;
+  helpHref?: string;
 }
 
-export default function FAQAccordion({ groups, supportHref = '/support/' }: Props) {
+export default function FAQAccordion({ groups, helpHref = '/help/' }: Props) {
   const [open, setOpen] = useState<string | null>(null);
 
   const toggle = (key: string) => {
@@ -34,7 +34,7 @@ export default function FAQAccordion({ groups, supportHref = '/support/' }: Prop
         </div>
       ))}
       <p style={{ marginTop: '16px' }}>
-        <a href={supportHref}>Full support page</a>
+        <a href={helpHref}>Full help page</a>
       </p>
     </div>
   );

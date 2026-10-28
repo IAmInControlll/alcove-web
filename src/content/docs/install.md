@@ -2,13 +2,13 @@
 title: Install Alcove
 heading: Install Alcove on Windows
 description: Download and install Alcove on Windows. Covers the SmartScreen warning for unsigned builds and links to the release page.
-summary: The download started automatically when you opened this page. Follow the steps below.
+summary: Download the installer, then follow the steps below.
 updated: 2026-08-19
 toc: true
 autoDownload: true
 ---
 
-The installer for the latest release should start downloading on its own. If it didn't, use the button below.
+<p class="install-started" hidden>The installer is downloading. If it did not start, use the button below.</p>
 
 <a class="btn btn-primary install-cta" href="https://github.com/IAmInControlll/alcove-web/releases/latest/download/Alcove-setup.exe" download>Download Alcove-setup.exe</a>
 
@@ -90,4 +90,4 @@ For the full release notes, the SHA-256 fingerprint (`checksums.txt`), and the l
 
 ## Trouble installing?
 
-If something goes wrong, see the [Support](../support/) page for common issues and how to get help.
+If something goes wrong, see the [Help](../help/) page for common issues and how to get help.

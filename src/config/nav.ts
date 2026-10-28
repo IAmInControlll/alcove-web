@@ -5,12 +5,12 @@ export interface NavItem {
 
 export const nav: NavItem[] = [
   { title: 'Changelog', url: '/changelog/' },
-  { title: 'Support', url: '/support/' },
+  { title: 'Help', url: '/help/' },
 ];
 
 export const footerNav: NavItem[] = [
   { title: 'Changelog', url: '/changelog/' },
-  { title: 'Support', url: '/support/' },
+  { title: 'Help', url: '/help/' },
   { title: 'Privacy', url: '/privacy/' },
   { title: 'Terms', url: '/terms/' },
 ];

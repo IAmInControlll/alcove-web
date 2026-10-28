@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d8fc7"/>
+      <stop offset="0.55" stop-color="#e9a07f"/>
+      <stop offset="1" stop-color="#f6c58f"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6a27e"/>
+      <stop offset="1" stop-color="#4f5f8f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="380" fill="url(#sky)"/>
+  <circle cx="400" cy="352" r="70" fill="#ffe2b3"/>
+  <rect y="370" width="800" height="230" fill="url(#water)"/>
+  <path d="M0 370 L60 350 L110 362 L170 340 L240 366 L300 352 L360 370 Z" fill="#5a5578" opacity="0.8"/>
+  <path d="M470 370 L520 348 L600 360 L660 336 L740 358 L800 346 L800 370 Z" fill="#5a5578" opacity="0.8"/>
+  <path d="M120 300 L120 370 M680 300 L680 370" stroke="#3d3a56" stroke-width="10"/>
+  <path d="M120 300 Q400 380 680 300" fill="none" stroke="#3d3a56" stroke-width="6"/>
+  <g stroke="#ffe7c2" stroke-linecap="round" opacity="0.7">
+    <path d="M360 400 H440" stroke-width="5"/><path d="M340 430 H460" stroke-width="4"/>
+    <path d="M370 465 H430" stroke-width="4"/><path d="M350 505 H450" stroke-width="3"/>
+  </g>
+</svg>

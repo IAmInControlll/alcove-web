@@ -34,11 +34,9 @@
       </g>
     </g>
   </svg>
-  <p class="arch-intro-title">Welcome to Alcove</p>
-  <div class="arch-intro-cue" aria-hidden="true">
-    <span class="arch-intro-cue-scroll">Scroll</span>
-    <span class="arch-intro-cue-swipe">Swipe up</span>
-    <span class="arch-intro-cue-line"></span>
+  <div class="arch-intro-heading">
+    <p class="arch-intro-title">Welcome to Alcove</p>
+    <p class="arch-intro-motto">Your space inside Windows.</p>
   </div>
   <button type="button" class="arch-intro-skip">Skip intro</button>
 </div>
@@ -75,6 +73,7 @@
     let pan = 0;
     let done = false;
     let trigger: ScrollTrigger | null = null;
+    let auto: gsap.core.Tween | null = null;
 
     const smooth = (t: number) => t * t * (3 - 2 * t);
 
@@ -137,11 +136,36 @@
         },
       });
       render(Math.min(1, window.scrollY / span));
+      intro.classList.add('is-ready');
     };
+
+    // Plays the zoom on its own after a beat, by scrolling the page for the visitor. Their own scrolling is held off until it ends.
+    const startAuto = () => {
+      if (done) return;
+      const proxy = { y: window.scrollY };
+      auto = gsap.to(proxy, {
+        y: span,
+        duration: 2.6,
+        ease: 'power1.inOut',
+        onUpdate: () => window.scrollTo({ top: proxy.y, behavior: 'instant' }),
+        onComplete: finish,
+      });
+    };
+    const autoTimer = window.setTimeout(startAuto, 1000);
+    const SCROLL_KEYS = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+    const block = (e: Event) => {
+      if (e instanceof KeyboardEvent && (e.target === skip || !SCROLL_KEYS.includes(e.key))) return;
+      e.preventDefault();
+    };
+    const inputs = ['wheel', 'touchmove', 'keydown'] as const;
+    inputs.forEach((type) => window.addEventListener(type, block, { passive: false }));
 
     const finish = () => {
       if (done) return;
       done = true;
+      window.clearTimeout(autoTimer);
+      auto?.kill();
+      inputs.forEach((type) => window.removeEventListener(type, block));
       const y = window.scrollY;
       trigger?.kill();
       window.removeEventListener('resize', measure);

@@ -14,11 +14,10 @@ const { downloadHref, helpHref } = Astro.props;
 <section class="hm-hero">
   <div class="hm-hero-copy">
     <h1 class="hm-hero-title">Clear the clutter. Keep what matters close.</h1>
-    <p class="hm-hero-sub">A visual workspace for Windows, one hotkey away. This one works. Try it.</p>
-    <div class="hm-hero-ctas">
-      <a class="btn btn-primary" href={downloadHref}>Download for Windows</a>
-      <a class="hm-link" href={helpHref}>Get help</a>
-    </div>
+    <p class="hm-hero-sub">A visual workspace for Windows, one hotkey away.</p>
+  </div>
+  <div class="hm-hero-try">
+    <p class="hm-hero-try-label">Try it:</p>
     <ul class="hm-hero-keys">
       <li>
         <button type="button" class="hm-hero-key" data-demo="window">
@@ -30,10 +29,21 @@ const { downloadHref, helpHref } = Astro.props;
           <Keycap keys={demoHotkeys.shelf} /> opens the Shelf
         </button>
       </li>
+      <li>
+        <button type="button" class="hm-hero-key" data-demo="peek">
+          <Keycap keys={demoHotkeys.peek} /> peeks the selected item
+        </button>
+      </li>
     </ul>
   </div>
   <AlcoveDemo client:load />
 </section>
+<div class="hm-get">
+  <div class="hm-hero-ctas">
+    <a class="btn btn-primary" href={downloadHref}>Download for Windows</a>
+    <a class="hm-link" href={helpHref}>Get help</a>
+  </div>
+</div>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('.hm-hero-key').forEach((btn) => {

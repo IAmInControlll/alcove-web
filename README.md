@@ -9,15 +9,13 @@ The documentation and marketing site for **Alcove**, a visual workspace for Wind
 | [Home](https://alcove-app.com/) | Marketing landing page |
 | [Privacy Policy](https://alcove-app.com/privacy/) | What is stored on your device, what leaves it, and how to remove it |
 | [Terms of Use](https://alcove-app.com/terms/) | What you can and can't do with Alcove, and the limits of the licence |
-| [Support](https://alcove-app.com/support/) | Where your data lives, common questions, and how to get help |
+| [Help](https://alcove-app.com/help/) | Where your data lives, common questions, and how to get help |
 
 ## Tech stack
 
 - [Astro](https://astro.build) - static site generator, ships zero JS by default
 - [React](https://react.dev) - interactive islands only (the live Alcove demo, FAQ, theme picker, theme toggle)
 - [Tailwind CSS](https://tailwindcss.com) v4 - utility-first styling, mapped to CSS variables for theme awareness
-- [motion](https://motion.dev) (Framer Motion) - React component animations
-- [Lenis](https://lenis.darkroom.engineering) - smooth scroll
 - [GSAP](https://gsap.com) - scroll-triggered timelines
 - Deployed to GitHub Pages via GitHub Actions
 

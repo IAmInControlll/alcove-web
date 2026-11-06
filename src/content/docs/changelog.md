@@ -3,9 +3,17 @@ title: Changelog
 heading: Changelog
 summary: Every version of Alcove, what changed in it, newest first.
 description: The full Alcove changelog. Every version, what changed, newest first.
-updated: 2026-10-27
+updated: 2026-11-05
 toc: false
 ---
+
+## November 5, 2026 (v0.1.4)
+
+- New Notch - rest your pointer at the top of your screen for your pinned apps and a board of widgets
+- New Alcove Files - browse, preview, and manage any folder on your PC without leaving Alcove
+- New toolbar widgets for media, timer, clipboard history, downloads, system info, and more - pick yours in Settings > Toolbar
+- Photos and videos in your grid now show real thumbnails, and Peek opens more kinds of files
+- Plus Keep awake, Launch all, Run as administrator from the grid, and lots of smaller fixes
 
 ## October 27, 2026 (v0.1.4)
 

@@ -3,7 +3,7 @@ title: Privacy Policy
 heading: Alcove Privacy Policy
 summary: What Alcove keeps on your device, the cases where anything leaves it, and how to remove all of it.
 description: The Alcove privacy policy. Alcove is a visual workspace for Windows with no accounts, no telemetry, and no analytics.
-updated: 2026-10-27
+updated: 2026-10-31
 toc: true
 ---
 
@@ -27,7 +27,7 @@ Alcove does not:
 - Send crash reports, stack traces, or diagnostic logs anywhere.
 - Create an account, a licence key, a device ID, or any other identifier for you.
 - Contact a server of its own. There is no Alcove backend and no auto-updater, so the app never checks in for a new version by itself. It does make one anonymous, unauthenticated request to the GitHub Releases API at launch to check whether a newer build is available; see "Data sent to external services" below.
-- Read your browsing history, your documents, your email, or your clipboard.
+- Read your browsing history, your documents, or your email. Alcove reads your clipboard only as described in "Clipboard history" below.
 - Show ads, or include any advertising or marketing SDK.
 - Sell, rent, or share personal information with third parties.
 
@@ -47,6 +47,12 @@ Alcove stores the following in `%APPDATA%\Alcove\`. All of it stays on your mach
 - **Icon cache** - `icons\` holds icons extracted from your shortcuts, as PNG and ICO files, so the grid loads quickly.
 
 Alcove does not upload any of these files.
+
+## Clipboard history
+
+The Clipboard history widget is off until you turn it on. When it is on and you open its panel, Alcove asks Windows for the items in Windows' own clipboard history, the same list Win+V shows. This happens on your PC only, and only while the panel is open. Alcove does not save clipboard items to disk, does not include them in backups, and does not send them anywhere.
+
+Items that apps such as password managers mark as excluded from clipboard history are never added to that list by Windows, so Alcove never sees them. When you pick an item, Alcove asks Windows to put it back on the clipboard. Windows clipboard history must be turned on in Windows Settings for the panel to show anything, and you can clear or turn it off there at any time.
 
 ## Backups you create
 
@@ -109,6 +115,7 @@ Alcove requests the following Windows capabilities:
 - **Shell access** - to launch applications, extract icons, and work with Windows system folders.
 - **Audio control** - to read and set system volume, switch output devices, and drive the per-app mixer.
 - **Power actions** - to shut down, restart, sleep, or lock the machine when you confirm one of those actions.
+- **Clipboard history** - to read Windows' clipboard history while the clipboard panel is open, and to put an item you pick back on the clipboard.
 - **Network access** - for Wikipedia lookups, the ECB rate feed, and the launch update check.
 - **Global hotkeys** - to show or hide the window, Peek, and the Shelf from anywhere.
 

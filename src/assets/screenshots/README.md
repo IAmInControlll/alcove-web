@@ -43,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
 
 ### `grid-view.png`
 
-- Used by: the workspace chapter (`HomeWorkspace.astro`), step 1 ("Your space")
+- Used by: nothing on the home page. The workspace chapter (`HomeWorkspace.astro`) draws live replicas of the app instead (`AlcoveScene`, `ShelfShowcase`, `NotchShowcase` and the card mocks), so they follow the theme picker.
 - Aspect: 16:10
 - Goal: Show the core product - the drag-and-drop grid with real things on it.
 - What to show: The main workspace with a varied, realistic set of tiles: a few app shortcuts, a couple of folders, maybe a shell object or a .url tile. Tiles should be arranged in a way that looks intentional but personal - grouped loosely by purpose rather than in a perfect grid. Include a mix of tile types so it reads as "shortcuts, apps, folders, and shell objects", not just app icons.
@@ -52,7 +52,7 @@ powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
 
 ### `folders.png`
 
-- Used by: the workspace chapter, step 2 ("Folders")
+- Used by: nothing on the home page. The workspace chapter (`HomeWorkspace.astro`) draws live replicas of the app instead (`AlcoveScene`, `ShelfShowcase`, `NotchShowcase` and the card mocks), so they follow the theme picker.
 - Aspect: 16:10
 - Goal: Show that folders in Alcove are real Windows junctions and that you can group things in-app.
 - What to show: At least one in-app folder open or expanded, with items inside it visible. Show a coloured folder or two so the "colour them to find things at a glance" claim is visible. If the UI distinguishes a junction from a copied folder (an icon, a badge, a path tooltip), include that cue - it is the proof for "not a copy".
@@ -70,21 +70,40 @@ powershell -ExecutionPolicy Bypass -File capture.ps1 -Shot grid-view
 
 ### `peek.png`
 
-- Used by: the workspace chapter, step 3 ("Peek")
+- Used by: nothing on the home page. The workspace chapter (`HomeWorkspace.astro`) draws live replicas of the app instead (`AlcoveScene`, `ShelfShowcase`, `NotchShowcase` and the card mocks), so they follow the theme picker.
 - Aspect: 16:10
 - Goal: Show Peek doing its one job: previewing a file inline without launching the source app.
 - What to show: A Peek preview open over a tile, with the previewed content clearly visible. An image, a document, or a text file all work - pick one where the preview is legible at screenshot size. The tile being peeked should be identifiable so the relationship between "the thing on the grid" and "the preview" is clear.
 - What to avoid: A Peek preview of something unreadable at small sizes (a giant spreadsheet, a video frame). A shot where the preview blends into the workspace background.
 - Feeling: "Quick look, no commitment."
 
+### `files.png`
+
+- Used by: nothing on the home page. The workspace chapter (`HomeWorkspace.astro`) draws live replicas of the app instead (`AlcoveScene`, `ShelfShowcase`, `NotchShowcase` and the card mocks), so they follow the theme picker.
+- Aspect: 16:10
+- Goal: Show Alcove Files as a folder browser in its own window, part of Alcove.
+- What to show: The Alcove Files window on a real-looking folder, with pinned folders in the sidebar and a mix of files in the list or the thumbnail grid. A Peek preview open on one file is a bonus.
+- What to avoid: A path or folder name that shows the developer's username. An empty folder.
+- Feeling: "I can get around my PC without opening File Explorer."
+
 ### `shelf.png`
 
-- Used by: the Shelf chapter (`HomeShelf.astro`), the second-largest image on the page
+- Used by: the `screenshot` list in the home page structured data (`src/pages/index.astro`). The workspace chapter draws a live replica of the Shelf instead (`ShelfShowcase`).
+- Status: needs a retake. The current shot predates Shelf file search (app 0.1.4), which the Shelf copy now leads with.
 - Aspect: 16:10
 - Goal: Show the Shelf as the second selling point: prominent, but after the workspace.
-- What to show: The Shelf open with a local search query typed in and a few results visible - enough to show it searches the workspace. If the Google and Wikipedia scopes are visible in the same frame, include them, but do not force all three scopes into the shot if it makes it cluttered. Local search results are the priority.
+- What to show: The Shelf open with a local search query typed in and a few results visible, including the Files section, so it shows the Shelf finds files on the PC as well as the workspace. If the Google and Wikipedia scopes are visible in the same frame, include them, but do not force all three scopes into the shot if it makes it cluttered. Local search results are the priority.
 - What to avoid: Making it outshine the workspace shot, which stays the hero. An empty Shelf with no query. A shot that makes Alcove look like a launcher first.
 - Feeling: "It's there when typing is faster than browsing."
+
+### `notch.png`
+
+- Used by: nothing on the home page. The workspace chapter (`HomeWorkspace.astro`) draws live replicas of the app instead (`AlcoveScene`, `ShelfShowcase`, `NotchShowcase` and the card mocks), so they follow the theme picker.
+- Aspect: 16:9 or 16:10 (the frame is 16:9 with `object-fit: contain`)
+- Goal: Show the Notch as a small drop-down at the top edge of the screen, separate from the Alcove window.
+- What to show: The top of a desktop with the Notch expanded: pinned apps on the left, a few widgets (media, timer, clock) on the right. Crop to the top part of the screen so the Notch is legible.
+- What to avoid: A full-screen shot where the Notch is a sliver. The Alcove window open behind it.
+- Feeling: "It's up there when I reach for it, gone when I don't."
 
 ## Demo video
 

@@ -17,16 +17,21 @@ Everything Alcove stores is under one folder:
 ```
 %APPDATA%\Alcove\
 ├── shortcuts\   copies of the shortcuts you added
-├── icons\       cached icons
+├── notch\       links to what you pinned to the Notch
+├── icons\       cached icons and thumbnails
 ├── settings.json
 ├── positions.json
+├── notch_layout.json
 ├── folder_colors.json
 ├── launch_stats.json
 ├── search_history.json
-└── exchange_rates.json
+├── desktop_sync.json
+├── file_index.bin
+├── exchange_rates.json
+└── update_check_cache.json
 ```
 
-Paste `%APPDATA%\Alcove` into the address bar in File Explorer to open it, or use the link in Settings > About.
+Paste `%APPDATA%\Alcove` into the address bar in File Explorer to open it, or use Data folder in Settings > Data management.
 
 ## Reporting a problem
 
@@ -34,9 +39,9 @@ The more of this you can include, the faster something gets fixed:
 
 1. What you expected, and what happened instead.
 2. The exact steps that trigger it, ideally from a fresh launch of the app.
-3. Your Alcove version, from Settings > About.
+3. Your Alcove version, from Settings > Help & Info.
 4. Your Windows version, from `winver`.
-5. Whether the problem survives a restart of the app, and whether it survives Settings > About > "Reset settings".
+5. Whether the problem survives a restart of the app, and whether it survives Reset settings in Settings > Data management.
 
 If a specific shortcut misbehaves, say what kind it is: a `.lnk`, a `.url`, an `.exe`, a linked external folder, or a Windows shell object such as Recycle Bin.
 
@@ -66,7 +71,19 @@ Open Settings, record a different combination for the workspace, Peek, or Shelf 
 
 ### An icon is missing or looks wrong
 
-Icons are extracted once and then cached. If a program updates and changes its icon, or extraction failed the first time, the stale one sticks around. Settings > About > "Clear cache" empties the cache, and icons are re-extracted the next time the folder is opened.
+Icons are extracted once and then cached. If a program updates and changes its icon, or extraction failed the first time, the stale one sticks around. Icon cache in Settings > Data management empties the cache, and icons are re-extracted the next time the folder is opened.
+
+### The Notch does not open
+
+Push the pointer all the way to the top edge, in the middle where the Notch sits, and hold it there for a moment. Only the strip as wide as the closed Notch opens it. The Notch stays shut while you drag a window and while a game or video is fullscreen, and it only opens on the monitor chosen in Settings > Notch. Set When closed to Hairline in the same section to see where it sits, or give it a hotkey.
+
+### Undo in Alcove Files
+
+Ctrl+Z undoes your last change in Alcove Files and Ctrl+Y redoes it, or right-click empty space for Undo and Redo. Deleted files come back from the Recycle Bin. Deleting a linked folder only removes the link.
+
+### The clipboard history panel is empty
+
+It reads Windows' own clipboard history, the list Win+V shows. If that is off in Windows Settings, the panel has nothing to show. It has a button that takes you to the Windows setting.
 
 ### A restored shortcut will not open
 
@@ -74,11 +91,11 @@ A backup stores your shortcuts, not the programs they point at. If a program has
 
 ### Where do I find the changelog?
 
-Settings > About > "What's new", inside the app.
+Settings > Help & Info > Changelog, inside the app, or the [Changelog](../changelog/) page.
 
 ## Backing up your workspace
 
-Settings > Backup & restore exports your whole workspace - settings, layout, folder colours, shortcuts, launch statistics, and search history - to a single `.alcove-backup` file wherever you choose to put it. It is worth doing before a big rearrange, before resetting settings, or before reinstalling Windows.
+Export backup, in Settings > Data management, saves your whole workspace - settings, layout, folder colours, shortcuts, your Notch collection and layout, launch statistics, and search history - to a single `.alcove-backup` file wherever you choose to put it. It is worth doing before a big rearrange, before resetting settings, or before reinstalling Windows.
 
 Importing replaces your current workspace entirely, and asks you to confirm before it does. If the restore fails part way, your existing workspace is left as it was.
 

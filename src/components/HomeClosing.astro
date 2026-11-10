@@ -18,13 +18,13 @@ const { downloadHref, helpHref, changelogHref } = Astro.props;
         <img class="lockup-on-light" src={lockupOnLightUrl} alt="Alcove. Your space inside Windows." width="299" height="280" />
         <img class="lockup-on-dark" src={lockupOnDarkUrl} alt="Alcove. Your space inside Windows." width="299" height="280" />
       </h2>
-      <p class="hm-close-line">This is what yours looks like on day one. Drag your shortcuts in.</p>
       <div class="hm-hero-ctas">
         <a class="btn btn-primary" href={downloadHref}>Download for Windows</a>
         <a class="hm-link" href={helpHref}>Get help</a>
       </div>
       <p class="hm-spec">
-        Free for personal use. No account. <a href={changelogHref}>See what's new</a>
+        Free for personal use, on Windows 10 and 11. No account.<br />
+        <a href={changelogHref}>See what's new</a>
       </p>
     </div>
   </div>

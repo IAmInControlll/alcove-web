@@ -14,9 +14,10 @@ interface Props {
   themeClass: string;
   onOpen: (entry: ShelfEntry) => void;
   onClose: () => void;
+  autoFocus?: boolean;
 }
 
-function Highlight({ text, query }: { text: string; query: string }) {
+export function Highlight({ text, query }: { text: string; query: string }) {
   const i = query ? text.toLowerCase().indexOf(query.toLowerCase()) : -1;
   if (i < 0) return <>{text}</>;
   return (
@@ -28,7 +29,7 @@ function Highlight({ text, query }: { text: string; query: string }) {
   );
 }
 
-export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props) {
+export default function DemoShelf({ items, themeClass, onOpen, onClose, autoFocus = true }: Props) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const input = useRef<HTMLInputElement>(null);
@@ -49,7 +50,9 @@ export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props)
     return list.map((e) => ({ kind: 'item', key: e.item.id, item: e.item, where: e.where }));
   }, [items, q, themeQuery]);
 
-  useEffect(() => input.current?.focus(), []);
+  useEffect(() => {
+    if (autoFocus) input.current?.focus();
+  }, [autoFocus]);
   useEffect(() => setActive(0), [query]);
 
   const current = results[active];
@@ -159,7 +162,7 @@ export default function DemoShelf({ items, themeClass, onOpen, onClose }: Props)
           <kbd>[Enter]</kbd> Open <kbd>[Tab]</kbd> or <kbd>[Right]</kbd> Menu
         </span>
         <span className="alc-shelf-foot-hint">
-          Search for <kbd>Theme:</kbd> in the Shelf to switch themes
+          Type <kbd>theme:</kbd> to switch themes
         </span>
         <span className="alc-shelf-foot-end">
           <kbd>[Esc]</kbd> Close

@@ -5,6 +5,8 @@
   --pad-b: #e5484d;
   --pad-x: #3b82f6;
   --pad-y: #d9a406;
+  --success: #22a35a;
+  --on-success: #ffffff;
   --bg-solid: #1a1a2e;
   --control-bg: #1a1a2e;
   --bg-alpha: 1;
@@ -13,6 +15,7 @@
   --surface: rgba(255, 255, 255, 0.08);
   --surface-hover: rgba(255, 255, 255, 0.12);
   --surface-active: rgba(255, 255, 255, 0.18);
+  --track-bg: rgba(255, 255, 255, 0.18);
   --border: rgba(255, 255, 255, 0.10);
   --border-strong: rgba(255, 255, 255, 0.15);
   --text-secondary: #c0c0d0;
@@ -61,12 +64,15 @@
   --titlebar-hint-track: var(--border);
   --titlebar-icon: var(--text-muted);
   --titlebar-icon-hover: var(--text-secondary);
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: var(--surface-hover);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: var(--surface-hover);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: none;
   --titlebar-btn-radius: var(--radius-sm);
   --titlebar-btn-text: var(--titlebar-icon);
+  --titlebar-btn-text-hover: var(--text-secondary);
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: var(--danger-hover);
   --titlebar-close-fill: none;
@@ -81,6 +87,8 @@
   --matrix-choice-blue: #1d4ed8;
   --matrix-choice-blue-hover: #1e40af;
   --matrix-choice-text: #ffffff;
+  --graph-stroke: #6366f1;
+  --graph-fill: rgba(99, 102, 241, 0.16);
 }
 
 .alc-app.theme-midnight {
@@ -103,6 +111,7 @@
   --surface: rgba(255, 255, 255, 0.08);
   --surface-hover: rgba(255, 255, 255, 0.12);
   --surface-active: rgba(255, 255, 255, 0.18);
+  --track-bg: rgba(255, 255, 255, 0.18);
   --menu-hover: rgba(255, 255, 255, 0.12);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -146,12 +155,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #8888a0;
   --titlebar-icon-hover: #e0e0e0;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.12);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.12);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #8888a0;
+  --titlebar-btn-text-hover: #e0e0e0;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -162,6 +174,8 @@
   --hint-text: #8888a0;
   --hint-accent: #6366f1;
   --hint-track: rgba(255, 255, 255, 0.10);
+  --graph-stroke: #6366f1;
+  --graph-fill: rgba(99, 102, 241, 0.16);
 }
 
 .alc-app.theme-ocean {
@@ -184,6 +198,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -227,12 +242,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6a9aa8;
   --titlebar-icon-hover: #c5dfe8;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6a9aa8;
+  --titlebar-btn-text-hover: #c5dfe8;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -243,6 +261,8 @@
   --hint-text: #6a9aa8;
   --hint-accent: #06b6d4;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #06b6d4;
+  --graph-fill: rgba(6, 182, 212, 0.16);
 }
 
 .alc-app.theme-forest {
@@ -265,6 +285,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -308,12 +329,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #789e72;
   --titlebar-icon-hover: #dbf0d4;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #789e72;
+  --titlebar-btn-text-hover: #dbf0d4;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -324,6 +348,8 @@
   --hint-text: #789e72;
   --hint-accent: #22c55e;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #22c55e;
+  --graph-fill: rgba(34, 197, 94, 0.16);
 }
 
 .alc-app.theme-loki {
@@ -346,6 +372,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -389,12 +416,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #bba050;
   --titlebar-icon-hover: #e6c84c;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #bba050;
+  --titlebar-btn-text-hover: #e6c84c;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -405,6 +435,8 @@
   --hint-text: #bba050;
   --hint-accent: #d4af37;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #d4af37;
+  --graph-fill: rgba(212, 175, 55, 0.16);
 }
 
 .alc-app.theme-sunset {
@@ -427,6 +459,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -470,12 +503,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #b98d70;
   --titlebar-icon-hover: #ffe8d6;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #b98d70;
+  --titlebar-btn-text-hover: #ffe8d6;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -486,6 +522,8 @@
   --hint-text: #b98d70;
   --hint-accent: #f97316;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #f97316;
+  --graph-fill: rgba(249, 115, 22, 0.16);
 }
 
 .alc-app.theme-mono {
@@ -508,6 +546,7 @@
   --surface: rgba(255, 255, 255, 0.08);
   --surface-hover: rgba(255, 255, 255, 0.14);
   --surface-active: rgba(255, 255, 255, 0.20);
+  --track-bg: rgba(255, 255, 255, 0.20);
   --menu-hover: rgba(255, 255, 255, 0.14);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -551,12 +590,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #888888;
   --titlebar-icon-hover: #ffffff;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.14);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.14);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #888888;
+  --titlebar-btn-text-hover: #ffffff;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ffffff;
   --titlebar-close-fill: none;
@@ -567,6 +609,8 @@
   --hint-text: #888888;
   --hint-accent: #ffffff;
   --hint-track: rgba(255, 255, 255, 0.12);
+  --graph-stroke: #ffffff;
+  --graph-fill: rgba(255, 255, 255, 0.16);
 }
 
 .alc-app.theme-matrix {
@@ -589,6 +633,7 @@
   --surface: rgba(34, 197, 94, 0.08);
   --surface-hover: rgba(34, 197, 94, 0.14);
   --surface-active: rgba(34, 197, 94, 0.22);
+  --track-bg: rgba(34, 197, 94, 0.22);
   --menu-hover: rgba(34, 197, 94, 0.14);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -632,12 +677,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #15803d;
   --titlebar-icon-hover: #4ade80;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(34, 197, 94, 0.14);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(34, 197, 94, 0.14);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #15803d;
+  --titlebar-btn-text-hover: #4ade80;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -648,6 +696,8 @@
   --hint-text: #15803d;
   --hint-accent: #00ff41;
   --hint-track: rgba(34, 197, 94, 0.20);
+  --graph-stroke: #00ff41;
+  --graph-fill: rgba(0, 255, 65, 0.16);
 }
 
 .alc-app.theme-navy {
@@ -670,6 +720,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -713,12 +764,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6a8aa8;
   --titlebar-icon-hover: #c5d4e8;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6a8aa8;
+  --titlebar-btn-text-hover: #c5d4e8;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -729,6 +783,8 @@
   --hint-text: #6a8aa8;
   --hint-accent: #3a82ff;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #3a82ff;
+  --graph-fill: rgba(58, 130, 255, 0.16);
 }
 
 .alc-app.theme-blossom {
@@ -751,6 +807,7 @@
   --surface: rgba(236, 72, 153, 0.08);
   --surface-hover: rgba(236, 72, 153, 0.15);
   --surface-active: rgba(236, 72, 153, 0.22);
+  --track-bg: rgba(236, 72, 153, 0.22);
   --menu-hover: rgba(236, 72, 153, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -794,12 +851,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #9e2f62;
   --titlebar-icon-hover: #831843;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(236, 72, 153, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(236, 72, 153, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 8px;
   --titlebar-btn-text: #9e2f62;
+  --titlebar-btn-text-hover: #831843;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #e11d48;
   --titlebar-close-fill: none;
@@ -810,6 +870,8 @@
   --hint-text: #9d5a7a;
   --hint-accent: #ec4899;
   --hint-track: rgba(131, 24, 67, 0.12);
+  --graph-stroke: #ec4899;
+  --graph-fill: rgba(236, 72, 153, 0.16);
 }
 
 .alc-app.theme-zudu {
@@ -832,6 +894,7 @@
   --surface: rgba(30, 111, 184, 0.08);
   --surface-hover: rgba(30, 111, 184, 0.15);
   --surface-active: rgba(30, 111, 184, 0.22);
+  --track-bg: rgba(30, 111, 184, 0.22);
   --menu-hover: rgba(30, 111, 184, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -875,12 +938,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #3d5a73;
   --titlebar-icon-hover: #1a3a52;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(30, 111, 184, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(30, 111, 184, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 8px;
   --titlebar-btn-text: #3d5a73;
+  --titlebar-btn-text-hover: #1a3a52;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #e11d48;
   --titlebar-close-fill: none;
@@ -891,6 +957,8 @@
   --hint-text: #3d5a73;
   --hint-accent: #1e6fb8;
   --hint-track: rgba(26, 58, 82, 0.12);
+  --graph-stroke: #1e6fb8;
+  --graph-fill: rgba(30, 111, 184, 0.16);
 }
 
 .alc-app.theme-zudu .scene-layer {
@@ -920,6 +988,7 @@
   --surface: rgba(120, 90, 60, 0.08);
   --surface-hover: rgba(120, 90, 60, 0.15);
   --surface-active: rgba(120, 90, 60, 0.22);
+  --track-bg: rgba(120, 90, 60, 0.22);
   --menu-hover: rgba(120, 90, 60, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -963,12 +1032,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #665032;
   --titlebar-icon-hover: #4a3a26;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(120, 90, 60, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(120, 90, 60, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #665032;
+  --titlebar-btn-text-hover: #4a3a26;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #b91c1c;
   --titlebar-close-fill: none;
@@ -979,6 +1051,8 @@
   --hint-text: #78716c;
   --hint-accent: #a87b5d;
   --hint-track: rgba(68, 64, 60, 0.12);
+  --graph-stroke: #a87b5d;
+  --graph-fill: rgba(168, 123, 93, 0.16);
 }
 
 .alc-app.theme-lilac {
@@ -1001,6 +1075,7 @@
   --surface: rgba(167, 139, 218, 0.08);
   --surface-hover: rgba(167, 139, 218, 0.15);
   --surface-active: rgba(167, 139, 218, 0.22);
+  --track-bg: rgba(167, 139, 218, 0.22);
   --menu-hover: rgba(167, 139, 218, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1044,12 +1119,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #665699;
   --titlebar-icon-hover: #4a3d70;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(167, 139, 218, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(167, 139, 218, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 8px;
   --titlebar-btn-text: #665699;
+  --titlebar-btn-text-hover: #4a3d70;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #d946a0;
   --titlebar-close-fill: none;
@@ -1060,6 +1138,8 @@
   --hint-text: #776b8f;
   --hint-accent: #a78bda;
   --hint-track: rgba(74, 68, 88, 0.12);
+  --graph-stroke: #a78bda;
+  --graph-fill: rgba(167, 139, 218, 0.16);
 }
 
 .alc-app.theme-luna {
@@ -1082,6 +1162,7 @@
   --surface: #ffffff;
   --surface-hover: #d8e7f7;
   --surface-active: #316ac5;
+  --track-bg: #316ac5;
   --menu-hover: #316ac5;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1125,12 +1206,15 @@
   --font-weight-title: 700;
   --titlebar-icon: #ffffff;
   --titlebar-icon-hover: #ffffff;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: #4a8ce8;
   --titlebar-btn-bg: #2a6fd6;
   --titlebar-btn-bg-hover: #4a8ce8;
   --titlebar-btn-fill: linear-gradient(180deg, #7fb4f0, #3d84dd 45%, #1e63c4 55%, #1450a8);
   --titlebar-btn-bevel: inset 0 0 0 1px #ffffff;
   --titlebar-btn-radius: 4px;
   --titlebar-btn-text: #ffffff;
+  --titlebar-btn-text-hover: #ffffff;
   --titlebar-close-bg: #dc4f1c;
   --titlebar-close-bg-hover: #ec6a33;
   --titlebar-close-fill: linear-gradient(180deg, #f4a58c, #e8703f 45%, #dc4f1c 55%, #bd3d12);
@@ -1141,6 +1225,8 @@
   --hint-text: #808080;
   --hint-accent: #0054e3;
   --hint-track: #aca899;
+  --graph-stroke: #0054e3;
+  --graph-fill: rgba(0, 84, 227, 0.16);
 }
 
 .alc-app.theme-silver {
@@ -1163,6 +1249,7 @@
   --surface: #ffffff;
   --surface-hover: #d8d8e0;
   --surface-active: #b2b4bf;
+  --track-bg: #b2b4bf;
   --menu-hover: #bbb7c7;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1206,12 +1293,15 @@
   --font-weight-title: 700;
   --titlebar-icon: #1a1a1a;
   --titlebar-icon-hover: #000000;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: #eaeaf0;
   --titlebar-btn-bg: #dcdce4;
   --titlebar-btn-bg-hover: #eaeaf0;
   --titlebar-btn-fill: linear-gradient(180deg, #ffffff, #ececf0 45%, #d6d6de 55%, #c2c2cc);
   --titlebar-btn-bevel: inset 0 0 0 1px #8e8f8f;
   --titlebar-btn-radius: 4px;
   --titlebar-btn-text: #1a1a1a;
+  --titlebar-btn-text-hover: #000000;
   --titlebar-close-bg: #dc4f1c;
   --titlebar-close-bg-hover: #ec6a33;
   --titlebar-close-fill: linear-gradient(180deg, #f4a58c, #e8703f 45%, #dc4f1c 55%, #bd3d12);
@@ -1222,6 +1312,8 @@
   --hint-text: #707080;
   --hint-accent: #4f6b8c;
   --hint-track: #a0a0a8;
+  --graph-stroke: #4f6b8c;
+  --graph-fill: rgba(79, 107, 140, 0.16);
 }
 
 .alc-app.theme-classic {
@@ -1244,6 +1336,7 @@
   --surface: #d4d0c8;
   --surface-hover: #c0c0c0;
   --surface-active: #000080;
+  --track-bg: #ffffff;
   --menu-hover: #000080;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1287,12 +1380,15 @@
   --font-weight-title: 700;
   --titlebar-icon: #ffffff;
   --titlebar-icon-hover: #ffffff;
+  --titlebar-icon-bg: #000080;
+  --titlebar-icon-bg-hover: #1084d0;
   --titlebar-btn-bg: #efefef;
   --titlebar-btn-bg-hover: #ffffff;
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: var(--bevel-raised);
   --titlebar-btn-radius: 0px;
   --titlebar-btn-text: #000000;
+  --titlebar-btn-text-hover: #000000;
   --titlebar-close-bg: #efefef;
   --titlebar-close-bg-hover: #ffffff;
   --titlebar-close-fill: none;
@@ -1303,6 +1399,8 @@
   --hint-text: #606060;
   --hint-accent: #000080;
   --hint-track: #808080;
+  --graph-stroke: #000080;
+  --graph-fill: rgba(0, 0, 128, 0.16);
 }
 
 .alc-app.theme-aero {
@@ -1325,6 +1423,7 @@
   --surface: rgba(255, 255, 255, 0.70);
   --surface-hover: rgba(255, 255, 255, 0.55);
   --surface-active: #bee6fd;
+  --track-bg: #bee6fd;
   --menu-hover: rgba(255, 255, 255, 0.55);
   --surface-fill: none;
   --surface-fill-hover: linear-gradient(rgba(255, 255, 255, 0.6), rgba(230, 236, 245, 0.8) 90%, rgba(255, 255, 255, 0.8));
@@ -1368,12 +1467,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #1a3550;
   --titlebar-icon-hover: #000000;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.65);
   --titlebar-btn-bg: rgba(255, 255, 255, 0.35);
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.65);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
   --titlebar-btn-radius: 3px;
   --titlebar-btn-text: #1a3550;
+  --titlebar-btn-text-hover: #000000;
   --titlebar-close-bg: #c8412a;
   --titlebar-close-bg-hover: #e05a3f;
   --titlebar-close-fill: linear-gradient(180deg, #e88a76, #d15038 45%, #bf3a22 55%, #a32d18);
@@ -1384,6 +1486,8 @@
   --hint-text: #6a7a8a;
   --hint-accent: #4b9ad6;
   --hint-track: rgba(120, 150, 190, 0.35);
+  --graph-stroke: #4b9ad6;
+  --graph-fill: rgba(75, 154, 214, 0.16);
 }
 
 .alc-app.theme-glass {
@@ -1406,6 +1510,7 @@
   --surface: rgba(255, 255, 255, 0.05);
   --surface-hover: rgba(255, 255, 255, 0.08);
   --surface-active: rgba(96, 165, 250, 0.25);
+  --track-bg: rgba(96, 165, 250, 0.25);
   --menu-hover: rgba(255, 255, 255, 0.08);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1449,12 +1554,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #b0b0c8;
   --titlebar-icon-hover: #e0e0f0;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.08);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.08);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #b0b0c8;
+  --titlebar-btn-text-hover: #e0e0f0;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -1465,6 +1573,22 @@
   --hint-text: #9a9ac0;
   --hint-accent: #60a5fa;
   --hint-track: rgba(255, 255, 255, 0.06);
+  --graph-stroke: #60a5fa;
+  --graph-fill: rgba(96, 165, 250, 0.16);
+}
+
+.alc-app.theme-glass[data-see-through] {
+  --text-color: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --text-on-surface-active: #ffffff;
+  --text-on-menu-hover: #ffffff;
+  --hint-text: rgba(255, 255, 255, 0.7);
+  --titlebar-text: #ffffff;
+  --titlebar-icon: rgba(255, 255, 255, 0.85);
+  --titlebar-icon-hover: #ffffff;
+  --titlebar-btn-text: rgba(255, 255, 255, 0.85);
+  --titlebar-close-text: rgba(255, 255, 255, 0.85);
 }
 
 .alc-app.theme-nord {
@@ -1487,6 +1611,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1530,12 +1655,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6a7a8a;
   --titlebar-icon-hover: #d8dee9;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6a7a8a;
+  --titlebar-btn-text-hover: #d8dee9;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -1546,6 +1674,8 @@
   --hint-text: #6a7a8a;
   --hint-accent: #88c0d0;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #88c0d0;
+  --graph-fill: rgba(136, 192, 208, 0.16);
 }
 
 .alc-app.theme-gruvbox {
@@ -1568,6 +1698,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1611,12 +1742,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #928374;
   --titlebar-icon-hover: #ebdbb2;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #928374;
+  --titlebar-btn-text-hover: #ebdbb2;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -1627,6 +1761,8 @@
   --hint-text: #928374;
   --hint-accent: #d79921;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #d79921;
+  --graph-fill: rgba(215, 153, 33, 0.16);
 }
 
 .alc-app.theme-pine {
@@ -1649,6 +1785,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1692,12 +1829,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #5a8a80;
   --titlebar-icon-hover: #c5e8e0;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #5a8a80;
+  --titlebar-btn-text-hover: #c5e8e0;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -1708,6 +1848,8 @@
   --hint-text: #5a8a80;
   --hint-accent: #14b8a6;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #14b8a6;
+  --graph-fill: rgba(20, 184, 166, 0.16);
 }
 
 .alc-app.theme-amber {
@@ -1730,6 +1872,7 @@
   --surface: rgba(255, 176, 0, 0.08);
   --surface-hover: rgba(255, 176, 0, 0.14);
   --surface-active: rgba(255, 176, 0, 0.22);
+  --track-bg: rgba(255, 176, 0, 0.22);
   --menu-hover: rgba(255, 176, 0, 0.14);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1773,12 +1916,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6b4a00;
   --titlebar-icon-hover: #ffb000;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 176, 0, 0.14);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 176, 0, 0.14);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #6b4a00;
+  --titlebar-btn-text-hover: #ffb000;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -1789,6 +1935,8 @@
   --hint-text: #6b4a00;
   --hint-accent: #ffb000;
   --hint-track: rgba(255, 176, 0, 0.20);
+  --graph-stroke: #ffb000;
+  --graph-fill: rgba(255, 176, 0, 0.16);
 }
 
 .alc-app.theme-catppuccin-mocha {
@@ -1811,6 +1959,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1854,12 +2003,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #a6adc8;
   --titlebar-icon-hover: #cdd6f4;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #a6adc8;
+  --titlebar-btn-text-hover: #cdd6f4;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #f38ba8;
   --titlebar-close-fill: none;
@@ -1870,6 +2022,8 @@
   --hint-text: #a6adc8;
   --hint-accent: #cba6f7;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #cba6f7;
+  --graph-fill: rgba(203, 166, 247, 0.16);
 }
 
 .alc-app.theme-dracula {
@@ -1892,6 +2046,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -1935,12 +2090,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6272a4;
   --titlebar-icon-hover: #f8f8f2;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6272a4;
+  --titlebar-btn-text-hover: #f8f8f2;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ff5555;
   --titlebar-close-fill: none;
@@ -1951,6 +2109,8 @@
   --hint-text: #6272a4;
   --hint-accent: #bd93f9;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #bd93f9;
+  --graph-fill: rgba(189, 147, 249, 0.16);
 }
 
 .alc-app.theme-monokai {
@@ -1973,6 +2133,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2016,12 +2177,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #75715e;
   --titlebar-icon-hover: #f8f8f2;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #75715e;
+  --titlebar-btn-text-hover: #f8f8f2;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ae81ff;
   --titlebar-close-fill: none;
@@ -2032,6 +2196,8 @@
   --hint-text: #75715e;
   --hint-accent: #f92672;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #f92672;
+  --graph-fill: rgba(249, 38, 114, 0.16);
 }
 
 .alc-app.theme-rose-pine {
@@ -2054,6 +2220,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2097,12 +2264,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6e6a86;
   --titlebar-icon-hover: #e0def4;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6e6a86;
+  --titlebar-btn-text-hover: #e0def4;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #eb6f92;
   --titlebar-close-fill: none;
@@ -2113,6 +2283,8 @@
   --hint-text: #6e6a86;
   --hint-accent: #ebbcba;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #ebbcba;
+  --graph-fill: rgba(235, 188, 186, 0.16);
 }
 
 .alc-app.theme-crimson {
@@ -2135,6 +2307,7 @@
   --surface: rgba(220, 38, 38, 0.08);
   --surface-hover: rgba(220, 38, 38, 0.14);
   --surface-active: rgba(220, 38, 38, 0.22);
+  --track-bg: rgba(220, 38, 38, 0.22);
   --menu-hover: rgba(220, 38, 38, 0.14);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2178,12 +2351,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #8a5a5a;
   --titlebar-icon-hover: #f5e6e6;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(220, 38, 38, 0.14);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(220, 38, 38, 0.14);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #8a5a5a;
+  --titlebar-btn-text-hover: #f5e6e6;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #7f1d1d;
   --titlebar-close-fill: none;
@@ -2194,6 +2370,8 @@
   --hint-text: #8a5a5a;
   --hint-accent: #dc2626;
   --hint-track: rgba(220, 38, 38, 0.20);
+  --graph-stroke: #dc2626;
+  --graph-fill: rgba(220, 38, 38, 0.16);
 }
 
 .alc-app.theme-solarized-dark {
@@ -2216,6 +2394,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2259,12 +2438,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #586e75;
   --titlebar-icon-hover: #93a1a1;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #586e75;
+  --titlebar-btn-text-hover: #93a1a1;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -2275,6 +2457,8 @@
   --hint-text: #586e75;
   --hint-accent: #268bd2;
   --hint-track: rgba(255, 255, 255, 0.08);
+  --graph-stroke: #268bd2;
+  --graph-fill: rgba(38, 139, 210, 0.16);
 }
 
 .alc-app.theme-metro {
@@ -2290,13 +2474,14 @@
   --text-muted: #767676;
   --text-disabled: #505050;
   --text-on-accent: #ffffff;
-  --text-on-surface-active: var(--text-color);
+  --text-on-surface-active: #000000;
   --text-on-menu-hover: var(--text-secondary);
 
   --accent-color: #00b7c3;
   --surface: #2b2b2b;
   --surface-hover: #333333;
   --surface-active: #00b7c3;
+  --track-bg: #555555;
   --menu-hover: #333333;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2340,12 +2525,15 @@
   --font-weight-title: 400;
   --titlebar-icon: #767676;
   --titlebar-icon-hover: #ffffff;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: #333333;
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: #333333;
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 0px;
   --titlebar-btn-text: #767676;
+  --titlebar-btn-text-hover: #ffffff;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #e3008c;
   --titlebar-close-fill: none;
@@ -2356,6 +2544,8 @@
   --hint-text: #767676;
   --hint-accent: #00b7c3;
   --hint-track: #333333;
+  --graph-stroke: #00b7c3;
+  --graph-fill: rgba(0, 183, 195, 0.16);
 }
 
 .alc-app.theme-alcove {
@@ -2378,6 +2568,7 @@
   --surface: rgba(88, 229, 187, 0.06);
   --surface-hover: rgba(88, 229, 187, 0.10);
   --surface-active: rgba(88, 229, 187, 0.16);
+  --track-bg: rgba(88, 229, 187, 0.16);
   --menu-hover: rgba(88, 229, 187, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2421,12 +2612,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6CA398;
   --titlebar-icon-hover: #D0F0E5;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(88, 229, 187, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(88, 229, 187, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6CA398;
+  --titlebar-btn-text-hover: #D0F0E5;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #F2545B;
   --titlebar-close-fill: none;
@@ -2437,6 +2631,8 @@
   --hint-text: #6CA398;
   --hint-accent: #58E5BB;
   --hint-track: rgba(88, 229, 187, 0.08);
+  --graph-stroke: #58E5BB;
+  --graph-fill: rgba(88, 229, 187, 0.16);
 }
 
 .alc-app.theme-noir {
@@ -2459,6 +2655,7 @@
   --surface: rgba(255, 255, 255, 0.05);
   --surface-hover: rgba(255, 255, 255, 0.09);
   --surface-active: rgba(255, 255, 255, 0.14);
+  --track-bg: rgba(255, 255, 255, 0.14);
   --menu-hover: rgba(255, 255, 255, 0.09);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2502,12 +2699,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #787878;
   --titlebar-icon-hover: #e0e0e0;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.09);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.09);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #787878;
+  --titlebar-btn-text-hover: #e0e0e0;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #909090;
   --titlebar-close-fill: none;
@@ -2518,6 +2718,8 @@
   --hint-text: #787878;
   --hint-accent: #909090;
   --hint-track: rgba(255, 255, 255, 0.07);
+  --graph-stroke: #909090;
+  --graph-fill: rgba(144, 144, 144, 0.16);
 }
 
 .alc-app.theme-cyberpunk {
@@ -2540,6 +2742,7 @@
   --surface: rgba(252, 238, 10, 0.08);
   --surface-hover: rgba(252, 238, 10, 0.14);
   --surface-active: rgba(252, 238, 10, 0.22);
+  --track-bg: rgba(252, 238, 10, 0.22);
   --menu-hover: rgba(252, 238, 10, 0.14);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2583,12 +2786,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6a5a04;
   --titlebar-icon-hover: #fcee0a;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(252, 238, 10, 0.14);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(252, 238, 10, 0.14);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #6a5a04;
+  --titlebar-btn-text-hover: #fcee0a;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #00f0ff;
   --titlebar-close-fill: none;
@@ -2599,6 +2805,8 @@
   --hint-text: #6a5a04;
   --hint-accent: #fcee0a;
   --hint-track: rgba(252, 238, 10, 0.20);
+  --graph-stroke: #fcee0a;
+  --graph-fill: rgba(252, 238, 10, 0.16);
 }
 
 .alc-app.theme-blueprint {
@@ -2621,6 +2829,7 @@
   --surface: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --surface-active: rgba(255, 255, 255, 0.16);
+  --track-bg: rgba(255, 255, 255, 0.16);
   --menu-hover: rgba(255, 255, 255, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2664,12 +2873,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6a8ab8;
   --titlebar-icon-hover: #ffffff;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 0px;
   --titlebar-btn-text: #6a8ab8;
+  --titlebar-btn-text-hover: #ffffff;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ff4444;
   --titlebar-close-fill: none;
@@ -2680,6 +2892,8 @@
   --hint-text: #6a8ab8;
   --hint-accent: #ffffff;
   --hint-track: rgba(255, 255, 255, 0.25);
+  --graph-stroke: #ffffff;
+  --graph-fill: rgba(255, 255, 255, 0.16);
 }
 
 .alc-app.theme-gameboy {
@@ -2695,13 +2909,14 @@
   --text-muted: #306230;
   --text-disabled: #306230;
   --text-on-accent: #0f380f;
-  --text-on-surface-active: var(--text-color);
+  --text-on-surface-active: #0f380f;
   --text-on-menu-hover: var(--text-secondary);
 
   --accent-color: #9bbc0f;
   --surface: #306230;
   --surface-hover: #306230;
   --surface-active: #8bac0f;
+  --track-bg: #0f380f;
   --menu-hover: #306230;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2745,12 +2960,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #306230;
   --titlebar-icon-hover: #9bbc0f;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: #306230;
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: #306230;
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 0px;
   --titlebar-btn-text: #306230;
+  --titlebar-btn-text-hover: #9bbc0f;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #8bac0f;
   --titlebar-close-fill: none;
@@ -2761,6 +2979,8 @@
   --hint-text: #306230;
   --hint-accent: #9bbc0f;
   --hint-track: #306230;
+  --graph-stroke: #9bbc0f;
+  --graph-fill: rgba(155, 188, 15, 0.16);
 }
 
 .alc-app.theme-high-contrast {
@@ -2776,13 +2996,14 @@
   --text-muted: #888888;
   --text-disabled: #555555;
   --text-on-accent: #000000;
-  --text-on-surface-active: var(--text-color);
+  --text-on-surface-active: #000000;
   --text-on-menu-hover: var(--text-secondary);
 
   --accent-color: #ffff00;
   --surface: #1a1a1a;
   --surface-hover: #2a2a2a;
   --surface-active: #ffff00;
+  --track-bg: #555555;
   --menu-hover: #2a2a2a;
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2826,12 +3047,15 @@
   --font-weight-title: 700;
   --titlebar-icon: #ffffff;
   --titlebar-icon-hover: #ffff00;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: #2a2a2a;
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: #2a2a2a;
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 0px;
   --titlebar-btn-text: #ffffff;
+  --titlebar-btn-text-hover: #ffff00;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ffff00;
   --titlebar-close-fill: none;
@@ -2842,6 +3066,8 @@
   --hint-text: #ffffff;
   --hint-accent: #00ffff;
   --hint-track: #ffffff;
+  --graph-stroke: #ffff00;
+  --graph-fill: rgba(255, 255, 0, 0.16);
 }
 
 .alc-app.theme-catppuccin-latte {
@@ -2864,6 +3090,7 @@
   --surface: rgba(136, 57, 239, 0.08);
   --surface-hover: rgba(136, 57, 239, 0.15);
   --surface-active: rgba(136, 57, 239, 0.22);
+  --track-bg: rgba(136, 57, 239, 0.22);
   --menu-hover: rgba(136, 57, 239, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2907,12 +3134,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #6c6f85;
   --titlebar-icon-hover: #4c4f69;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(136, 57, 239, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(136, 57, 239, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #6c6f85;
+  --titlebar-btn-text-hover: #4c4f69;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #d20f39;
   --titlebar-close-fill: none;
@@ -2923,6 +3153,8 @@
   --hint-text: #acb0be;
   --hint-accent: #8839ef;
   --hint-track: rgba(76, 79, 105, 0.12);
+  --graph-stroke: #8839ef;
+  --graph-fill: rgba(136, 57, 239, 0.16);
 }
 
 .alc-app.theme-solarized-light {
@@ -2945,6 +3177,7 @@
   --surface: rgba(38, 139, 210, 0.08);
   --surface-hover: rgba(38, 139, 210, 0.15);
   --surface-active: rgba(38, 139, 210, 0.22);
+  --track-bg: rgba(38, 139, 210, 0.22);
   --menu-hover: rgba(38, 139, 210, 0.15);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -2988,12 +3221,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #839496;
   --titlebar-icon-hover: #586e75;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(38, 139, 210, 0.15);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(38, 139, 210, 0.15);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #839496;
+  --titlebar-btn-text-hover: #586e75;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #dc322f;
   --titlebar-close-fill: none;
@@ -3004,6 +3240,8 @@
   --hint-text: #93a1a1;
   --hint-accent: #268bd2;
   --hint-track: rgba(88, 110, 117, 0.15);
+  --graph-stroke: #268bd2;
+  --graph-fill: rgba(38, 139, 210, 0.16);
 }
 
 .alc-app.theme-paper {
@@ -3026,6 +3264,7 @@
   --surface: rgba(82, 82, 82, 0.06);
   --surface-hover: rgba(82, 82, 82, 0.10);
   --surface-active: rgba(82, 82, 82, 0.16);
+  --track-bg: rgba(82, 82, 82, 0.16);
   --menu-hover: rgba(82, 82, 82, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -3069,12 +3308,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #a3a3a3;
   --titlebar-icon-hover: #1a1a1a;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(82, 82, 82, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(82, 82, 82, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #a3a3a3;
+  --titlebar-btn-text-hover: #1a1a1a;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #b91c1c;
   --titlebar-close-fill: none;
@@ -3085,6 +3327,8 @@
   --hint-text: #a3a3a3;
   --hint-accent: #525252;
   --hint-track: rgba(26, 26, 26, 0.10);
+  --graph-stroke: #525252;
+  --graph-fill: rgba(82, 82, 82, 0.16);
 }
 
 .alc-app.theme-notebook {
@@ -3107,6 +3351,7 @@
   --surface: rgba(139, 111, 71, 0.06);
   --surface-hover: rgba(139, 111, 71, 0.10);
   --surface-active: rgba(139, 111, 71, 0.16);
+  --track-bg: rgba(139, 111, 71, 0.16);
   --menu-hover: rgba(139, 111, 71, 0.10);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -3150,12 +3395,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #a89888;
   --titlebar-icon-hover: #3d3327;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(139, 111, 71, 0.10);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(139, 111, 71, 0.10);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 5px;
   --titlebar-btn-text: #a89888;
+  --titlebar-btn-text-hover: #3d3327;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #b91c1c;
   --titlebar-close-fill: none;
@@ -3166,6 +3414,8 @@
   --hint-text: #a89888;
   --hint-accent: #8b6f47;
   --hint-track: rgba(139, 111, 71, 0.14);
+  --graph-stroke: #8b6f47;
+  --graph-fill: rgba(139, 111, 71, 0.16);
 }
 
 .alc-app.theme-mica-dark {
@@ -3188,6 +3438,7 @@
   --surface: rgba(255, 255, 255, 0.05);
   --surface-hover: rgba(255, 255, 255, 0.08);
   --surface-active: rgba(96, 205, 255, 0.25);
+  --track-bg: rgba(96, 205, 255, 0.25);
   --menu-hover: rgba(255, 255, 255, 0.08);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -3231,12 +3482,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #c0c0c0;
   --titlebar-icon-hover: #e6e6e6;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.08);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.08);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #c0c0c0;
+  --titlebar-btn-text-hover: #e6e6e6;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #ef4444;
   --titlebar-close-fill: none;
@@ -3247,6 +3501,8 @@
   --hint-text: #8a8a8a;
   --hint-accent: #60cdff;
   --hint-track: rgba(255, 255, 255, 0.06);
+  --graph-stroke: #60cdff;
+  --graph-fill: rgba(96, 205, 255, 0.16);
 }
 
 .alc-app.theme-mica-light {
@@ -3269,6 +3525,7 @@
   --surface: rgba(255, 255, 255, 0.60);
   --surface-hover: rgba(255, 255, 255, 0.45);
   --surface-active: rgba(0, 95, 184, 0.15);
+  --track-bg: rgba(0, 95, 184, 0.15);
   --menu-hover: rgba(255, 255, 255, 0.45);
   --surface-fill: none;
   --surface-fill-hover: none;
@@ -3312,12 +3569,15 @@
   --font-weight-title: 500;
   --titlebar-icon: #555555;
   --titlebar-icon-hover: #1a1a1a;
+  --titlebar-icon-bg: transparent;
+  --titlebar-icon-bg-hover: rgba(255, 255, 255, 0.45);
   --titlebar-btn-bg: transparent;
   --titlebar-btn-bg-hover: rgba(255, 255, 255, 0.45);
   --titlebar-btn-fill: none;
   --titlebar-btn-bevel: 0 0 #0000;
   --titlebar-btn-radius: 6px;
   --titlebar-btn-text: #555555;
+  --titlebar-btn-text-hover: #1a1a1a;
   --titlebar-close-bg: transparent;
   --titlebar-close-bg-hover: #c00;
   --titlebar-close-fill: none;
@@ -3328,6 +3588,8 @@
   --hint-text: #8a8a8a;
   --hint-accent: #005fb8;
   --hint-track: rgba(0, 0, 0, 0.08);
+  --graph-stroke: #005fb8;
+  --graph-fill: rgba(0, 95, 184, 0.16);
 }
 
 .alc-app.theme-blueprint .grid-surface {

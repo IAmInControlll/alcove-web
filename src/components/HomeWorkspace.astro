@@ -1,78 +1,162 @@
 ---
-import { tour } from '../config/home';
-import { screenshotUrl } from '../config/screenshots';
+import { tour, shelfCards, notchCards } from '../config/home';
+import type { FeatureCard } from '../config/home';
+import type { DemoScene } from './AlcoveDemo';
+import type { FitFocus } from './ScaledFit';
+import AlcoveScene from './AlcoveScene.tsx';
+import FilesScene from './FilesScene.tsx';
+import DemoShelfSnippet from './DemoShelfSnippet.tsx';
+import DemoNotchGlance from './DemoNotchGlance.tsx';
+import DemoNotchSearch from './DemoNotchSearch.tsx';
+import ShelfShowcase from './ShelfShowcase.tsx';
+import NotchShowcase from './NotchShowcase.tsx';
+import '../styles/app-themes.css';
 
-const steps = ['workspace', 'folders', 'peek']
-  .map((id) => tour.find((step) => step.id === id))
-  .filter((step) => step !== undefined)
-  .map((step) => ({ ...step, src: screenshotUrl(step.screenshot) }));
+const step = (id: string) => tour.find((s) => s.id === id);
+const workspace = step('workspace');
+
+const scenes: { id: string; scene: DemoScene | 'files'; focus: FitFocus }[] = [
+  { id: 'folders', scene: { folder: 'games' }, focus: { x: 0, y: 0, w: 440, h: 330 } },
+  { id: 'peek', scene: { peek: 'why' }, focus: { x: 190, y: 70, w: 500, h: 375 } },
+  { id: 'files', scene: 'files', focus: { x: 0, y: 0, w: 600, h: 450 } },
+];
+const cards = scenes.flatMap(({ id, scene, focus }) => {
+  const card = step(id);
+  return card ? [{ ...card, scene, focus }] : [];
+});
+
+const visualLabel = (card: FeatureCard) => `${card.title}: ${card.caption}`;
 ---
 
-<section class="hm-section hm-workspace" aria-labelledby="workspace">
-  <div class="hm-wrap hm-workspace-grid">
-    <div class="hm-workspace-copy">
-      <h2 id="workspace" class="hm-h2">A grid you arrange the way you think</h2>
-      {
-        steps.map((step, i) => (
-          <div class="hm-step" data-step={i}>
-            <h3>{step.title}</h3>
-            <p>{step.caption}</p>
-            {step.src && <img class="hm-step-shot" src={step.src} alt={step.alt} loading="lazy" />}
-          </div>
-        ))
-      }
-      <p class="hm-step-foot">
-        Around the edges: a per-app volume mixer, power actions that ask before they act, and full keyboard and Xbox
-        controller navigation if you'd rather not touch the mouse.
-      </p>
-    </div>
-    <div class="hm-workspace-stage">
+<section class="hm-band is-raised" aria-labelledby="hm-band-alcove">
+  <p class="hm-band-label" id="hm-band-alcove">Alcove</p>
+  <div class="hm-wrap">
+    <div class="hm-feature">
+      <div class="hm-feature-copy">
+        <h2 class="hm-h2">A grid you arrange yourself</h2>
+        {workspace && <p class="hm-lede">{workspace.caption}</p>}
+      </div>
       <div class="hm-stage-frame">
-        {
-          steps.map(
-            (step, i) =>
-              step.src && (
-                <img
-                  class:list={['hm-stage-shot', { 'is-active': i === 0 }]}
-                  src={step.src}
-                  alt={step.alt}
-                  data-shot={i}
-                  loading="lazy"
-                />
-              ),
-          )
-        }
+        <AlcoveScene client:visible scene={{}} label={workspace?.alt ?? 'The Alcove workspace'} />
       </div>
     </div>
+
+    <ul class="hm-cards">
+      {
+        cards.map((card) => (
+          <li class="hm-card">
+            <div class="hm-card-frame">
+              {card.scene === 'files' ? (
+                <FilesScene client:visible label={card.alt} focus={card.focus} />
+              ) : (
+                <AlcoveScene client:visible scene={card.scene} label={card.alt} focus={card.focus} />
+              )}
+            </div>
+            <h3>{card.title}</h3>
+            <p>{card.caption}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="hm-cards-foot">
+      The toolbar holds the widgets you switch on, from a per-app volume mixer and media controls to a timer,
+      clipboard history, your Downloads, and system info. All of it works from the keyboard or an Xbox controller
+      too.
+    </p>
+  </div>
+</section>
+
+<section class="hm-band" aria-labelledby="hm-band-shelf">
+  <p class="hm-band-label" id="hm-band-shelf">Shelf</p>
+  <div class="hm-wrap">
+    <div class="hm-feature is-flipped">
+      <div class="hm-feature-copy">
+        <h2 class="hm-h2">When you already know what you want</h2>
+        <p class="hm-lede">
+          The Shelf is a launcher on its own hotkey, kept apart from the grid so the grid stays a place you arrange. The
+          Shelf opens from anywhere and finds apps, files, and folders as you type. Try it here.
+        </p>
+      </div>
+      <div class="hm-stage-frame">
+        <ShelfShowcase client:visible />
+      </div>
+    </div>
+    <ul class="hm-cards">
+      {
+        shelfCards.map((card) => (
+          <li class="hm-card">
+            <div class="hm-card-frame hm-card-live">
+              {card.visual.kind === 'shelf' && <DemoShelfSnippet snippet={card.visual.snippet} themeClass="theme-alcove" />}
+              {card.visual.kind === 'glance' && <DemoNotchGlance themeClass="theme-alcove" label={visualLabel(card)} />}
+              {card.visual.kind === 'popout' && (
+                <DemoNotchGlance themeClass="theme-alcove" popout={card.visual.popout} label={visualLabel(card)} />
+              )}
+              {card.visual.kind === 'notchSearch' && <DemoNotchSearch themeClass="theme-alcove" query={card.visual.query} pins={card.visual.pins} />}
+            </div>
+            <h3>{card.title}</h3>
+            <p>{card.caption}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="hm-band is-raised" aria-labelledby="hm-band-notch">
+  <p class="hm-band-label" id="hm-band-notch">Notch</p>
+  <div class="hm-wrap">
+    <div class="hm-feature">
+      <div class="hm-feature-copy">
+        <h2 class="hm-h2">Up at the top edge</h2>
+        <p class="hm-lede">
+          The Notch is a drop-down at the top of your screen. Rest your pointer there a moment longer and the Notch grows
+          into a board with the apps you pin and widgets you lay out yourself, like media, a timer, and your clipboard
+          history.
+        </p>
+      </div>
+      <div class="hm-stage-frame">
+        <NotchShowcase client:visible />
+      </div>
+    </div>
+    <ul class="hm-cards">
+      {
+        notchCards.map((card) => (
+          <li class="hm-card">
+            <div class="hm-card-frame hm-card-live">
+              {card.visual.kind === 'shelf' && <DemoShelfSnippet snippet={card.visual.snippet} themeClass="theme-alcove" />}
+              {card.visual.kind === 'glance' && <DemoNotchGlance themeClass="theme-alcove" label={visualLabel(card)} />}
+              {card.visual.kind === 'popout' && (
+                <DemoNotchGlance themeClass="theme-alcove" popout={card.visual.popout} label={visualLabel(card)} />
+              )}
+              {card.visual.kind === 'notchSearch' && <DemoNotchSearch themeClass="theme-alcove" query={card.visual.query} pins={card.visual.pins} />}
+            </div>
+            <h3>{card.title}</h3>
+            <p>{card.caption}</p>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { getSiteThemeId, subscribeSiteTheme } from '../config/themes';
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  const shots = document.querySelectorAll<HTMLElement>('.hm-stage-shot');
-  const steps = document.querySelectorAll<HTMLElement>('.hm-step');
-
-  const show = (index: number) => {
-    shots.forEach((shot) => shot.classList.toggle('is-active', shot.dataset.shot === String(index)));
-    steps.forEach((step) => step.classList.toggle('is-active', step.dataset.step === String(index)));
-  };
-
-  // The screenshot beside the copy follows whichever step is being read.
-  gsap.matchMedia().add('(min-width: 900px)', () => {
-    steps.forEach((step) => {
-      ScrollTrigger.create({
-        trigger: step,
-        start: 'top 60%',
-        end: 'bottom 60%',
-        onToggle: (self) => {
-          if (self.isActive) show(Number(step.dataset.step));
-        },
-      });
+  const followTheme = () => {
+    const id = getSiteThemeId() ?? 'alcove';
+    document.querySelectorAll<HTMLElement>('[data-follow-theme]').forEach((el) => {
+      [...el.classList].filter((c) => c.startsWith('theme-')).forEach((c) => el.classList.remove(c));
+      el.classList.add(`theme-${id}`);
     });
-    show(0);
+  };
+  followTheme();
+  subscribeSiteTheme(followTheme);
+
+  const now = new Date();
+  document.querySelectorAll('[data-notch-time]').forEach((el) => {
+    el.textContent = now.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  });
+  document.querySelectorAll('[data-notch-date]').forEach((el) => {
+    el.textContent = now.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
   });
 </script>

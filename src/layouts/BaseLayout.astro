@@ -92,10 +92,10 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
       (function () {
         try {
           var saved = localStorage.getItem('alcove-theme');
-          if (saved === 'dark' || saved === 'light') {
-            document.documentElement.setAttribute('data-theme', saved);
-          }
-        } catch (e) {}
+          document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
       })();
     </script>
     <script is:inline>
@@ -228,18 +228,15 @@ const canonicalPath = Astro.url.pathname.replace(base, '').replace(/\/+/g, '/') 
           </a>
           <p class="footer-tagline">{site.tagline}</p>
         </div>
+        <a class="donate-btn" href={site.donateUrl} target="_blank" rel="noopener noreferrer" aria-label="Support Alcove on Ko-fi">
+          <img class="kofi-badge kofi-badge-dark" src={kofiBadgeDarkUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
+          <img class="kofi-badge kofi-badge-light" src={kofiBadgeLightUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
+        </a>
         <nav class="footer-nav" aria-label="Footer">
           {footerNav.map((item) => <a href={withBase(item.url)}>{item.title}</a>)}
           <a href={`mailto:${site.contactEmail}`}>Email</a>
           <a href={site.issuesUrl}>Report an issue</a>
         </nav>
-        <div class="footer-base">
-          <p class="fine">This site loads no fonts, scripts, or trackers from third parties.</p>
-          <a class="donate-btn" href={site.donateUrl} target="_blank" rel="noopener noreferrer" aria-label="Support Alcove on Ko-fi">
-            <img class="kofi-badge kofi-badge-dark" src={kofiBadgeDarkUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
-            <img class="kofi-badge kofi-badge-light" src={kofiBadgeLightUrl} alt="Support me on Ko-fi" width="980" height="198" loading="lazy" />
-          </a>
-        </div>
       </div>
     </footer>
     </div>

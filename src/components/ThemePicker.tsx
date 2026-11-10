@@ -28,7 +28,7 @@ interface Props {
 }
 
 export default function ThemePicker({ headless = false }: Props) {
-  const activeId = useSiteThemeId();
+  const activeId = useSiteThemeId() ?? "alcove";
   const active = activeId ? themeById(activeId) : undefined;
   const Wrapper = headless ? "div" : "section";
 

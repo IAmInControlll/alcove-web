@@ -8,6 +8,7 @@ interface Props {
 
 export default function DemoSticky({ tasks, done }: Props) {
   const count = tasks.filter((t) => done.includes(t.id)).length;
+  const next = tasks.find((t) => !done.includes(t.id))?.id;
 
   return (
     <aside className="alc-sticky" aria-label="Things to try">
@@ -21,7 +22,7 @@ export default function DemoSticky({ tasks, done }: Props) {
         {tasks.map((t) => {
           const isDone = done.includes(t.id);
           return (
-            <li key={t.id} data-done={isDone || undefined}>
+            <li key={t.id} data-done={isDone || undefined} data-next={t.id === next || undefined}>
               <span className="alc-sticky-box" aria-hidden="true">
                 {isDone && <Check size={11} strokeWidth={3} />}
               </span>

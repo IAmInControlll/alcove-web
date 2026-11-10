@@ -3,7 +3,7 @@ title: Privacy Policy
 heading: Alcove Privacy Policy
 summary: What Alcove keeps on your device, the cases where anything leaves it, and how to remove all of it.
 description: The Alcove privacy policy. Alcove is a visual workspace for Windows with no accounts, no telemetry, and no analytics.
-updated: 2026-10-31
+updated: 2026-11-09
 toc: true
 ---
 
@@ -37,22 +37,34 @@ Alcove stores the following in `%APPDATA%\Alcove\`. All of it stays on your mach
 
 - **Your shortcut files** - when you add a shortcut, Alcove **copies the actual file** (`.lnk`, `.url`, or `.exe`) into the `shortcuts\` folder inside its own data folder. That copy is what the grid shows and launches, which is why removing an item from Alcove never touches the original on your desktop.
 - **Linked folders** - an external folder you drag in becomes a Windows junction instead of a copy. Only the link is stored. The folder's contents are never copied and never moved.
+- **Desktop sync** - unless you turn it off in Settings, new things on your Desktop are copied into your Home folder. `desktop_sync.json` records the paths of the Desktop items Alcove has seen and the tile it made for each, so nothing is imported twice.
+- **Your Notch collection** - what you pin to the Notch lives in the `notch\` folder as shortcuts to the originals, never copies. `notch_layout.json` holds the order of your pinned items and the layout of your Notch widgets.
 - **Grid layout** - `positions.json` maps each item's path to its column and row on the grid.
 - **Folder colours** - `folder_colors.json` maps in-app folders to the colour you picked for them.
 - **Launch statistics** - `launch_stats.json` holds a launch count and a last-launch timestamp per item, used to rank recent and frequent entries in the Shelf. When you open something from a Shelf search, the text you typed is saved with that item (up to 20 searches per item) so the same search finds it first next time. No file contents are recorded.
 - **File search index** - while file search uses Alcove's own index (the default), `file_index.bin` holds the names of the files and folders in the places the Shelf searches: your user folder, the programs in Program Files, and any drives or folders you add in Settings. It records names and folder structure only, never file contents, so results can appear as you type. It is never included in a backup, and it is deleted when you switch file search to Windows Search or turn it off. With Windows Search selected, Alcove asks Windows' own search index on your PC instead and keeps nothing.
 - **Search history** - when you use the Shelf in Google or Wikipedia mode, your queries are saved to `search_history.json` so you can re-run them. Each mode keeps a separate list of up to 20 queries, most recent first, deduplicated by normalised text. Wikipedia queries are recorded when you scroll an article preview, when a preview stays on screen for three seconds, or when you open the article in your browser. Google queries are recorded when you launch the search.
-- **Settings** - `settings.json` holds your theme, window position and size, opacity, tile size, hotkey assignments, and the other preferences from the Settings modal.
+- **Settings** - `settings.json` holds your theme, window position and size, opacity, tile size, hotkey assignments, toolbar widgets, and the other preferences from the Settings modal. It also holds the folders you pinned to the Alcove Files sidebar and the last 10 folders you opened there.
 - **Cached exchange rates** - `exchange_rates.json` holds the most recent European Central Bank reference rate feed, so currency answers keep working offline.
-- **Icon cache** - `icons\` holds icons extracted from your shortcuts, as PNG and ICO files, so the grid loads quickly.
+- **Update check cache** - `update_check_cache.json` holds the ETag from the last update check described below.
+- **Icon cache** - `icons\` holds icons extracted from your shortcuts, as PNG and ICO files, so the grid loads quickly. For photos and videos in your grid, the cached image is a small thumbnail of the file itself. Alcove Files keeps its thumbnails in memory only.
 
 Alcove does not upload any of these files.
 
 ## Clipboard history
 
-The Clipboard history widget is off until you turn it on. When it is on and you open its panel, Alcove asks Windows for the items in Windows' own clipboard history, the same list Win+V shows. This happens on your PC only, and only while the panel is open. Alcove does not save clipboard items to disk, does not include them in backups, and does not send them anywhere.
+Alcove does not read clipboard history until you choose Allow in a clipboard widget, and you can choose Stop showing history in its panel, or turn off Clipboard history access in Settings, at any time. That choice belongs to Alcove on this PC, so restoring a backup never turns clipboard history access on or off. Once you allow it, Alcove asks Windows for the items in Windows' own clipboard history, the same list Win+V shows, when you open the clipboard panel and while a Notch clipboard tile that lists items is on screen. The icon-only tile and the preview in the Notch layout editor never read it. This happens on your PC only. Alcove does not save clipboard items to disk, does not include them in backups, and does not send them anywhere.
 
 Items that apps such as password managers mark as excluded from clipboard history are never added to that list by Windows, so Alcove never sees them. When you pick an item, Alcove asks Windows to put it back on the clipboard. Windows clipboard history must be turned on in Windows Settings for the panel to show anything, and you can clear or turn it off there at any time.
+
+## What the widgets read
+
+The toolbar and Notch widgets read a few things from Windows on your PC to show them. None of it is saved to disk, included in backups, or sent anywhere.
+
+- **Media** reads what is playing from Windows' media controls: the title, artist, and cover art.
+- **Downloads** lists the files in your Downloads folder.
+- **System info** reads CPU, memory, GPU, network, and disk activity, and your drives' free space.
+- **Battery** reads the battery level and whether the charger is plugged in.
 
 ## Backups you create
 
@@ -62,7 +74,8 @@ What a backup contains:
 
 - Your settings, grid layout, folder colours, launch statistics, and **search history**.
 - Copies of your shortcut files from the `shortcuts\` folder.
-- A manifest recording each linked folder's path along with **the real path on disk that it points to**.
+- Your Notch collection from the `notch\` folder, and `notch_layout.json`.
+- A manifest recording each linked folder's path, in your grid and in your Notch, along with **the real path on disk that it points to**.
 
 What a backup does not contain: the icon cache and the cached exchange rates, both of which are rebuilt afterwards, and the contents of linked folders, which are never copied.
 
@@ -100,9 +113,9 @@ You can remove any of it at any time:
 
 - **Search history** - in the Shelf, switch to Google or Wikipedia mode with an empty query, then use the "Clear" button in the history header for that mode. Individual entries have an x button.
 - **Launch statistics** - in the Shelf, use "Clear recents" on an empty Local query.
-- **File search index** - Settings > Behavior > File search, choose Windows Search or Off. This deletes `file_index.bin`.
-- **Icon cache** - Settings > About > "Clear cache".
-- **Settings** - Settings > About > "Reset settings". This deletes `settings.json` and restores the defaults. It does **not** delete your shortcuts, grid layout, folder colours, launch statistics, or search history.
+- **File search index** - in Settings > Shelf > File search, choose Windows Search or Off. This deletes `file_index.bin`.
+- **Icon cache** - Icon cache in Settings > Data management.
+- **Settings** - Reset settings in Settings > Data management. This deletes `settings.json` and restores the defaults. It does **not** delete your shortcuts, grid layout, folder colours, launch statistics, or search history.
 - **Individual shortcuts** - delete them from the grid. For a linked folder, only the junction is removed; the original folder and everything in it is left alone.
 - **Everything** - delete the `%APPDATA%\Alcove\` folder yourself. That removes every file Alcove stores locally. The reset command above removes settings but not your shortcuts or history, so deleting the folder is the way to clear everything. The NSIS uninstaller also offers to delete this folder with an explicit checkbox (off by default, so your workspace is preserved unless you opt in), and it does so safely without following junctions into the external folders they link to.
 - **Backups** - delete the `.alcove-backup` files yourself, wherever you saved them. Nothing else removes them.
@@ -114,8 +127,9 @@ Alcove requests the following Windows capabilities:
 - **File system access** - to copy, organise, and launch your shortcuts.
 - **Shell access** - to launch applications, extract icons, and work with Windows system folders.
 - **Audio control** - to read and set system volume, switch output devices, and drive the per-app mixer.
-- **Power actions** - to shut down, restart, sleep, or lock the machine when you confirm one of those actions.
-- **Clipboard history** - to read Windows' clipboard history while the clipboard panel is open, and to put an item you pick back on the clipboard.
+- **Power actions** - to shut down, restart, sleep, or lock the machine when you confirm one of those actions, and to keep the PC awake while Keep awake is on.
+- **Media controls** - to show what is playing and to play, pause, or skip it from the media widget.
+- **Clipboard history** - after you allow it, to read Windows' clipboard history while the clipboard panel or a Notch clipboard tile is shown, and to put an item you pick back on the clipboard.
 - **Network access** - for Wikipedia lookups, the ECB rate feed, and the launch update check.
 - **Global hotkeys** - to show or hide the window, Peek, and the Shelf from anywhere.
 

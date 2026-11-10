@@ -11,7 +11,7 @@ export default function ComparisonTable({ comparison }: Props) {
   return (
     <section className="home-section band" aria-labelledby="compared">
       <SectionHeader id="compared" title="What Windows already gives you">
-        Windows already has two places to keep things. This is how they compare.
+        Here is Alcove next to the desktop and the Start menu.
       </SectionHeader>
       <table className="compare">
         <thead>

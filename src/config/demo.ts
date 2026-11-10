@@ -42,6 +42,7 @@ export interface DemoFile extends DemoBase {
   size: string;
   path: string;
   body: string;
+  picture?: string;
 }
 
 export interface DemoEntry {
@@ -75,16 +76,54 @@ export const demoHotkeys = {
   peek: ['Ctrl', 'P'],
 };
 
-export type DemoTaskId = 'drag' | 'folder' | 'nested' | 'peek' | 'hide' | 'shelf' | 'theme';
+export const demoNotchClipboard: { text: string; ago: string; image?: boolean }[] = [
+  { text: 'npm run build', ago: 'just now' },
+  { text: 'Image', ago: '1m ago', image: true },
+  { text: 'Meeting notes for Thursday', ago: '3m ago' },
+  { text: 'C:\\Users\\You\\Projects\\Website', ago: '5m ago' },
+  { text: 'alcove-app.com', ago: '8m ago' },
+];
+
+/** A tile pinned to the Notch's apps side. */
+export interface DemoPin {
+  label: string;
+  icon: string;
+}
+
+export const demoNotchPins: DemoPin[] = [
+  { label: 'Spotify', icon: 'spotify' },
+  { label: 'VS Code', icon: 'vscode' },
+  { label: 'Terminal', icon: 'terminal' },
+  { label: 'Discord', icon: 'discord' },
+  { label: 'Steam', icon: 'steam' },
+  { label: 'Chrome', icon: 'chrome' },
+  { label: 'Notepad', icon: 'notepad' },
+];
+
+/** The pins the Notch's search box keeps, as the app's `filterView` does:
+ *  a name containing the query, ignoring case. */
+export function filterPins(pins: DemoPin[], query: string): DemoPin[] {
+  const q = query.trim().toLowerCase();
+  return q ? pins.filter((pin) => pin.label.toLowerCase().includes(q)) : pins;
+}
+
+export const demoNotchTracks: { title: string; artist: string; art: string }[] = [
+  { title: 'Low Light', artist: 'Harbour Lines', art: 'rooftops' },
+  { title: 'Second Window', artist: 'Mira Vale', art: 'lake' },
+  { title: 'Quiet Hours', artist: 'The Overpass', art: 'hillside' },
+];
+
+export type DemoTaskId = 'drag' | 'folder' | 'nested' | 'peek' | 'hide' | 'shelf' | 'notch' | 'theme';
 
 export const demoTasks: { id: DemoTaskId; label: string }[] = [
+  { id: 'theme', label: 'Change the theme (click settings)' },
   { id: 'drag', label: 'Drag a tile somewhere else' },
   { id: 'folder', label: 'Open a folder' },
   { id: 'nested', label: 'Find a folder inside a folder' },
   { id: 'peek', label: 'Peek inside a file' },
-  { id: 'hide', label: 'Hide it with Ctrl+Space' },
+  { id: 'hide', label: 'Hide Alcove with Ctrl+Space' },
   { id: 'shelf', label: 'Open the Shelf' },
-  { id: 'theme', label: 'Change the theme' },
+  { id: 'notch', label: 'Open the Notch' },
 ];
 
 export const demoHints = {
@@ -103,6 +142,19 @@ export const demoHints = {
   output: 'Your speakers and headphones list here, to switch between. This one is a demo.',
   mixer: 'Every app gets its own volume slider here. This one is a demo.',
   power: 'Power actions ask before they do anything.',
+  keepAwake: 'Keep awake is on. The PC will not sleep until you turn it off.',
+  system: 'CPU, memory, GPU, disk, and network, live. This one is a demo.',
+  notch: 'The Notch. Rest your pointer on the top edge of the screen to open the Notch.',
+  notchFiles: 'Alcove Files would open here, a folder browser that comes with Alcove. This one is a demo.',
+  notchCopied: (text: string) => `Copied ${text} again. Your recent copies come from Windows clipboard history.`,
+  notchPower: 'Power actions ask before they do anything. This one is a demo.',
+  notchEdit: 'Edit layout lets you drag widgets around, resize them, and pick new ones.',
+  notchSettings: 'Notch settings: the hairline, hover to expand, and which glances pop out.',
+  notchAdd: 'Pin apps, files, or folders here, or drop one on the top edge of the screen.',
+  notchAlcove: 'Alcove is open already. From any other app, this brings it to the front.',
+  notchNoMatch: (query: string) => `Nothing pinned matches ${query}.`,
+  notchTrack: (title: string) => `Playing ${title}. This one is a demo.`,
+  gridView: 'Linked folders can show as a grid, with thumbnails of your photos.',
   search: 'Press Ctrl+F to jump to search',
 };
 
@@ -291,7 +343,20 @@ export const demoHome: DemoItem[] = [
     cell: [5, 2],
     compact: [1, 3],
     recent: 'Home - just now',
-    body: 'Drag any tile to an empty spot. It stays there.\n\nClick Tools to open it.\n\nPress Ctrl+Space to hide this window, and again to bring it back.\n\nPress Ctrl+Shift+Space for the Shelf. Type "theme" in it.\n\nThe gear in the title bar switches themes too. The whole site changes with it.',
+    body: 'Drag any tile to an empty spot. It stays there.\n\nClick Tools to open it.\n\nPress Ctrl+Space to hide Alcove. Press it again to bring Alcove back.\n\nPress Ctrl+Shift+Space for the Shelf. Type "theme" in it.\n\nRest your pointer on the top edge of this desktop for the Notch.\n\nThe gear in the title bar switches themes too. The whole site changes with it.',
+  },
+  {
+    id: 'lake',
+    kind: 'file',
+    label: 'Lake.jpg',
+    icon: 'photos',
+    picture: 'lake',
+    size: '2.7 MB',
+    path: 'C:\\Users\\You\\Desktop\\Lake.jpg',
+    cell: [7, 2],
+    compact: [3, 2],
+    recent: 'Home - Oct 2, 2026',
+    body: '',
   },
   { id: 'explorer', kind: 'app', label: 'File Explorer', icon: 'file-explorer', type: 'Shortcut', target: 'explorer.exe', cell: [0, 2], compact: [0, 2], recent: 'Home - Aug 6, 2026' },
   {
@@ -308,3 +373,8 @@ export const demoHome: DemoItem[] = [
   },
   { id: 'recycle-bin', kind: 'app', label: 'Recycle Bin', icon: 'recycle-bin', type: 'System folder', target: 'Recycle Bin', cell: [8, 4], compact: [3, 4], recent: 'Home - Aug 7, 2026' },
 ];
+
+const flatten = (list: DemoItem[], where: string): { item: DemoItem; where: string }[] =>
+  list.flatMap((item) => [{ item, where }, ...(item.kind === 'folder' ? flatten(item.items, item.label) : [])]);
+
+export const demoShelfItems = flatten(demoHome, 'Home');

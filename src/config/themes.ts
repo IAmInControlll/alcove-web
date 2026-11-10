@@ -11,6 +11,7 @@ export interface AlcoveTheme {
   corners: ThemeCorners;
   variant: ThemeVariant;
   translucent?: boolean;
+  frosted?: boolean;
   retro?: boolean;
   scene?: boolean;
 }
@@ -49,11 +50,11 @@ export const THEMES: AlcoveTheme[] = [
   { id: 'catppuccin-latte', name: 'Catppuccin Latte', color: '#eff1f5', accent: '#8839ef', corners: 'round', variant: 'light' },
   { id: 'lilac', name: 'Lilac', color: '#f8f7fc', accent: '#a78bda', corners: 'round', variant: 'light' },
   { id: 'blossom', name: 'Blossom', color: '#fdf2f8', accent: '#ec4899', corners: 'round', variant: 'light' },
-  { id: 'glass', name: 'Glass', color: 'rgba(10,10,20,0.3)', accent: '#60a5fa', corners: 'round', variant: 'dark', translucent: true },
+  { id: 'glass', name: 'Glass', color: 'rgba(10,10,20,0.3)', accent: '#60a5fa', corners: 'round', variant: 'dark', translucent: true, frosted: true },
   { id: 'classic', name: 'Classic', color: '#c0c0c0', accent: '#000080', corners: 'square', variant: 'light', retro: true },
   { id: 'luna', name: 'Luna', color: '#ece9d8', accent: '#0054e3', corners: 'square', variant: 'light', retro: true },
   { id: 'silver', name: 'Silver', color: '#e0dfe3', accent: '#4f6b8c', corners: 'square', variant: 'light', retro: true },
-  { id: 'aero', name: 'Aero', color: '#ebeef5', accent: '#4b9ad6', corners: 'small', variant: 'light', translucent: true, retro: true },
+  { id: 'aero', name: 'Aero', color: '#ebeef5', accent: '#4b9ad6', corners: 'small', variant: 'light', translucent: true, frosted: true, retro: true },
   { id: 'mica-dark', name: '11 Dark', color: 'rgba(32,32,32,0.3)', accent: '#60cdff', corners: 'round', variant: 'dark', translucent: true },
   { id: 'mica-light', name: '11 Light', color: 'rgba(243,243,243,0.3)', accent: '#005fb8', corners: 'round', variant: 'light', translucent: true },
 ];

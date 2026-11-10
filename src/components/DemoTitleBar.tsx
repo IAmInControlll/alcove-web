@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, Minus, Settings, ShelvingUnit, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, Minus, PanelTopOpen, Settings, ShelvingUnit, X } from 'lucide-react';
 import DemoLockup from './DemoLockup';
 
 interface Props {
@@ -7,25 +7,30 @@ interface Props {
   menuOpen: boolean;
   toolbarVisible: boolean;
   onShelf: () => void;
+  onNotch: () => void;
   onSettings: () => void;
   onHide: () => void;
   onToggleToolbar: () => void;
   children?: React.ReactNode;
 }
 
-export default function DemoTitleBar({ hint, hintVisible, menuOpen, toolbarVisible, onShelf, onSettings, onHide, onToggleToolbar, children }: Props) {
+export default function DemoTitleBar({ hint, hintVisible, menuOpen, toolbarVisible, onShelf, onNotch, onSettings, onHide, onToggleToolbar, children }: Props) {
   return (
     <header className="alc-titlebar">
       <DemoLockup />
       <div className="alc-titlebar-tools">
-        <button type="button" className="alc-tb-btn" aria-label="Open the Shelf" onClick={onShelf}>
+        <button type="button" className="alc-tb-btn" aria-label="Shelf" title="Shelf" onClick={onShelf}>
           <ShelvingUnit size={14} />
+        </button>
+        <button type="button" className="alc-tb-btn alc-notch-toggle" aria-label="Notch" title="Notch" onClick={onNotch}>
+          <PanelTopOpen size={14} />
         </button>
         <span className="alc-anchor">
           <button
             type="button"
             className="alc-tb-btn alc-menu-toggle"
-            aria-label="Themes"
+            aria-label="Settings"
+            title="Settings"
             aria-expanded={menuOpen}
             onClick={onSettings}
           >
@@ -52,10 +57,10 @@ export default function DemoTitleBar({ hint, hintVisible, menuOpen, toolbarVisib
       <button type="button" className="alc-hotkey" onClick={onHide} aria-label="Hide Alcove (Ctrl+Space)">
         <kbd>[Ctrl+Space]</kbd>
       </button>
-      <button type="button" className="alc-tb-btn alc-tb-caption" aria-label="Minimise" onClick={onHide}>
+      <button type="button" className="alc-tb-btn alc-tb-caption" aria-label="Minimize" title="Minimize" onClick={onHide}>
         <Minus size={14} />
       </button>
-      <button type="button" className="alc-tb-btn alc-tb-caption alc-tb-close" aria-label="Close" onClick={onHide}>
+      <button type="button" className="alc-tb-btn alc-tb-caption alc-tb-close" aria-label="Close" title="Close" onClick={onHide}>
         <X size={14} />
       </button>
     </header>

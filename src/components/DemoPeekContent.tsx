@@ -1,4 +1,4 @@
-import { demoIcon, folderSwatch } from '../config/demo';
+import { demoIcon, demoPicture, folderSwatch } from '../config/demo';
 import type { DemoItem } from '../config/demo';
 
 interface Props {
@@ -6,6 +6,13 @@ interface Props {
 }
 
 export default function DemoPeekContent({ item }: Props) {
+  if (item.kind === 'file' && item.picture) {
+    return (
+      <div className="alc-peek-image">
+        <img src={demoPicture(item.picture)} alt={item.label} />
+      </div>
+    );
+  }
   if (item.kind === 'file') {
     return <pre className="alc-peek-text">{item.body}</pre>;
   }

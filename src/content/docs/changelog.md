@@ -7,12 +7,14 @@ updated: 2026-11-05
 toc: false
 ---
 
-## November 5, 2026 (v0.1.4)
+## November 5, 2026 (v0.1.5)
 
-- New Notch - rest your pointer at the top of your screen for your pinned apps and a board of widgets
+- New Notch - rest your pointer at the top of your screen, or click Notch in the title bar, for your pinned apps and a board of widgets
 - New Alcove Files - browse, preview, and manage any folder on your PC without leaving Alcove
 - New toolbar widgets for media, timer, clipboard history, downloads, system info, and more - pick yours in Settings > Toolbar
 - Photos and videos in your grid now show real thumbnails, and Peek opens more kinds of files
+- Shelf file search now offers to search your other drives when it can't find a file
+- The Shelf now lets your desktop show through in the Glass and Aero themes, with crisp white text in Glass
 - Plus Keep awake, Launch all, Run as administrator from the grid, and lots of smaller fixes
 
 ## October 27, 2026 (v0.1.4)

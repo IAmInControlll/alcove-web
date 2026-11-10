@@ -5,7 +5,6 @@ import ArchIntro from '../components/ArchIntro.astro';
 import HomeHero from '../components/HomeHero.astro';
 import DemoVideo from '../components/DemoVideo.tsx';
 import HomeWorkspace from '../components/HomeWorkspace.astro';
-import HomeShelf from '../components/HomeShelf.astro';
 import HomeThemes from '../components/HomeThemes.astro';
 import ComparisonTable from '../components/ComparisonTable.tsx';
 import HomePrivacy from '../components/HomePrivacy.astro';
@@ -56,12 +55,11 @@ const structuredData = {
   <ArchIntroInit slot="head" />
   <ArchIntro slot="overlay" />
 
-  <HomeHero downloadHref={withBase('/install/?download')} helpHref={withBase('/help/')} />
+  <HomeHero />
   <div class="prose hm-prose">
     <DemoVideo copy={demo} src={demoVideoUrl} poster={demoPosterUrl} />
   </div>
   <HomeWorkspace />
-  <HomeShelf />
   <HomeThemes />
   <div class="prose hm-prose">
     <ComparisonTable comparison={comparison} />
@@ -70,7 +68,7 @@ const structuredData = {
   <div class="prose hm-prose">
     <section class="home-section band" aria-labelledby="questions">
       <SectionHeader id="questions" title="Questions">
-        Alcove is built by one person. Questions, bugs, and feature requests all land in the same inbox: <Email email={site.contactEmail} />
+        Alcove is built by one person. Please direct any questions, bugs, and feature requests to the dev at: <Email email={site.contactEmail} />
       </SectionHeader>
       <FAQAccordion client:visible groups={faqGroups} helpHref={withBase('/help/')} />
     </section>

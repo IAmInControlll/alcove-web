@@ -12,11 +12,16 @@ import DemoThemeMenu from './DemoThemeMenu';
 import DemoColumnHeaders from './DemoColumnHeaders';
 import type { SortColumn, SortDir } from './DemoColumnHeaders';
 import DemoFileList from './DemoFileList';
+import DemoEntryGrid from './DemoEntryGrid';
+import DemoNotch from './DemoNotch';
+import type { NotchStage } from './DemoNotch';
+import DemoLinkedViewToggle from './DemoLinkedViewToggle';
+import type { LinkedView } from './DemoLinkedViewToggle';
 import DemoSticky from './DemoSticky';
 import Keycap from './Keycap';
-import { DEMO_TILE, DEMO_TILE_COMPACT, demoHints, demoHome, demoHotkeys, demoTasks } from '../config/demo';
+import { DEMO_TILE, DEMO_TILE_COMPACT, demoHints, demoHome, demoHotkeys, demoShelfItems, demoTasks } from '../config/demo';
 import type { Cell, DemoEntry, DemoFolder, DemoItem, DemoTaskId } from '../config/demo';
-import { setSiteTheme, themeById, useSiteThemeId } from '../config/themes';
+import { setSiteTheme, subscribeSiteTheme, themeById, useSiteThemeId } from '../config/themes';
 import '../styles/app-themes.css';
 
 type Layout = Record<string, Cell>;
@@ -38,6 +43,9 @@ interface State {
   volume: number;
   audioOpen: boolean;
   powerOpen: boolean;
+  keepAwake: boolean;
+  linkedView: LinkedView;
+  notch: NotchStage;
   toolbar: boolean;
   done: DemoTaskId[];
 }
@@ -62,6 +70,9 @@ type Action =
   | { type: 'volume'; v: number }
   | { type: 'audio' }
   | { type: 'power' }
+  | { type: 'keepAwake' }
+  | { type: 'linkedView'; view: LinkedView }
+  | { type: 'notch'; stage: NotchStage }
   | { type: 'theme' }
   | { type: 'toolbar' }
   | { type: 'escape' };
@@ -83,6 +94,9 @@ const initial: State = {
   volume: 64,
   audioOpen: false,
   powerOpen: false,
+  keepAwake: false,
+  linkedView: 'list',
+  notch: 'closed',
   toolbar: true,
   done: [],
 };
@@ -116,7 +130,9 @@ function step(s: State, a: Action): State {
     case 'peek':
       return { ...s, peek: a.id };
     case 'shelf':
-      return { ...s, shelf: a.open, menu: false };
+      if (a.open === s.shelf) return s;
+      if (a.open) return { ...s, shelf: true, menu: false, peek: null };
+      return { ...s, shelf: false };
     case 'menu':
       return { ...s, menu: a.open };
     case 'hint':
@@ -131,12 +147,19 @@ function step(s: State, a: Action): State {
       return { ...s, audioOpen: !s.audioOpen };
     case 'power':
       return { ...s, powerOpen: !s.powerOpen };
+    case 'keepAwake':
+      return { ...s, keepAwake: !s.keepAwake };
+    case 'linkedView':
+      return { ...s, linkedView: a.view };
+    case 'notch':
+      return s.notch === a.stage ? s : { ...s, notch: a.stage };
     case 'theme':
       return s;
     case 'toolbar':
       return { ...s, toolbar: !s.toolbar };
     case 'escape':
-      if (s.shelf) return { ...s, shelf: false };
+      if (s.notch !== 'closed') return { ...s, notch: 'closed' };
+      if (s.shelf) return step(s, { type: 'shelf', open: false });
       if (s.menu) return { ...s, menu: false };
       if (s.peek) return { ...s, peek: null };
       if (s.query) return { ...s, query: '' };
@@ -162,6 +185,8 @@ function taskFor(s: State, a: Action): DemoTaskId | null {
       return 'hide';
     case 'shelf':
       return a.open ? 'shelf' : null;
+    case 'notch':
+      return a.stage !== 'closed' ? 'notch' : null;
     case 'theme':
       return 'theme';
     default:
@@ -187,9 +212,6 @@ function pathTo(id: string, list: DemoItem[] = demoHome, trail: string[] = []): 
   }
   return null;
 }
-
-const flatten = (list: DemoItem[], where: string): { item: DemoItem; where: string }[] =>
-  list.flatMap((item) => [{ item, where }, ...(item.kind === 'folder' ? flatten(item.items, item.label) : [])]);
 
 function sortEntries(entries: DemoEntry[], column: SortColumn, dir: SortDir): DemoEntry[] {
   return [...entries].sort((a, b) => {
@@ -243,12 +265,21 @@ const ARROWS: Record<string, [number, number]> = {
   ArrowDown: [0, 1],
 };
 
-export default function AlcoveDemo() {
-  const [s, dispatch] = useReducer(reducer, initial);
+export interface DemoScene {
+  folder?: string;
+  peek?: string;
+}
+
+const sceneState = (scene: DemoScene | undefined): State =>
+  scene ? { ...initial, folder: scene.folder ?? null, peek: scene.peek ?? null, focused: scene.peek ?? null } : initial;
+
+export default function AlcoveDemo({ scene }: { scene?: DemoScene }) {
+  const [s, dispatch] = useReducer(reducer, scene, sceneState);
   const [hintVisible, setHintVisible] = useState(true);
   const [size, setSize] = useState({ cols: 9, rows: 5 });
   const compact = useCompact();
   const themeId = useSiteThemeId() ?? 'alcove';
+  useEffect(() => subscribeSiteTheme(() => dispatch({ type: 'theme' })), []);
   const theme = themeById(themeId);
   const themeClass = `theme-${themeId}`;
   const grid = useRef<HTMLDivElement>(null);
@@ -316,6 +347,14 @@ export default function AlcoveDemo() {
 
   const hint = (text: string) => dispatch({ type: 'hint', text });
 
+  const notchTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const notchLater = (stage: NotchStage, ms: number) => {
+    clearTimeout(notchTimer.current);
+    notchTimer.current = setTimeout(() => dispatch({ type: 'notch', stage }), ms);
+  };
+  const notchNow = () => clearTimeout(notchTimer.current);
+  useEffect(() => () => clearTimeout(notchTimer.current), []);
+
   const open = useCallback((item: DemoItem) => {
     if (item.kind === 'folder' && !demoHome.includes(item)) {
       dispatch({ type: 'push', segment: item.id });
@@ -349,7 +388,6 @@ export default function AlcoveDemo() {
     if (t) dispatch({ type: 'hint', text: demoHints.theme(t.name) });
   }, []);
 
-  const shelfItems = useMemo(() => flatten(demoHome, 'Home'), []);
 
   const shelfOpen = (e: ShelfEntry) => {
     if (e.kind === 'theme') {
@@ -365,6 +403,7 @@ export default function AlcoveDemo() {
   };
 
   useEffect(() => {
+    if (scene) return;
     const onKey = (e: KeyboardEvent) => {
       const mod = e.ctrlKey || e.metaKey;
       const inDemo = !!grid.current?.closest('.alc-stage')?.matches(':hover, :focus-within');
@@ -400,7 +439,11 @@ export default function AlcoveDemo() {
       const detail = (e as CustomEvent<string>).detail;
       if (detail === 'shelf') dispatch({ type: 'shelf', open: !s.shelf });
       else if (detail === 'peek') peekSelected();
-      else dispatch({ type: 'toggle' });
+      else if (detail === 'notch') {
+        notchNow();
+        dispatch({ type: 'notch', stage: s.notch === 'closed' ? 'compact' : 'closed' });
+        if (s.notch === 'closed') hint(demoHints.notch);
+      } else dispatch({ type: 'toggle' });
     };
     window.addEventListener('keydown', onKey);
     window.addEventListener('alcove-demo', onPress);
@@ -408,30 +451,48 @@ export default function AlcoveDemo() {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('alcove-demo', onPress);
     };
-  }, [s.shelf, s.open, s.focused, s.peek, items, entries, open]);
+  }, [s.shelf, s.notch, s.open, s.focused, s.peek, items, entries, open]);
+
+  useEffect(() => {
+    if (!scene) window.dispatchEvent(new CustomEvent('alcove-demo-open', { detail: s.open }));
+  }, [s.open]);
+
+  useEffect(() => {
+    if (!scene) window.dispatchEvent(new CustomEvent('alcove-demo-shelf', { detail: s.shelf }));
+  }, [s.shelf]);
+
+  useEffect(() => {
+    if (!scene) window.dispatchEvent(new CustomEvent('alcove-demo-notch', { detail: s.notch !== 'closed' }));
+  }, [s.notch]);
+
+  const setLinkedView = (view: LinkedView) => {
+    dispatch({ type: 'linkedView', view });
+    if (view === 'grid' && s.linkedView !== 'grid') hint(demoHints.gridView);
+  };
 
   const crumbs = top?.link ? [top.label, ...s.sub] : chain.map((f) => f.label);
   const onCrumb = (i: number) =>
     i < 0 ? dispatch({ type: 'enter', folder: null }) : dispatch({ type: 'sub', path: s.sub.slice(0, i) });
 
   useEffect(() => {
-    if (!s.menu && !s.shelf) return;
+    if (!s.menu && !s.shelf && s.notch === 'closed') return;
     const onDown = (e: PointerEvent) => {
       const target = e.target as Element;
       if (target.closest('[data-demo]')) return;
+      if (s.notch !== 'closed' && !target.closest('.alc-notch, .alc-notch-toggle')) dispatch({ type: 'notch', stage: 'closed' });
       if (s.menu && !target.closest('.alc-menu, .alc-menu-toggle')) dispatch({ type: 'menu', open: false });
       if (s.shelf && !target.closest('.alc-shelf')) dispatch({ type: 'shelf', open: false });
     };
     document.addEventListener('pointerdown', onDown);
     return () => document.removeEventListener('pointerdown', onDown);
-  }, [s.menu, s.shelf]);
+  }, [s.menu, s.shelf, s.notch]);
 
   const peekItem = s.peek && !entries ? items.find((i) => i.id === s.peek) : undefined;
   const peekEntry = s.peek && entries ? entries.find((e) => e.name === s.peek) : undefined;
   const radius = theme?.corners === 'square' ? 0 : theme?.corners === 'small' ? 4 : 8;
 
-  return (
-    <div className="alc-stage" data-intro-target style={{ '--alc-corner': `${radius}px` } as React.CSSProperties}>
+  const stage = (
+    <div className={scene ? 'alc-stage alc-scene' : 'alc-stage'} data-intro-target={scene ? undefined : ''} style={{ '--alc-corner': `${radius}px` } as React.CSSProperties}>
       {s.open ? (
         <div
           className={`alc-app ${themeClass} alc-window`}
@@ -447,6 +508,11 @@ export default function AlcoveDemo() {
             toolbarVisible={s.toolbar}
             onToggleToolbar={() => dispatch({ type: 'toolbar' })}
             onShelf={() => dispatch({ type: 'shelf', open: true })}
+            onNotch={() => {
+              notchNow();
+              dispatch({ type: 'notch', stage: s.notch === 'closed' ? 'compact' : 'closed' });
+              if (s.notch === 'closed') hint(demoHints.notch);
+            }}
             onSettings={() => dispatch({ type: 'menu', open: !s.menu })}
             onHide={() => dispatch({ type: 'hide' })}
           >
@@ -461,6 +527,8 @@ export default function AlcoveDemo() {
             volume={s.volume}
             audioOpen={s.audioOpen}
             powerOpen={s.powerOpen}
+            keepAwake={s.keepAwake}
+            linkedView={entries ? s.linkedView : null}
             onCrumb={onCrumb}
             onQuery={(v) => dispatch({ type: 'query', q: v })}
             onMute={() => {
@@ -473,15 +541,22 @@ export default function AlcoveDemo() {
             onPower={() => hint(demoHints.power)}
             onOutput={() => hint(demoHints.output)}
             onMixer={() => hint(demoHints.mixer)}
+            onKeepAwake={() => {
+              dispatch({ type: 'keepAwake' });
+              if (!s.keepAwake) hint(demoHints.keepAwake);
+            }}
+            onSystem={() => hint(demoHints.system)}
+            onLinkedView={setLinkedView}
           />
           ) : (
             folder && (
               <div className="alc-crumbbar">
                 <DemoCrumbs crumbs={crumbs} onCrumb={onCrumb} />
+                {entries && <DemoLinkedViewToggle view={s.linkedView} onView={setLinkedView} />}
               </div>
             )
           )}
-          {entries && entries.length > 0 && (
+          {entries && entries.length > 0 && s.linkedView === 'list' && (
             <DemoColumnHeaders
               column={s.sort.column}
               dir={s.sort.dir}
@@ -506,6 +581,14 @@ export default function AlcoveDemo() {
           >
             {s.loading ? (
               <span className="alc-spinner" role="status" aria-label="Loading" />
+            ) : entries && s.linkedView === 'grid' ? (
+              <DemoEntryGrid
+                entries={listed}
+                tile={tile}
+                focused={s.focused}
+                onFocus={(name) => dispatch({ type: 'focus', id: name })}
+                onOpen={openEntry}
+              />
             ) : entries ? (
               <DemoFileList
                 entries={listed}
@@ -565,25 +648,79 @@ export default function AlcoveDemo() {
         </div>
       ) : (
         <div className="alc-desktop">
-          <div className="alc-desktop-card">
-            <p>Hidden. It is one keypress away.</p>
-            <button type="button" className="alc-summon" onClick={() => dispatch({ type: 'show' })}>
-              <Keycap keys={demoHotkeys.window} /> brings it back
-            </button>
-          </div>
+          {!s.shelf && (
+            <div className="alc-desktop-card">
+              <p>Alcove is hidden, one keypress away.</p>
+              <button type="button" className="alc-summon" onClick={() => dispatch({ type: 'show' })}>
+                <Keycap keys={demoHotkeys.window} /> brings Alcove back
+              </button>
+            </div>
+          )}
         </div>
       )}
-      {s.shelf && (
-        <div className="alc-shelf-wrap">
-          <DemoShelf
-            items={shelfItems}
-            themeClass={themeClass}
-            onOpen={shelfOpen}
-            onClose={() => dispatch({ type: 'shelf', open: false })}
+      {!scene && (
+        <>
+          {s.shelf && (
+            <div className="alc-shelf-wrap">
+              <DemoShelf
+                items={demoShelfItems}
+                themeClass={themeClass}
+                onOpen={shelfOpen}
+                onClose={() => dispatch({ type: 'shelf', open: false })}
+              />
+            </div>
+          )}
+          <div
+            className="alc-notch-zone"
+            aria-hidden="true"
+            onPointerEnter={() => s.notch === 'closed' && notchLater('compact', 250)}
+            onPointerLeave={() => s.notch === 'compact' && notchLater('closed', 350)}
           />
-        </div>
+          {!s.done.includes('notch') && s.notch === 'closed' && (
+            <button
+              type="button"
+              className="alc-notch-cue"
+              onPointerEnter={() => notchLater('compact', 250)}
+              onClick={() => {
+                notchNow();
+                dispatch({ type: 'notch', stage: 'compact' });
+              }}
+            >
+              <span className="alc-notch-cue-line" aria-hidden="true" />
+              <span className="alc-notch-cue-label">Hover here for the Notch</span>
+            </button>
+          )}
+          <DemoNotch
+            stage={s.notch}
+            themeClass={themeClass}
+            frosted={!!theme?.frosted}
+            keepAwake={s.keepAwake}
+            onExpand={() => {
+              notchNow();
+              dispatch({ type: 'notch', stage: 'expanded' });
+            }}
+            onAlcove={() => {
+              dispatch({ type: 'notch', stage: 'closed' });
+              hint(demoHints.notchAlcove);
+            }}
+            onShelf={() => {
+              dispatch({ type: 'notch', stage: 'closed' });
+              dispatch({ type: 'shelf', open: true });
+            }}
+            onHint={hint}
+            onPointerEnter={() => (s.notch === 'compact' ? notchLater('expanded', 2000) : notchNow())}
+            onPointerLeave={() => s.notch === 'compact' && notchLater('closed', 350)}
+          />
+        </>
       )}
+    </div>
+  );
+
+  if (scene) return stage;
+  return (
+    <div className="alc-demo-row">
       <DemoSticky tasks={demoTasks} done={s.done} />
+      {stage}
     </div>
   );
 }

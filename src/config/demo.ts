@@ -53,7 +53,21 @@ export interface DemoEntry {
   entries?: DemoEntry[];
   body?: string;
   picture?: string;
+  hidden?: boolean;
+  sealed?: boolean;
 }
+
+export interface DemoDrive {
+  name: string;
+  free: string;
+  total: string;
+  used: number;
+}
+
+export const demoDrives: DemoDrive[] = [
+  { name: 'Local Disk (C:)', free: '512.6 GB', total: '931.5 GB', used: 45 },
+  { name: 'Data (D:)', free: '1.31 TB', total: '1.82 TB', used: 28 },
+];
 
 export interface DemoFolder extends DemoBase {
   kind: 'folder';
@@ -82,6 +96,15 @@ export const demoNotchClipboard: { text: string; ago: string; image?: boolean }[
   { text: 'Meeting notes for Thursday', ago: '3m ago' },
   { text: 'C:\\Users\\You\\Projects\\Website', ago: '5m ago' },
   { text: 'alcove-app.com', ago: '8m ago' },
+];
+
+export const demoDownloads: { name: string; icon: string; size: number; modified: string; picture?: string }[] = [
+  { name: 'Holiday photo.jpg', icon: 'photos', size: 2_640_000, modified: '2026-10-30', picture: 'lake' },
+  { name: 'Trailer.mp4', icon: 'vlc', size: 48_200_000, modified: '2026-10-29' },
+  { name: 'Budget 2026.xlsx', icon: 'text-file', size: 18_400, modified: '2026-10-27' },
+  { name: 'Invoice 0042.pdf', icon: 'text-file', size: 88_000, modified: '2026-10-21' },
+  { name: 'Wallpaper.png', icon: 'photos', size: 4_120_000, modified: '2026-10-14', picture: 'hillside' },
+  { name: 'Notes.txt', icon: 'notepad', size: 1_020, modified: '2026-10-09' },
 ];
 
 /** A tile pinned to the Notch's apps side. */
@@ -113,14 +136,15 @@ export const demoNotchTracks: { title: string; artist: string; art: string }[] =
   { title: 'Quiet Hours', artist: 'The Overpass', art: 'hillside' },
 ];
 
-export type DemoTaskId = 'drag' | 'folder' | 'nested' | 'peek' | 'hide' | 'shelf' | 'notch' | 'theme';
+export type DemoTaskId = 'drag' | 'folder' | 'nested' | 'peek' | 'files' | 'hide' | 'shelf' | 'notch' | 'theme';
 
 export const demoTasks: { id: DemoTaskId; label: string }[] = [
-  { id: 'theme', label: 'Change the theme (click settings)' },
+  { id: 'theme', label: "Change the theme (the gear in the window's top-left corner)" },
   { id: 'drag', label: 'Drag a tile somewhere else' },
   { id: 'folder', label: 'Open a folder' },
   { id: 'nested', label: 'Find a folder inside a folder' },
   { id: 'peek', label: 'Peek inside a file' },
+  { id: 'files', label: 'Open Alcove Files and find This PC (the folder button next to the power button)' },
   { id: 'hide', label: 'Hide Alcove with Ctrl+Space' },
   { id: 'shelf', label: 'Open the Shelf' },
   { id: 'notch', label: 'Open the Notch' },
@@ -130,32 +154,34 @@ export const demoHints = {
   start: 'Drag a tile somewhere else. It stays there.',
   moved: 'Moved. It stays there until you move it again.',
   blocked: 'Something is already there. Pick an empty spot.',
+  arrangeOnly: 'Here tiles only move. The demo at the top of the page opens them.',
   folder: 'Drag a folder into Alcove to link it without copying it.',
   linked: 'Linked folders stay in sync with the original folder.',
   parent: 'Press Esc to go to the parent folder.',
   peek: 'Peek shows what is inside without opening its app.',
   pickFirst: 'Click something first, then Peek.',
-  launchFile: (name: string) => `${name} would open in its app now. This one is a demo. Ctrl+P peeks at it instead.`,
-  launch: (name: string) => `${name} would open now. This one is a demo.`,
+  launchFile: (name: string) => `${name} would open in its app now. This is just a demo. Ctrl+P peeks at it instead.`,
+  launch: (name: string) => `${name} would open now. This is just a demo.`,
   theme: (name: string) => `${name}. The whole page changed with it.`,
   muted: 'Muted. Expand the group for the per-app mixer.',
-  output: 'Your speakers and headphones list here, to switch between. This one is a demo.',
-  mixer: 'Every app gets its own volume slider here. This one is a demo.',
+  output: 'Your speakers and headphones list here, to switch between. This is just a demo.',
+  mixer: 'Every app gets its own volume slider here. This is just a demo.',
   power: 'Power actions ask before they do anything.',
   keepAwake: 'Keep awake is on. The PC will not sleep until you turn it off.',
-  system: 'CPU, memory, GPU, disk, and network, live. This one is a demo.',
   notch: 'The Notch. Rest your pointer on the top edge of the screen to open the Notch.',
-  notchFiles: 'Alcove Files would open here, a folder browser that comes with Alcove. This one is a demo.',
+  notchFiles: 'Alcove Files would open here, a folder browser that comes with Alcove. This is just a demo.',
   notchCopied: (text: string) => `Copied ${text} again. Your recent copies come from Windows clipboard history.`,
-  notchPower: 'Power actions ask before they do anything. This one is a demo.',
+  notchPower: 'Power actions ask before they do anything. This is just a demo.',
   notchEdit: 'Edit layout lets you drag widgets around, resize them, and pick new ones.',
   notchSettings: 'Notch settings: the hairline, hover to expand, and which glances pop out.',
   notchAdd: 'Pin apps, files, or folders here, or drop one on the top edge of the screen.',
   notchAlcove: 'Alcove is open already. From any other app, this brings it to the front.',
   notchNoMatch: (query: string) => `Nothing pinned matches ${query}.`,
-  notchTrack: (title: string) => `Playing ${title}. This one is a demo.`,
+  notchTrack: (title: string) => `Playing ${title}. This is just a demo.`,
   gridView: 'Linked folders can show as a grid, with thumbnails of your photos.',
   search: 'Press Ctrl+F to jump to search',
+  downloadDrag: (name: string) => `You can drop ${name} anywhere on your PC, or straight into another program.`,
+  filesSealed: (name: string) => `${name} would open here. In the demo, only your own folders open.`,
 };
 
 const dir = (name: string, created: string, modified: string, entries: DemoEntry[]): DemoEntry => ({
@@ -170,8 +196,10 @@ const file = (
   size: number,
   created: string,
   modified = created,
-  extra: Pick<DemoEntry, 'body' | 'picture'> = {},
+  extra: Pick<DemoEntry, 'body' | 'picture' | 'hidden'> = {},
 ): DemoEntry => ({ name, size, created, modified, ...extra });
+const sealed = (name: string, modified: string, hidden = false): DemoEntry => ({ name, size: 0, created: modified, modified, entries: [], sealed: true, hidden });
+const desktopIni = (created: string) => file('desktop.ini', 282, created, created, { hidden: true });
 
 const projects: DemoEntry[] = [
   dir('Garden planner', '2026-03-02', '2026-09-14', [
@@ -378,3 +406,75 @@ const flatten = (list: DemoItem[], where: string): { item: DemoItem; where: stri
   list.flatMap((item) => [{ item, where }, ...(item.kind === 'folder' ? flatten(item.items, item.label) : [])]);
 
 export const demoShelfItems = flatten(demoHome, 'Home');
+
+const tile = (id: string) => flatten(demoHome, '').find((f) => f.item.id === id)?.item;
+const tileFile = (id: string, size: number, created: string, modified = created): DemoEntry => {
+  const t = tile(id);
+  return t?.kind === 'file' ? file(t.label, size, created, modified, { body: t.body || undefined, picture: t.picture }) : file(id, size, created);
+};
+const shortcuts = (list: DemoItem[]): DemoEntry[] =>
+  list.map((item) =>
+    item.kind === 'folder' && !item.link
+      ? dir(item.label, '2026-08-06', '2026-10-26', shortcuts(item.items))
+      : file(`${item.label.replace(/\.[^.]+$/, '')}.lnk`,1_200 + item.label.length * 23, '2026-08-06', '2026-10-24'),
+  );
+
+export const demoPlaces: Record<string, DemoEntry[]> = {
+  Desktop: [
+    tileFile('try', 412, '2026-11-13'),
+    tileFile('why', 605, '2026-08-06', '2026-11-13'),
+    tileFile('lake', 2_700_000, '2026-10-02'),
+    desktopIni('2026-08-06'),
+  ],
+  Documents: [
+    dir('Letters', '2026-02-11', '2026-09-03', [
+      file('Boiler, to the landlord.txt', 870, '2026-09-03', '2026-09-03', {
+        body: 'Hi,\n\nThe boiler is making the noise again. The one that sounds like a small horse.\n\nAny chance someone could look at it this week?\n\nThanks',
+      }),
+      file('Council tax.pdf', 64_000, '2026-02-11'),
+    ]),
+    dir('Recipes', '2026-03-20', '2026-10-18', [
+      file('Sourdough.txt', 1_420, '2026-03-20', '2026-10-18', {
+        body: 'Sourdough, attempt 6\n\n500 g flour\n350 g water\n100 g starter\n10 g salt\n\nFold every 30 min, four times.\nOvernight in the fridge.\nAttempt 5 was a frisbee. Do not rush the proof.',
+      }),
+      file('Focaccia.txt', 760, '2026-05-02', '2026-05-02', {
+        body: 'Focaccia\n\nSame dough, more oil.\nRosemary from the garden.\nDimple it like you mean it.',
+      }),
+    ]),
+    tileFile('todo', 74, '2026-10-20', '2026-11-13'),
+    file('CV 2026.pdf', 142_000, '2026-01-15', '2026-07-30'),
+    file('Car insurance.pdf', 310_000, '2026-04-08'),
+    desktopIni('2026-01-02'),
+  ],
+  Downloads: demoDownloads.map((d) => file(d.name, d.size, d.modified, d.modified, { picture: d.picture })),
+  Pictures: [
+    dir('Lisbon', '2026-06-26', '2026-06-26', [
+      file('Rooftops.jpg', 3_412_000, '2026-06-19', '2026-06-19', { picture: 'rooftops' }),
+      file('River.jpg', 2_987_000, '2026-06-19', '2026-06-19', { picture: 'river' }),
+      file('Tiles.jpg', 3_105_000, '2026-06-21', '2026-06-21', { picture: 'tiles' }),
+    ]),
+    dir('Screenshots', '2026-07-12', '2026-10-20', [file('Screenshot 2026-10-20 214508.png', 112_595, '2026-10-20', '2026-10-20', { picture: 'og' })]),
+    file('Allotment in June.jpg', 3_220_000, '2026-06-14', '2026-06-14', { picture: 'park' }),
+    file('Hillside.jpg', 4_120_000, '2026-10-14', '2026-10-14', { picture: 'hillside' }),
+    desktopIni('2026-01-02'),
+  ],
+  Music: [
+    ...demoNotchTracks.map((t) => dir(t.artist, '2026-05-10', '2026-09-22', [file(`${t.title}.mp3`, 7_400_000 + t.title.length * 91_000, '2026-05-10', '2026-09-22', { picture: t.art })])),
+    desktopIni('2026-01-02'),
+  ],
+  Videos: [
+    dir('Lisbon', '2026-06-26', '2026-06-26', [file('Tram 28.mp4', 96_400_000, '2026-06-22'), file('Sunset at the river.mp4', 61_800_000, '2026-06-24')]),
+    file('Garden timelapse.mp4', 212_000_000, '2026-09-14'),
+    desktopIni('2026-01-02'),
+  ],
+  Projects: projects,
+  'Local Disk (C:)': [
+    sealed('$Recycle.Bin', '2026-11-12', true),
+    sealed('Program Files', '2026-10-29'),
+    sealed('Program Files (x86)', '2026-10-21'),
+    sealed('Users', '2026-01-02'),
+    sealed('Windows', '2026-11-06'),
+    file('pagefile.sys', 8_589_934_592, '2026-11-13', '2026-11-13', { hidden: true }),
+  ],
+  Alcove: shortcuts(demoHome),
+};

@@ -9,7 +9,7 @@ const COLUMNS: { key: SortColumn; label: string }[] = [
 ];
 
 interface Props {
-  column: SortColumn;
+  column: SortColumn | null;
   dir: SortDir;
   onSort: (column: SortColumn) => void;
 }

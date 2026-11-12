@@ -3,7 +3,10 @@ import {
   Activity,
   ChevronLeft,
   ChevronRight,
+  ClipboardList,
   Coffee,
+  Download,
+  FolderOpen,
   Headphones,
   Lock,
   Moon,
@@ -18,6 +21,8 @@ import {
 import DemoCrumbs from './DemoCrumbs';
 import DemoLinkedViewToggle from './DemoLinkedViewToggle';
 import type { LinkedView } from './DemoLinkedViewToggle';
+import DemoToolbarPopup from './DemoToolbarPopup';
+import type { ToolbarPopup } from './DemoToolbarPopup';
 
 interface Props {
   crumbs: string[];
@@ -38,7 +43,10 @@ interface Props {
   onOutput: () => void;
   onMixer: () => void;
   onKeepAwake: () => void;
-  onSystem: () => void;
+  popup: ToolbarPopup | null;
+  onPopup: (popup: ToolbarPopup) => void;
+  onFiles: (place?: 'Downloads') => void;
+  onHint: (text: string) => void;
   onLinkedView: (view: LinkedView) => void;
 }
 
@@ -62,7 +70,10 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
     onOutput,
     onMixer,
     onKeepAwake,
-    onSystem,
+    popup,
+    onPopup,
+    onFiles,
+    onHint,
     onLinkedView,
   },
   searchRef,
@@ -145,9 +156,28 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
           {powerOpen ? <ChevronLeft size={13} /> : <ChevronRight size={13} />}
         </button>
       </div>
-      <button type="button" className="alc-sm-btn" aria-label="System info and Task Manager" title="System info and Task Manager" onClick={onSystem}>
-        <Activity size={13} />
+      <button type="button" className="alc-sm-btn" aria-label="Alcove Files" title="Alcove Files" onClick={() => onFiles()}>
+        <FolderOpen size={13} />
       </button>
+      {(
+        [
+          ['downloads', 'Downloads', Download],
+          ['system', 'System info and Task Manager', Activity],
+          ['clipboard', 'Clipboard history', ClipboardList],
+        ] as const
+      ).map(([kind, label, Icon]) => (
+        <button
+          key={kind}
+          type="button"
+          className="alc-sm-btn alc-tb-toggle"
+          aria-label={label}
+          title={label}
+          aria-expanded={popup === kind}
+          onClick={() => onPopup(kind)}
+        >
+          <Icon size={13} />
+        </button>
+      ))}
       <label className="alc-search">
         <Search size={12} aria-hidden="true" />
         <input ref={searchRef} value={query} onChange={(e) => onQuery(e.target.value)} placeholder="Search..." aria-label="Search the grid" />
@@ -159,6 +189,7 @@ const DemoToolbar = forwardRef<HTMLInputElement, Props>(function DemoToolbar(
           <kbd>Ctrl+F</kbd>
         )}
       </label>
+      {popup && <DemoToolbarPopup kind={popup} onHint={onHint} onFiles={onFiles} />}
     </div>
   );
 });

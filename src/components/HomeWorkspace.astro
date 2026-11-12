@@ -17,7 +17,7 @@ const workspace = step('workspace');
 
 const scenes: { id: string; scene: DemoScene | 'files'; focus: FitFocus }[] = [
   { id: 'folders', scene: { folder: 'games' }, focus: { x: 0, y: 0, w: 440, h: 330 } },
-  { id: 'peek', scene: { peek: 'why' }, focus: { x: 190, y: 70, w: 500, h: 375 } },
+  { id: 'peek', scene: { peek: 'why' }, focus: { x: 0, y: 0, w: 690, h: 518 } },
   { id: 'files', scene: 'files', focus: { x: 0, y: 0, w: 600, h: 450 } },
 ];
 const cards = scenes.flatMap(({ id, scene, focus }) => {
@@ -37,7 +37,7 @@ const visualLabel = (card: FeatureCard) => `${card.title}: ${card.caption}`;
         {workspace && <p class="hm-lede">{workspace.caption}</p>}
       </div>
       <div class="hm-stage-frame">
-        <AlcoveScene client:visible scene={{}} label={workspace?.alt ?? 'The Alcove workspace'} />
+        <AlcoveScene client:visible scene={{ arrange: true }} label={workspace?.alt ?? 'The Alcove workspace'} interactive />
       </div>
     </div>
 
@@ -115,7 +115,7 @@ const visualLabel = (card: FeatureCard) => `${card.title}: ${card.caption}`;
         </p>
       </div>
       <div class="hm-stage-frame">
-        <NotchShowcase client:visible />
+        <NotchShowcase client:load />
       </div>
     </div>
     <ul class="hm-cards">

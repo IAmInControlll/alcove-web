@@ -313,7 +313,8 @@
   flex: 1;
   min-height: 0;
   padding: 4px 8px;
-  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .alc-files-row {
@@ -387,4 +388,207 @@
 
 .alc-files-grow {
   flex: 1;
+}
+
+:where(.alc-files button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: default;
+}
+
+.alc-files-btn:not([data-disabled]):not([data-active]):hover,
+.alc-files-place:not([data-active]):hover {
+  background-color: var(--surface-hover);
+  color: var(--text-color);
+}
+
+.alc-files-btn:focus-visible,
+.alc-files-place:focus-visible,
+.alc-files-crumb:focus-visible,
+.alc-files-col:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+}
+
+button.alc-files-crumb:hover {
+  color: var(--text-color);
+}
+
+.alc-files-col:hover {
+  color: var(--text-secondary);
+}
+
+.alc-files-filter input.alc-files-filter-box {
+  color: var(--text-color);
+  font-family: inherit;
+  outline: none;
+}
+
+.alc-files-filter-box::placeholder {
+  color: var(--text-muted);
+}
+
+.alc-files-filter-box:focus {
+  border-color: var(--accent-color);
+}
+
+.alc-files-list,
+.alc-files-grid {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.alc-files-row:not([data-selected]):hover,
+.alc-files-tile:not([data-selected]):hover {
+  background-color: var(--surface-hover);
+}
+
+.alc-files-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  align-content: start;
+  gap: 4px;
+  min-height: 0;
+  padding: 8px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.alc-files-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.alc-files-tile[data-selected] {
+  background-color: var(--surface-active);
+  background-image: var(--surface-fill-active);
+  color: var(--text-on-surface-active);
+}
+
+.alc-files-tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+}
+
+.alc-files-tile[data-selected] .alc-files-tile-icon {
+  color: inherit;
+}
+
+.alc-files-thumb {
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.alc-files-tile-name {
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.alc-files-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 32px 16px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.alc-files-row[data-hidden]:not([data-selected]),
+.alc-files-tile[data-hidden]:not([data-selected]) {
+  opacity: 0.6;
+}
+
+.alc-files-pc {
+  flex: 1;
+  min-height: 0;
+  padding: 16px;
+}
+
+.alc-files-pc-label {
+  margin: 0;
+  padding: 0 8px 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.alc-files-drives {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 4px;
+}
+
+.alc-files-drive {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+.alc-files-drive:not([data-selected]):hover {
+  background-color: var(--surface-hover);
+}
+
+.alc-files-drive[data-selected] {
+  background-color: var(--surface-active);
+  background-image: var(--surface-fill-active);
+  color: var(--text-on-surface-active);
+}
+
+.alc-files-drive-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  color: var(--text-color);
+}
+
+.alc-files-drive[data-selected] .alc-files-drive-text {
+  color: inherit;
+}
+
+.alc-files-drive-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: var(--surface);
+}
+
+.alc-files-drive-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--accent-color);
+}
+
+.alc-files-drive-free {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.alc-files-drive[data-selected] .alc-files-drive-free {
+  color: inherit;
 }

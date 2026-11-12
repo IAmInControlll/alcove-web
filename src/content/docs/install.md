@@ -84,9 +84,9 @@ Current builds are not code-signed, so SmartScreen flags the installer. This is 
 <p>Feedback and criticism are both very welcome. If there's something you'd like built, just let me know - I'll get back to you as soon as possible. You can open an issue on GitHub <a href="https://github.com/IAmInControlll/alcove-web/issues/new" target="_blank" rel="noopener noreferrer">here</a>, or email <a href="mailto:iamincontrol.dev@gmail.com">iamincontrol.dev@gmail.com</a><button type="button" class="email-copy" data-email="iamincontrol.dev@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-check"><polyline points="20 6 9 17 4 12"></polyline></svg></button>.</p>
 </div>
 
-## Release notes and verification
+## Release notes
 
-For the full release notes, the SHA-256 fingerprint (`checksums.txt`), and the list of files in this release, see the <a href="https://github.com/IAmInControlll/alcove-web/releases/latest" target="_blank" rel="noopener noreferrer">latest release page</a>.
+For the full release notes, see the <a href="https://github.com/IAmInControlll/alcove-web/releases/latest" target="_blank" rel="noopener noreferrer">latest release page</a>.
 
 ## Trouble installing?
 

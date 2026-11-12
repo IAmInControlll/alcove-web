@@ -1,38 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DemoNotch from './DemoNotch';
 import type { NotchStage } from './DemoNotch';
 import { themeById, useSiteThemeId } from '../config/themes';
 import { demoNotchPins } from '../config/demo';
 
-const CYCLE: Record<NotchStage, { next: NotchStage; after: number }> = {
-  closed: { next: 'compact', after: 1200 },
+type ShowStage = Exclude<NotchStage, 'closed'>;
+
+const CYCLE: Record<ShowStage, { next: ShowStage; after: number }> = {
   compact: { next: 'expanded', after: 3000 },
-  expanded: { next: 'closed', after: 3500 },
+  expanded: { next: 'compact', after: 6000 },
 };
 
-const reducedMotion =() => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const REST_TO_EXPAND = 700;
+const HINT_FOR = 2600;
+
+const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export default function NotchShowcase() {
   const themeId = useSiteThemeId() ?? 'alcove';
-  const [stage, setStage] = useState<NotchStage>('closed');
-  const [paused, setPaused] = useState(false);
+  const [stage, setStage] = useState<ShowStage>('compact');
+  const [hovered, setHovered] = useState(false);
+  const [hint, setHint] = useState<{ text: string; key: number } | null>(null);
+  const rest = useRef(0);
 
   useEffect(() => {
-    if (reducedMotion()) {
-      setStage('expanded');
-      return;
-    }
-    if (paused) return;
+    if (hovered || reducedMotion()) return;
     const { next, after } = CYCLE[stage];
-    const t = setTimeout(() => setStage(next), after);
-    return () => clearTimeout(t);
-  }, [stage, paused]);
+    const t = window.setTimeout(() => setStage(next), after);
+    return () => window.clearTimeout(t);
+  }, [stage, hovered]);
+
+  useEffect(() => {
+    if (!hint) return;
+    const t = window.setTimeout(() => setHint(null), HINT_FOR);
+    return () => window.clearTimeout(t);
+  }, [hint]);
+
+  useEffect(() => () => window.clearTimeout(rest.current), []);
+
+  const show = (text: string) => setHint({ text, key: Date.now() });
 
   return (
-    <div className="hm-notch-live" onPointerEnter={() => {
-        setPaused(true);
-        setStage((s) => (s === 'closed' ? 'compact' : s));
-      }} onPointerLeave={() => setPaused(false)}>
+    <div
+      className="hm-notch-live"
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => {
+        setHovered(false);
+        window.clearTimeout(rest.current);
+      }}
+    >
       <DemoNotch
         stage={stage}
         themeClass={`theme-${themeId}`}
@@ -40,13 +56,20 @@ export default function NotchShowcase() {
         keepAwake={false}
         onExpand={() => setStage('expanded')}
         onCompact={() => setStage('compact')}
-        onAlcove={() => {}}
-        onShelf={() => {}}
-        onHint={() => {}}
-        onPointerEnter={() => {}}
-        onPointerLeave={() => {}}
+        onAlcove={() => show('In the app, this opens Alcove.')}
+        onShelf={() => show('In the app, this opens the Shelf.')}
+        onHint={show}
+        onPointerEnter={() => {
+          if (stage === 'compact') rest.current = window.setTimeout(() => setStage('expanded'), REST_TO_EXPAND);
+        }}
+        onPointerLeave={() => window.clearTimeout(rest.current)}
         pinned={demoNotchPins}
       />
+      {hint && (
+        <p key={hint.key} className="hm-notch-hint" role="status">
+          {hint.text}
+        </p>
+      )}
     </div>
   );
 }

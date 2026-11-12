@@ -7,11 +7,12 @@ interface Props {
   scene: DemoScene;
   label: string;
   focus?: FitFocus;
+  interactive?: boolean;
 }
 
-export default function AlcoveScene({ scene, label, focus }: Props) {
+export default function AlcoveScene({ scene, label, focus, interactive }: Props) {
   return (
-    <ScaledFit width={880} height={556} label={label} focus={focus}>
+    <ScaledFit width={880} height={556} label={label} focus={focus} interactive={interactive}>
       <AlcoveDemo scene={scene} />
     </ScaledFit>
   );

@@ -9,7 +9,7 @@ import HomeThemes from '../components/HomeThemes.astro';
 import ComparisonTable from '../components/ComparisonTable.tsx';
 import HomePrivacy from '../components/HomePrivacy.astro';
 import SectionHeader from '../components/SectionHeader.tsx';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import FAQWindow from '../components/FAQWindow.tsx';
 import HomeClosing from '../components/HomeClosing.astro';
 import Email from '../components/Email.astro';
 import { site } from '../config/site';
@@ -46,6 +46,16 @@ const structuredData = {
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       author: { '@type': 'Person', name: 'IAmInControlll', url: 'https://github.com/IAmInControlll' },
     },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqGroups
+        .flatMap((group) => group.items)
+        .map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer.replace(/<[^>]+>/g, '') },
+        })),
+    },
   ],
 };
 ---
@@ -68,9 +78,9 @@ const structuredData = {
   <div class="prose hm-prose">
     <section class="home-section band" aria-labelledby="questions">
       <SectionHeader id="questions" title="Questions">
-        Alcove is built by one person. Please direct any questions, bugs, and feature requests to the dev at: <Email email={site.contactEmail} />
+        Alcove is built by one person. Most answers are below or on the <a href={withBase('/help/')}>full help page</a>. Please direct any other questions, bugs, and feature requests to the dev at: <Email email={site.contactEmail} />
       </SectionHeader>
-      <FAQAccordion client:visible groups={faqGroups} helpHref={withBase('/help/')} />
+      <FAQWindow client:visible groups={faqGroups} helpHref={withBase('/help/')} />
     </section>
   </div>
   <HomeClosing downloadHref={withBase('/install/?download')} helpHref={withBase('/help/')} changelogHref={withBase('/changelog/')} />

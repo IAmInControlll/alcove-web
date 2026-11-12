@@ -10,7 +10,7 @@ export default function ComparisonTable({ comparison }: Props) {
 
   return (
     <section className="home-section band" aria-labelledby="compared">
-      <SectionHeader id="compared" title="What Windows already gives you">
+      <SectionHeader id="compared" title="What Alcove offers you that Windows does not">
         Here is Alcove next to the desktop and the Start menu.
       </SectionHeader>
       <table className="compare">

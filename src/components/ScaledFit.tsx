@@ -32,9 +32,9 @@ export default function ScaledFit({ width, height, label, focus, interactive = f
   }, []);
 
   const area = focus ?? { x: 0, y: 0, w: width, h: height };
-  const scale = Math.min(size.w / area.w, size.h / area.h);
-  const left = size.w / 2 - (area.x + area.w / 2) * scale;
-  const top = size.h / 2 - (area.y + area.h / 2) * scale;
+  const scale = focus ? Math.max(size.w / area.w, size.h / area.h) : Math.min(size.w / area.w, size.h / area.h);
+  const left = focus ? -area.x * scale : size.w / 2 - (area.x + area.w / 2) * scale;
+  const top = focus ? -area.y * scale : size.h / 2 - (area.y + area.h / 2) * scale;
 
   return (
     <div

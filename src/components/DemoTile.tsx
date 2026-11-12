@@ -16,7 +16,7 @@ interface Props {
 const translate = (x: number, y: number) => `translate(${x}px, ${y}px)`;
 
 export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, onOpen, onMove }: Props) {
-  const drag = useRef<{ x: number; y: number; moved: boolean } | null>(null);
+  const drag = useRef<{ x: number; y: number; k: number; moved: boolean } | null>(null);
   const baseX = cell[0] * tile;
   const baseY = cell[1] * tile;
   const iconSize = Math.round(tile * 0.45);
@@ -37,14 +37,14 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
       onPointerDown={(e) => {
         if (e.button !== 0) return;
         e.currentTarget.setPointerCapture(e.pointerId);
-        drag.current = { x: e.clientX, y: e.clientY, moved: false };
+        drag.current = { x: e.clientX, y: e.clientY, k: e.currentTarget.getBoundingClientRect().width / tile || 1, moved: false };
       }}
       onPointerMove={(e) => {
         const d = drag.current;
         if (!d) return;
-        const dx = e.clientX - d.x;
-        const dy = e.clientY - d.y;
-        if (!d.moved && Math.hypot(dx, dy) < 4) return;
+        const dx = (e.clientX - d.x) / d.k;
+        const dy = (e.clientY - d.y) / d.k;
+        if (!d.moved && Math.hypot(dx, dy) * d.k < 4) return;
         d.moved = true;
         e.currentTarget.classList.add('is-dragging');
         e.currentTarget.style.transform = translate(baseX + dx, baseY + dy);
@@ -55,8 +55,8 @@ export default function DemoTile({ item, cell, tile, focused, canDrop, onFocus, 
         if (!d?.moved) return;
         const el = e.currentTarget;
         const target: Cell = [
-          Math.round((baseX + e.clientX - d.x) / tile),
-          Math.round((baseY + e.clientY - d.y) / tile),
+          Math.round((baseX + (e.clientX - d.x) / d.k) / tile),
+          Math.round((baseY + (e.clientY - d.y) / d.k) / tile),
         ];
         el.classList.remove('is-dragging');
         const ok = canDrop(target);

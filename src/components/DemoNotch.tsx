@@ -82,13 +82,14 @@ export default function DemoNotch(p: Props) {
   useLayoutEffect(() => {
     const stage = wrap.current?.parentElement;
     if (!stage) return;
+    const fit = drawn === 'compact' ? COMPACT : EXPANDED;
     const measure = () =>
-      setScale(Math.min(1, (stage.clientWidth * 0.82) / EXPANDED.width, (stage.clientHeight - 8) / EXPANDED.height));
+      setScale(Math.min(1, (stage.clientWidth * 0.94) / fit.width, (stage.clientHeight - 8) / fit.height));
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(stage);
     return () => ro.disconnect();
-  }, []);
+  }, [drawn]);
 
   const size = drawn === 'compact' ? COMPACT : EXPANDED;
   const shown = filterPins(p.pinned ?? [], query);
@@ -136,7 +137,7 @@ export default function DemoNotch(p: Props) {
         <span className="alc-notch-ear is-right" aria-hidden="true" />
         <div className="alc-notch-clip">
           <div className={`alc-notch-content${opened ? ' was-opened' : ''}`} style={{ width: size.width, height: size.height }}>
-            {now && drawn === 'compact' && (
+            {drawn === 'compact' && (
               <div
                 key="compact"
                 className={`alc-notch-stage alc-notch-compact${swapped}`}
@@ -147,8 +148,8 @@ export default function DemoNotch(p: Props) {
                 <div className="alc-notch-glance-row">
                   <DemoNotchWidget id="media" surface="glance" ctx={ctx} />
                   <div className="alc-notch-corner">
-                    <span className="alc-nw-sm alc-nw-medium alc-nw-secondary alc-nw-num">{time(ctx.now)}</span>
-                    <span className="alc-nw-xs alc-nw-muted">{shortDate(ctx.now)}</span>
+                    <span className="alc-nw-sm alc-nw-medium alc-nw-secondary alc-nw-num">{now && time(now)}</span>
+                    <span className="alc-nw-xs alc-nw-muted">{now && shortDate(now)}</span>
                   </div>
                 </div>
               </div>
@@ -217,7 +218,7 @@ export default function DemoNotch(p: Props) {
             )}
           </div>
         </div>
-        {now && drawn === 'compact' && (
+        {drawn === 'compact' && (
           <button type="button" className="alc-notch-chevron" aria-label="Expand the Notch" title="Expand" onClick={p.onExpand}>
             <ChevronDown size={14} />
           </button>

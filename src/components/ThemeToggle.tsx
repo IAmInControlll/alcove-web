@@ -1,8 +1,34 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { X } from "lucide-react";
 import { THEMES, getSiteThemeId, setSiteTheme, themeById } from "../config/themes";
 
+function useThemeHint() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const root = document.documentElement;
+    let timer = 0;
+    const start = () => {
+      timer = window.setTimeout(() => setShow(true), 800);
+    };
+    const observer = new MutationObserver(() => {
+      if (root.hasAttribute("data-intro")) return;
+      observer.disconnect();
+      start();
+    });
+    if (root.hasAttribute("data-intro")) observer.observe(root, { attributes: true, attributeFilter: ["data-intro"] });
+    else start();
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+  return [show, () => setShow(false)] as const;
+}
+
 export default function ThemeToggle() {
+  const [hint, dismissHint] = useThemeHint();
   const toggle = useCallback(() => {
+    dismissHint();
     const active = themeById(getSiteThemeId() ?? "");
     const dark = active
       ? active.variant === "dark"
@@ -16,9 +42,10 @@ export default function ThemeToggle() {
     } catch {
       /* ignore */
     }
-  }, []);
+  }, [dismissHint]);
 
   return (
+    <span className="theme-toggle-wrap">
     <button
       type="button"
       className="theme-toggle"
@@ -54,5 +81,14 @@ export default function ThemeToggle() {
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
       </svg>
     </button>
+    {hint && (
+      <span className="theme-hint" role="status">
+        Click here to cycle through our themes!
+        <button type="button" className="theme-hint-close" aria-label="Dismiss" onClick={dismissHint}>
+          <X size={13} strokeWidth={2.5} aria-hidden="true" />
+        </button>
+      </span>
+    )}
+    </span>
   );
 }
